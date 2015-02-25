@@ -1,0 +1,118 @@
+<layout name="layout_homepage" />
+<script language="javascript">
+$(document).ready(function(){
+
+var command="";
+$("table tr:gt(0)").each(function(i){
+    $(this).children("td").each(function(i){
+		if($(this).text()==$('#username').val()){
+			$(this).attr("style", "BACKGROUND-COLOR: yellow");
+		}
+    });
+});
+
+$('td').click(function(){
+if($(this).text()=="" && !($(this).attr("role")=="note")){
+$(this).attr("style", "BACKGROUND-COLOR: #98FB98");
+ $(this).text($('#username').val());
+ //alert($(this).parent("tr").attr("num")+$(this).attr("role"));
+ command=command+"add"+","+$(this).parent("tr").attr("num")+","+$(this).attr("role")+";";
+ //alert(command);
+ }
+ else if($(this).text()==$('#username').val()){
+ $(this).attr("style", "BACKGROUND-COLOR: #eee");
+ $(this).text("");
+  command=command+"delete"+","+$(this).parent("tr").attr("num")+","+$(this).attr("role")+";";
+ //alert(command);
+ }
+});	
+
+$("#add_meeting_id").change(function() {
+	var temp = $("#add_meeting_id").val()
+	$.get("__APP__/Home/Member/booking_add_meeting_role_ajax",{add_role_date:temp},function(data){
+	var count=data.length
+	$("#add_meeting_role").empty()
+	for(var i=0;i<count;i++){
+		$("#add_meeting_role").append("<option value="+data[i].role_id+">"+data[i].role_name+"</option>");
+	}
+   })
+});
+
+$('#submit').click(function(){
+	if($('#add_meeting_id option:selected').text()!=""){
+		command="";
+		command="add"+","+$('#add_meeting_id option:selected').val()+","+$('#add_meeting_role option:selected').val()+";";
+		if($('#delete_meeting_id option:selected').text()!=""){
+			command=command+"delete"+","+$('#delete_meeting_id option:selected').val()+","+$('#delete_meeting_role option:selected').val()+";";
+		}		
+		
+	}
+	else if($('#delete_meeting_id option:selected').text()!=""){
+		command="";
+		command="delete"+","+$('#delete_meeting_id option:selected').val()+","+"null"+";";
+	}	
+	//alert(command);
+	$("#change_role").val(command);
+	//$("documentForm").submit("__APP__/Home/Member/booking_js");
+});	
+
+	
+});
+</script>
+<input type="hidden" id="username" value="{$username}">
+
+	<div class="table-responsive">
+		<table class="table table-bordered">
+		<thead>
+			<tr><th>Meeting Number</th><th>Date</th><th>Meeting Style</th><th>Note</th><th>ToastMaster</th><th>JokeMaster</th><th>General Evaluator</th><th>Timer</th><th>Grammarian</th><th>Aha Counter</th><th>Table Master1</th><th>Table Master2</th><th>Speaker1</th><th>Evaluator1</th><th>Speaker2</th><th>Evaluator2</th><th>Speaker3</th><th>Evaluator3</th><th>Speaker4</th><th>Evaluator4</th><th>Speaker5</th><th>Evaluator5</th><th>Speaker6</th><th>Speaker7</th><th>Speaker8</th><th>Speaker9</th></tr>
+		</thead>
+		<tbody>
+			<volist name="data" id="vo">
+			<tr num="{$vo.m_date}"><td role="num">{$vo.num}</td><td role="date">{$vo.m_date}</td><td>{$vo.language}</td><td role="note">{$vo.note}</td><td role="toast_id">{$vo.toast_id}</td><td role="joke_id">{$vo.joke_id}</td><td role="ge_id">{$vo.ge_id}</td><td role="timer_id">{$vo.timer_id}</td><td role="gramm_id">{$vo.gramm_id}</td><td role="aha_id">{$vo.aha_id}</td><td role="table1_id">{$vo.table1_id}</td><td role="table2_id">{$vo.table2_id}</td><td role="spk1_id">{$vo.spk1_id}</td><td role="ev1_id">{$vo.ev1_id}</td><td role="spk2_id">{$vo.spk2_id}</td><td role="ev2_id">{$vo.ev2_id}</td>
+			<td role="spk3_id">{$vo.spk3_id}</td><td role="ev3_id">{$vo.ev3_id}</td><td role="spk4_id">{$vo.spk4_id}</td><td role="ev4_id">{$vo.ev4_id}</td><td role="spk5_id">{$vo.spk5_id}</td><td role="ev5_id">{$vo.ev5_id}</td><td role="spk6_id">{$vo.spk6_id}</td><td role="spk7_id">{$vo.spk7_id}</td><td role="spk8_id">{$vo.spk8_id}</td><td role="spk9_id">{$vo.spk9_id}</td></tr>
+			</volist>
+		</tbody>
+		<tfoot>
+              <tr>
+                <td colspan="6">
+                  <div class="pagination">               	  
+                  	{$page_method}
+                  </div>                 
+                  <div class="clear"></div>
+                </td>
+              </tr>
+        </tfoot> 	
+		</table>
+	</div>
+
+  <!--<form action="{:U('booking_form_deal')}" class="form-horizontal">-->
+  <form method="post" id="documentForm" action="{:U('booking_js')}">
+	<input id="change_role" type="hidden" name="change_role" value="">
+      Add:&nbsp&nbsp&nbsp&nbsp
+      <select id="add_meeting_id" class="input-xlarge" name="add_meeting_id">
+	  <option></option>
+	  <volist name="add_role" id="vo">
+      <option>{$vo}</option>
+	  </volist>
+      </select>
+
+
+
+      <select id="add_meeting_role" class="input-xlarge" name="add_meeting_role">
+	  <option></option>
+	  </volist></select>
+	  <br/>
+       Delete:
+      <select id="delete_meeting_id" class="input-xlarge" name="delete_meeting_id">
+	  <option></option>
+	  <volist name="delete_role" id="vo">
+      <option>{$vo}</option>
+	  </volist>
+	  </select>	  
+	  <br/><br/>
+      <button class="btn btn-success" id="submit">Submit</button>
+
+  </form>
+	
+						
+						

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)http://www.revillwebdesign.com/demos/bootstraptutorial/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!--<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">-->
+<load href="__ROOT__/Public/css/bootstrap.min.css" />
+<load href="__ROOT__/Public/css/bootstrap-theme.min.css" />
+<load href="__ROOT__/Public/js/jquery-2.1.1.min.js" />
+<title>Agenda</title>
+</head>
+<script>
+/*  function CreateDom() {
+            var select = $("<select/>").appendTo($("body"));
+            var option1 = $("<option value=\"1\">text1</option>").appendTo(select);
+            var option2 = $("<option value=\"2\">text2</option>").appendTo(select);
+            var option3 = $("<option value=\"3\">text3</option>").appendTo(select);
+            var text = $("<input type=\"text\">").css({ "width": "150px", "border": "1px lightgrey solid" }).appendTo($("body"));
+            var checkbox = $("<input type=\"checkbox\" />").appendTo($("body"));
+            var ul = $("<ul/>").appendTo($("body"));
+            var li = $("<li>li1</li>").appendTo(ul);
+            var li = $("<li>li2</li>").appendTo(ul);
+
+  } */
+ function CreateDom() {
+            var text = $("<input type=\"text\">").css({ "width": "150px", "border": "1px lightgrey solid" }).appendTo($("body"));
+
+  }
+
+$(document).ready(function(){
+
+//$('.duration').dblclick(function(){
+	//$(this).attr("style", "BACKGROUND-COLOR: #98FB98");
+//	var time=$(this).text();
+//    var text = $("<input type=\"text\" value=\"$(this).text()\">").appendTo($(this));
+	
+});
+
+});
+
+</script>
+<body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="col-md-6">
+			<div class="col-md-8">
+			<br/>
+			<h3 class="text-center">{$clubname} {$meeting_num} meeting</h3>
+			<p class="text-center">Time:{$meeting_time}</p> 
+			<p class="text-center">Venue:{$meeting_room}</p>
+			</div>
+			<div class="col-md-4">
+			<img src="__ROOT__/temp/qrpic/{$qr_pic}.png" class="img-responsive" alt="Responsive image">
+			</div>			
+			<table class="table table-condensed">
+			<tr bgcolor='#B6DC73'>	
+				<th>Time</th>
+				<th>Role</th>
+				<th>Action</th>
+				<th>Member</th>
+				<th>Duration<br>(Mins)</th>
+				</tr>
+			<volist name="table" id="vo">
+			<tr><td>{$vo.time}</td><td>{$vo.role}</td><td>{$vo.action}</td><td>{$vo.member}</td><td class="duration">{$vo.duration}</td></tr>
+			</volist>
+			<tr>
+			</table>
+		</div>
+		
+		<div class="col-md-6">
+			<table>				
+				<tr>
+					<td colspan='8'><b>Club Mission:</b>To provide a mutually supportive and positive learning environment in which every individual member has the opportunity to develop oral communication and leadership skills, which in turn foster self-confidence and personal growth.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'><b>Three Etiquettes: </b></td>	
+				</tr>
+				<tr>
+					<td colspan='8'>1) Before and after your speech, shake hands with the person inviting you   </td>	
+				</tr>
+				<tr>
+					<td colspan='8'>2) No walk in/out of the room during the meeting, shift your cell phone into slient mode</td>	
+				</tr>
+				<tr>
+					<td colspan='8'>3)To be a member, you should: Attend our meeting 3 times and deliver ice breaker speech.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'><b>Key links in our meeting:</b></td>	
+				</tr>
+				<tr>
+					<td colspan='8'>Table topic: Every member or guest has a chance to deliver a unprepared speech within 1'-2'.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'>Prepared speech: Deliver prepared speech following the manuel, members only except ice breaker.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'>Evaluation: Feedbacks will be given to make improvements possible.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'><b>Speech Objectives:</b></td>	
+				</tr>
+				<tr>
+					<td colspan='8'>C1:<b>Ice Breaker</b>  Begin public speaking before audiences.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'>C2:<b>Organize your speech</b> Select an appropriate outline which allows listeners to easily follow.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'>C3:<b>Get to the point</b> Select a speech topic and determine its general specific purposes.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'>C4:<b>How to say it </b>Select the right words and sentence structure to communicate your ideas clearly.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'>C5:<b>Your body speaks </b> Use stance, movement ,gestures ,facial expressions&eye contacts.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'>C6:<b>Vocal Variety</b>  Use voice volume, pitch, rate&quality to reflect&add Meaning and interest.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'>C7:<b>Research Your Topic</b> Collect information about your topic from numerous sources.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'>C8:<b>Get comfortable with Visual Aids</b> Select visual aids appropriate for your message&listeners.
+					</td>	
+				</tr>
+				<tr>
+					<td colspan='8'>C9:<b>Persuade with Power </b> Persuade listeners to adopt your viewpoint or ideas or to take actions.</td>	
+				</tr>
+				<tr>
+					<td colspan='8'>C10:<b>Inspire your audience</b> Inspire by appealing to noble motives&challenging listeners to achieve.</td>	
+				</tr>
+			</table>
+			
+			<table class="table table-condensed">
+				<tr>
+					<td rowspan='2' colspan='2'>Timing Rules</td>
+					<td colspan='2' bgcolor='green'>Green</td>
+					<td colspan='2' bgcolor='yellow'>Yellow</td>
+					<td colspan='2' bgcolor='red'>Red</td>	
+				</tr>
+				<tr>					
+					<td colspan='2'>Minimu</td>
+					<td colspan='2'>Midpoint</td>
+					<td colspan='2'>Maximum</td>	
+				</tr>
+				<tr>
+					<td colspan='2'>Speech more than 3'</td>
+					<td colspan='2'>Qualified</td>
+					<td colspan='2'>1' left</td>
+					<td colspan='2'>Stop within 30'</td>	
+				</tr>	
+				<tr>
+					<td colspan='2'>Speech less than 3'</td>
+					<td colspan='2'>Qualified</td>
+					<td colspan='2'>30'' left</td>
+					<td colspan='2'>Stop within 15''</td>	
+				</tr>				
+				<tr>
+					<td colspan='8'> Club Executive Committee</td>
+				</tr>
+			 							
+				<tr>
+					<td >Postion</td>				
+					<volist name="officer" id="vo">
+					<td>{$key}</td>
+					</volist>
+				</tr>
+				<tr>
+					<td >Officer Name</td>
+					<volist name="officer" id="vo">
+					<td>{$vo}</td>
+					</volist>
+				</tr>
+				<tr>
+					<td >Officer Assistant</td>
+					<volist name="officer_a" id="vo">
+					<td>{$vo}</td>
+					</volist>			
+				</tr>
+			</table>
+			<table class="table table-condensed">
+				<tr>
+					<td rowspan='2' colspan='8'> Vote for best table topic speaker :</td>
+				</tr>
+				<tr>
+					<td colspan='8'/ > 
+				</tr>
+			</table>			
+		</div>
+	</div>
+</div>
+</body>
+</html>

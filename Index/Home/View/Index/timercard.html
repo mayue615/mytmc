@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>无标题文档</title>
+<load href="__ROOT__/Public/css/bootstrap.min.css" />
+<load href="__ROOT__/Public/css/bootstrap-responsive.min.css" />
+<load href="__ROOT__/Public/js/jquery-2.1.1.min.js" />
+<script>
+
+	var speech
+	var min=0
+	var sec=0
+    var t
+    function timedCount() {
+	   $("#clock").text(min+":"+sec);
+        sec = sec + 1;
+		if(sec==60){
+		   min=min+1;
+		   sec=0;
+		   }
+		if(min==60){
+		  min=0;
+		}
+		if(speech<=3){
+			if((speech-min)==1){
+			   g2g();
+			   if((sec>=30))
+				   g2y();
+		    }
+			if((speech-min)==0)
+			{
+			    y2r();
+			}
+		}
+        else{
+			if((speech-min)==2){
+			   g2g();
+		    }
+			if((speech-min)==1){
+			   g2y();
+		    }			
+			if((speech-min)==0)
+			{
+			    y2r();
+			}		
+				
+        }		
+        t = setTimeout("timedCount()", 1000);
+    }		
+   function stopCount() {
+	    sec=0
+		min=0
+        clearTimeout(t)
+		r2g();
+    }	
+	function g2g()
+	{
+	$("#bb").removeClass("background_grey");
+    $("#bb").addClass("background_green");
+	}
+	function g2y()
+	{
+    $("#bb").removeClass("background_green");
+    $("#bb").addClass("background_yellow");
+	}
+	function y2r()
+	{
+    $("#bb").removeClass("background_yellow");
+    $("#bb").addClass("background_red");	
+	}
+	function r2g()
+	{
+    $("#bb").removeClass("background_red");
+    $("#bb").addClass("background_grey");	
+	}
+	
+$(document).ready(function(){
+  $("#btn_begin").click(function(){
+  speech=($("input[name='RadioGroup1']:checked").val()).replace(/[^0-9]/ig, "");
+    timedCount();	
+  });
+   $("#btn_end").click(function(){
+     stopCount();
+  });   
+   $("#btn_grey2green").click(function(){
+     g2g();
+  }); 
+  $("#btn_green2yellow").click(function(){
+     g2y();
+  });  
+  $("#btn_yellow2red").click(function(){
+	y2r();
+  });   
+  $("#btn_red2grey").click(function(){
+	r2g();
+  });    
+
+
+});
+
+</script>
+<style type="text/css">
+.background_yellow {
+	background-color: #EEEE00;
+}
+.background_green {
+	background-color: #66CD00;
+}
+.background_red {
+	background-color: #EE0000;
+}
+.background_grey {
+	background-color: #eee;
+}
+.important {
+	font-weight:bold;
+	font-size:xx-large;
+}
+.blue {
+	color:blue;
+}
+</style>
+</head>
+
+<body id ="bb" class="background_grey">
+<div class="container">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1 id="clock">0:0</h1>
+      <fieldset>
+        <legend>Speech time</legend>
+        <p>
+          <label>
+            <input type="radio" name="RadioGroup1" value="time_2" id="RadioGroup1_0"/>
+            2 minutes</label>
+          <br />
+          <label>
+            <input type="radio" name="RadioGroup1" value="time_3" id="RadioGroup1_1" />
+            3 minutes</label>
+          <br />
+          <label>
+            <input type="radio" name="RadioGroup1" value="time_6" id="RadioGroup1_2" />
+            4~6 minutes</label>
+          <br />
+          <label>
+            <input type="radio" name="RadioGroup1" value="time_7" id="RadioGroup1_3" />
+            5~7 minutes</label>
+          <br />
+          <label>
+            <input type="radio" name="RadioGroup1" value="time_10" id="RadioGroup1_4" />
+            8~10 minutes</label>
+          <br />
+        </p>
+      </fieldset>
+      <br>
+      <button id="btn_begin">Begin!</button>
+      <button id="btn_end">End!</button>
+      <br>
+      <br>
+      <button id="btn_grey2green">Green</button>
+      <button id="btn_green2yellow">Yellow</button>
+      <button id="btn_yellow2red">Red</button>
+      <button id="btn_red2grey">Grey</button>
+	  <br>
+	  <a href="{:U('Index/index')}"><h4>Return</h4></a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

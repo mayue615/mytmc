@@ -1,0 +1,94 @@
+<layout name="layout_homepage" />
+
+	  
+<div class="col-md-2">
+	  <h3>News</h3>
+	  <table class="table">
+            <tbody>
+              <volist name="news_list" id="vo">
+              <tr>
+                <td><a href="{:U('Index/article',array('article_id'=>$vo['Id']))}">{$vo['subject']}</a></td>
+              </tr>  
+              </volist>                        
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6">
+                  <div class="pagination">               	  
+                  	{$page_method_news}
+                  </div>                 
+                  <div class="clear"></div>
+                </td>
+              </tr>
+            </tfoot>
+	  </table>
+	  <h3>Friend links</h3>
+	  <a href="http://www.toastmasters.org/">Toastmasters</a>
+</div>
+<div class="col-md-8">  
+	<h3>World Speech</h3>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>
+                 
+                </th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Create time</th>
+              </tr>
+            </thead>
+              
+            <!-- 表内容部分 -->
+            <tbody>
+              <volist name="article_list" id="vo">
+              <tr>
+                <td></td>
+                <td><a href="{:U('Index/article',array('article_id'=>$vo['Id']))}">{$vo['subject']}</a></td>
+                <td>{$vo['author']}</td>
+                <td>{$vo['createtime']}</td>
+              </tr>  
+              </volist>                        
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6">
+                  <div class="pagination">               	  
+                  	{$page_method_article}
+                  </div>                 
+                  <div class="clear"></div>
+                </td>
+              </tr>
+            </tfoot>            
+          </table>
+</div>
+<div class="col-md-2">
+	  <h3>Donate Coffee</h3>	
+		<p>If you like our website, please give us a cup of coffee.</p>	
+		<!--<img src="__ROOT__/Public/img/wechat.PNG" class="img-responsive" alt="Responsive image"></img>
+		<br/>-->
+		<img src="__ROOT__/Public/img/alipay.JPG" class="img-responsive" alt="Responsive image"></img>
+		<h3>Donate Wall</h3>
+	  <table class="table">
+            <tbody>
+              <volist name="donation_list" id="vo">
+              <tr>
+                <td>{$vo['name']}</td>
+				<td>{$vo['money']}</td>
+				<td>{$vo['unit']}</td>				
+              </tr>  
+              </volist>                        
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6">
+                  <div class="pagination">               	  
+                  	{$page_method_donation}
+                  </div>                 
+                  <div class="clear"></div>
+                </td>
+              </tr>
+            </tfoot>
+	  </table>
+		
+</div> 

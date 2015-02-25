@@ -1,0 +1,147 @@
+<layout name="layout_homepage" />
+<script type="text/javascript"> 
+$(document).ready(function(){
+
+  });
+function add_cc(element)
+{
+	var oldhtml = element.innerHTML;
+	var newobj = document.createElement('input');
+	
+	var tab = document.getElementById("ava_table");
+	var obj= element.parentNode;
+	row = obj.rowIndex;
+
+	newobj.type = 'text';
+	newobj.onblur = function()
+	{
+		new_value = this.value ? this.value : oldhtml; 
+
+		element.innerHTML = new_value;	
+		var input_add =  document.getElementById("input_cc");
+		num = tab.rows[row].cells[0].innerText;	
+		input_add.value = input_add.value + num + ':' + new_value + ';';
+	}
+	element.innerHTML = '';
+	element.appendChild(newobj);
+	newobj.focus();	
+}
+
+function add_title(element)
+{
+	var oldhtml = element.innerHTML;
+	var newobj = document.createElement('input');	
+	var tab = document.getElementById("ava_table");
+
+	var obj= element.parentNode;
+	row = obj.rowIndex;
+
+
+	newobj.type = 'text';
+	newobj.onblur = function()
+	{
+		new_value = this.value ? this.value : oldhtml; 
+		element.innerHTML = new_value;	
+		var input_add =  document.getElementById("input_title");
+		num = tab.rows[row].cells[0].innerText;	
+		input_add.value =  input_add.value + num + ':' + new_value + ';';
+	}
+	element.innerHTML = '';
+	element.appendChild(newobj);
+	newobj.focus();	
+}	
+	
+
+</script>
+<div id="content" class="row-fluid">
+<h2>My role</h2>	
+	<div class="table-responsive">
+		<table class="table table-striped">	
+		<tr><th>Role</th><th>Number</th></tr>
+		<volist name="roles" id="vo2">
+		<tr><td>{$key}</td><td>{$vo2}</td></tr>
+		</volist>
+		</table>
+	</div>		
+	
+<h2>My speech</h2>
+	<form method="get" action="{:U('mypage_speech_deal')}">
+	<div class="table-responsive">
+		<table class="table table-striped">	
+			<tr><th>No.</th><th>Date</th><th>Level</th><th>Title</th></tr>
+			<volist name="speech" id="vo">
+			<tr><td>{$vo.num}</td>
+			<td>{$vo.m_date}</td>
+			<td>{$vo.level}</td>
+		<if condition="$vo['article_id'] eq 0">		
+			<td>{$vo.title}</td></tr>
+		<else />
+			<td><a href="{:U('Index/article',array('article_id'=>$vo['article_id']))}">{$vo.title}</td></tr>		
+		</if>		
+			
+			</volist>
+				
+
+	<!--<input id="input_cc" name="input_cc" type="hidden" value="12"/>
+	<input id="input_title" name="input_title" type="hidden" value="13"/>-->
+	<tr><td>No.<select class="input-xlarge" id="input_number" name="number" type="text" value="">
+	<option></option>
+	<volist name="speech" id="vo">
+	<option>{$vo.num}</option>
+	</volist>
+	</select></td>
+	<td>Level:<select class="input-xlarge" id="input_level" name="level" type="text" value="">
+	<option></option>
+	<option>CC1</option>
+	<option>CC2</option>
+	<option>CC3</option>
+	<option>CC4</option>
+	<option>CC5</option>
+	<option>CC6</option>
+	<option>CC7</option>
+	<option>CC8</option>	
+	<option>CC9</option>
+	<option>CC10</option>	
+	<option>AC1</option>
+	<option>AC2</option>
+	<option>AC3</option>
+	<option>AC4</option>
+	<option>AC5</option>
+	<option>AC6</option>
+	<option>AC7</option>
+	<option>AC8</option>	
+	<option>AC9</option>
+	<option>AC10</option>		
+	</select>
+	</td>
+	<!--<td>Title:<input id="input_title" name="title" type="text" value=""/></td>-->
+	<td>Title:<select class="input-xlarge" id="input_article" name="title" type="text" value="">
+	<option></option>
+	<volist name="article" id="vo2">
+	<option>{$vo2.subject}</option>
+	</volist>
+	</td></tr>
+	<tr><td><button class="btn btn-success">Submit</button></td><td></td><td></td></tr>	
+	</form>
+	</table>
+	</div>
+	
+	<h2>My Info</h2>
+	<form action="mypage_info_deal">
+	<div class="table-responsive">
+		<table class="table table-striped">	
+			<tr><th>Display Name</br>(Relogin required)</th><td><input type="text" name="dis_name" value="{$user['dis_name']}"></td></tr>
+			<tr><th>Phone</th><td><input type="text" name="phone" value={$user['phone']}></td></tr>
+			<tr><th>Mail</th><td><input type="text" name="mail" value={$user['mail']}></td></tr>
+			<tr><th>Password</th><td><input type="text" name="password" value={$user['password']}></td></tr>		
+			<tr><th>Latest Speech Status</th><td><input type="text" name="speech_level" value={$user['speech_level']}></td></tr>
+			<tr><th>Birthday</th><td><input type="text" name="birthday" value={$user['birthday']}></td></tr>			
+			<tr><th>Join in date</th><td><input type="text" name="date_join" value={$user['date_join']}></td></tr>
+			<tr><td><button class="btn btn-success">Submit</button></td><td></td></tr>	
+		</table>
+	</div>	
+	</form>
+</div>
+
+						
+						

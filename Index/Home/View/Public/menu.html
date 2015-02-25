@@ -1,0 +1,61 @@
+﻿	<nav class="navbar navbar-default" role="navigation">
+		<div>
+
+		
+		<if condition="$_COOKIE['user_authority'] eq 'member'">
+			<ul class="nav navbar-nav">		
+				<li><a href="{:U('Index/index')}">Homepage</a></li>
+				<li><a href="{:U('Member/club_info')}">Club members</a></li>
+				<li><a href="{:U('Member/history')}">History</a></li>
+				<li><a href="{:U('Member/booking')}">Booking</a></li>
+				<li><a href="{:U('Member/agenda')}">Agenda</a></li>
+				<li><a href="{:U('Member/myarticle')}">My Article</a></li>
+				<li><a href="{:U('Member/mypage')}">My Page</a></li>
+				<li><a href="{:U('Index/timecard')}">Timer Card</a></li>	
+				<li><a href="{:U('Luckydraw/activity')}">Activity Assistant</a></li>				
+			</ul>
+			<ul class="nav pull-right">
+				<li><a href="{:U('Login/logout')}">Log out</a></li>
+			</ul>
+		<elseif condition="$_COOKIE['user_authority'] eq 'admin'"/>
+			<ul class="nav navbar-nav">	
+				<li><a href="{:U('Index/index')}">Homepage</a></li>
+				<li><a href="{:U('Admin/members')}">Members</a></li>		
+				<li><a href="{:U('Admin/club_info_show')}">Club</a></li>		
+				<li><a href="{:U('Admin/member_cl')}">Member_CL</a></li>
+				<li><a href="{:U('Admin/meeting')}">Meeting</a></li>
+				<li><a href="{:U('Checkin/checkin_admin')}">Checkin Management</a></li>				
+				<li><a href="{:U('Member/agenda')}">Agenda</a></li>		
+				<li><a href="{:U('Admin/agenda_manage')}">Agenda Management</a></li>					
+				<li><a href="{:U('Admin/mypage')}">My Info</a></li>	
+				<li><a href="{:U('Luckydraw/activity')}">Activity Assistant</a></li>				
+			</ul>
+			<ul class="nav pull-right">
+				<li><a href="{:U('Login/logout')}">Log out</a></li>
+			</ul>		
+		<elseif condition="$_COOKIE['user_authority'] eq 'superadmin'"/>
+			<ul class="nav navbar-nav">		
+				<li><a href="{:U('Index/index')}">Homepage</a></li>			
+				<li><a href="{:U('Superadmin/Clubs')}">Clubs</a></li>		
+				<li><a href="{:U('Article/admin')}">Articles</a></li>		
+				<li><a href="{:U('Superadmin/donation')}">Donations</a></li>	
+				<li><a href="{:U('Superadmin/mypage')}">My Info</a></li>			  			
+			</ul>
+			<ul class="nav pull-right">
+				<li><a href="{:U('Login/logout')}">Log out</a></li>
+			</ul>
+		
+		<else />
+        <ul class="nav navbar-nav">			
+			<li><a href="{:U('Index/index')}">Homepage</a></li>
+			<li><a href="{:U('Index/timecard')}">Timer Card</a></li>	
+        </ul>
+		<ul class="nav pull-right">
+			<li><a href="{:U('Login/login')}">Log in</a></li>
+        </ul>				
+		</if>
+
+			
+
+		</div>
+    </nav>

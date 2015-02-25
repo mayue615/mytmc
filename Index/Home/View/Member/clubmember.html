@@ -1,0 +1,16 @@
+<layout name="layout_homepage" />
+
+<h3>Contact with <a href="mailto:{$email_sum}">all members' email</a></h3>
+<div id="content" class="row-fluid">
+	<div class="table-responsive">
+		<table class="table table-striped">	
+			<tr><th>User Name</th><th>Phone</th><th>Email</th><th>Last login</th></tr>
+			<volist name="data" id="vo">
+			<tr><td>{$vo.english_name}</td><td>{$vo.phone}</td><td><a href="mailto:{$vo.email}">{$vo.email}</a></td><td>{$vo.last_login}</td></tr>
+			</volist>
+		</table>
+	</div>
+</div>
+
+						
+						

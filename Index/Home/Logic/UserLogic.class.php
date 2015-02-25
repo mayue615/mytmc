@@ -18,22 +18,46 @@ delete_user_by_id($user_id);
 			else{
 				$condition=array('user_name'=>$user_name,'password'=>$password);
 			}
-			$result=$this->where($condition)->find();		
+			$result=$this->where($condition)->find();
 			if($result==NULL)
 				return false;
 			else
 				return $result['Id'];
 		}
-		
-		
+		public function is_phone_exist($phone,$password){
+			if($password==NULL){
+				$condition=array('phone'=>$phone);
+			}
+			else{
+				$condition=array('phone'=>$phone,'password'=>$password);
+			}
+			$result=$this->where($condition)->find();		
+			if($result==NULL)
+				return false;
+			else
+				return $result['Id'];
+		}		
+		public function is_mail_exist($mail,$password){
+			if($password==NULL){
+				$condition=array('email'=>$mail);
+			}
+			else{
+				$condition=array('email'=>$mail,'password'=>$password);
+			}
+			$result=$this->where($condition)->find();		
+			if($result==NULL)
+				return false;
+			else
+				return $result['Id'];
+		}		
 		public function get_user_info_by_id($user_id){
 			$condition=array('Id'=>$user_id);
-			$result=$this->where($condition)->find();
+			$result=$this->relation(true)->where($condition)->find();
 			return $result;
 		}
 		public function get_user_info_by_user_name($user_name){
 			$condition=array('user_name'=>$user_name);
-			$result=$this->where($condition)->find();
+			$result=$this->relation(true)->where($condition)->find();
 			return $result;
 		}
 		/*

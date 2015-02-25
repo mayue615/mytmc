@@ -1,0 +1,27 @@
+<layout name="layout_homepage" />
+<script language="javascript">
+$(document).ready(function(){
+$("table tr:gt(0)").each(function(i){
+    $(this).children("td").each(function(i){
+		if($(this).text()==$('#username').val()){
+			$(this).attr("style", "BACKGROUND-COLOR: yellow");
+		}
+    });
+});
+
+});
+</script>
+
+	<div class="table-responsive">
+		<table class="table table-striped">
+
+			<tr><th>No.</th><th>Date</th><th>Role</th></tr>
+			<volist name="data" id="vo">
+			<tr><td>{$vo.num}</td><td>{$vo.m_date}</td><td>{$vo.role}</td></tr>
+			</volist>
+		</table>
+
+	</div>
+	<h3><a href="{:U('Member/history_PC')}">Show PC Page</a></h3>
+						
+						
