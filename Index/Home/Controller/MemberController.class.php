@@ -6,15 +6,15 @@ class MemberController extends CommonController {
 	public function club_choose(){
 		$club_id=I('get.club_id');
 		cookie('club_id',$club_id);		
-		$this->redirect('club_info');
+		$this->success();
 
 	}
     public function club_info(){
 		$email_sum="";
 		$club_id = cookie('club_id');
-		$user_id=session("user_id");
-		$club1=D('club','Api');
-		$arr=$club1->get_users_info($club_id);
+		$user_id=session('user_id');
+		$club=D('club','Api');
+		$arr=$club->get_users_info($club_id);
 		foreach($arr as $item){
 			if($item!=""){
 				$email_sum=$email_sum.$item['email'].";";
@@ -35,13 +35,16 @@ class MemberController extends CommonController {
 	
     public function history_PC(){
  		$current_date = date('Y-m-d',time());
-		$club_id = $_SESSION['club_id'];
-		$user_id = $_SESSION['user_id'];
+		$club_id = cookie('club_id');
+		$user_id = session('user_id');
+		$meeting=D('visualMeeting','Api');
+		$data=$meeting->get_visual_meeting_table($club_id);
 /* 		$meeting1=new MeetingController();
 		$each_page_num=8;
 		$result=$meeting1->all_meeting_page($club_id,1,$each_page_num);	 */
-		$this->assign('data',$result['data']);
-		$this->assign('page_method',$result['show']);		
+		$this->assign('data',$data);
+		//$this->assign('data',$result['data']);
+		//$this->assign('page_method',$result['show']);		
 		$this->display('history');		
 	}
 

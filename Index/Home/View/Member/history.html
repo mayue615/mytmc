@@ -35,15 +35,19 @@ $("table tr:gt(0)").each(function(i){
 });*/
 });
 </script>
-<input type="hidden" id="username" value="{$username}">
+<input type="hidden" id="username" value="{$user_name}">
 	<div class="table-responsive">
 		<table class="table table-bordered">
 		<thead>
-			<tr><th>Meeting Number</th><th>Date</th><th>Meeting Style</th><th>Note</th><th>ToastMaster</th><th>JokeMaster</th><th>General Evaluator</th><th>Timer</th><th>Grammarian</th><th>Aha Counter</th><th>Table Master1</th><th>Table Master2</th><th>Speaker1</th><th>Evaluator1</th><th>Speaker2</th><th>Evaluator2</th><th>Speaker3</th><th>Evaluator3</th><th>Speaker4</th><th>Evaluator4</th><th>Speaker5</th><th>Evaluator5</th><th>Speaker6</th><th>Speaker7</th><th>Speaker8</th><th>Speaker9</th></tr>
+			<tr><th>No.</th><th>Date</th><th>Type</th><th>Language</th><th>Note</th><th>Toast Master</th><th>Joke Master</th><th>General Evaluator</th><th>Timer</th>
+			<th>Grammarian</th><th>Aha Counter</th><th>Table Master</th><th>Table Evaluator</th>
+			<th>Speaker1</th><th>Evaluator1</th><th>Speaker2</th><th>Evaluator2</th><th>Speaker3</th><th>Evaluator3</th><th>Speaker4</th><th>Evaluator4</th>
+			<th>Speaker5</th><th>Evaluator5</th><th>Speaker6</th><th>Evaluator6</th><th>Speaker7</th><th>Evaluator7</th><th>Speaker8</th><th>Evaluator8</th>
+			<th>Speaker9</th><th>Evaluator9</th></tr>
 		</thead>
 		<tbody>
 			<volist name="data" id="vo">
-			<tr><td>{$vo.num}</td><td>{$vo.m_date}</td><td>{$vo.language}</td><td>{$vo.note}</td>
+			<tr><td>{$vo.num}</td><td>{$vo.m_date}</td><td>{$vo.type}</td><td>{$vo.language}</td><td>{$vo.note}</td>
 			<td>{$vo.toast_id}</td>
 			<td>{$vo.joke_id}</td>
 			<td>{$vo.ge_id}</td>
@@ -51,21 +55,16 @@ $("table tr:gt(0)").each(function(i){
 			<td>{$vo.gramm_id}</td>
 			<td>{$vo.aha_id}</td>
 			<td>{$vo.table1_id}</td>
-			<td>{$vo.table2_id}</td>
-			<td>{$vo.spk1_id}</td>
-			<td>{$vo.ev1_id}</td>
-			<td>{$vo.spk2_id}</td>
-			<td>{$vo.ev2_id}</td>
-			<td>{$vo.spk3_id}</td>
-			<td>{$vo.ev3_id}</td>
-			<td>{$vo.spk4_id}</td>
-			<td>{$vo.ev4_id}</td>
-			<td>{$vo.spk5_id}</td>
-			<td>{$vo.ev5_id}</td>
-			<td>{$vo.spk6_id}</td>
-			<td>{$vo.spk7_id}</td>
-			<td>{$vo.spk8_id}</td>
-			<td>{$vo.spk9_id}</td>
+			<td>{$vo.table1_ev_id}</td>
+			<td>{$vo.spk1_id}</td><td>{$vo.ev1_id}</td>
+			<td>{$vo.spk2_id}</td><td>{$vo.ev2_id}</td>
+			<td>{$vo.spk3_id}</td><td>{$vo.ev3_id}</td>
+			<td>{$vo.spk4_id}</td><td>{$vo.ev4_id}</td>
+			<td>{$vo.spk5_id}</td><td>{$vo.ev5_id}</td>
+			<td>{$vo.spk6_id}</td><td>{$vo.ev6_id}</td>
+			<td>{$vo.spk7_id}</td><td>{$vo.ev7_id}</td>
+			<td>{$vo.spk8_id}</td><td>{$vo.ev8_id}</td>
+			<td>{$vo.spk9_id}</td><td>{$vo.ev9_id}</td>
 			</tr>
 			</volist>
 		</tbody>

@@ -13,7 +13,8 @@ use Think\Controller;
 			$this->assign('username',$temp);
 			$club_info=$user->get_user_club($user_id);
 			$this->assign('club_info',$club_info);
-			$this->assign('user_name',$user_name."@");			
+			$this->assign('user_name',$user_name);	
+			$this->assign('user_name_2',$user_name."@");
 			
 		}
 		

@@ -7,6 +7,32 @@ use Home\Logic\ClubLogic;
 			$result = $this->relation('user')->where($condition)->find();
 			return $result['user'];
 		}
+		public function get_meetings_info($club_id){
+			$condition['Id']=$club_id;
+			$arr = $this->relation('meeting')->where($condition)->find();
+/* 			$user=D('user','Api');
+			$id2name_dict=$user->get_user_name_dictionary(); */
+/* 			$meeting=D('meeting','Api');
+			$roles=$meeting->get_meeting_role_id();
+			//$roles=array('toast_id','joke_id','table1_id','table2_id','ge_id','gramm_id','timer_id','aha_id','ev1_id','ev2_id','ev3_id','ev4_id','ev5_id','spk1_id','spk2_id','spk3_id','spk4_id','spk5_id','spk6_id','spk7_id','spk8_id','spk9_id');		
+			foreach($arr['meeting'] as &$value)
+			{
+				foreach($roles as $role)
+				if($value[$role] != "") 
+				{
+					$i=$value[$role];
+					$value[$role]=$id2name_dict[$i];
+				}	   
+			} */			
+			return $arr['meeting'];		
+		}
+		public function get_meetings_id($club_id){
+			$condition['Id']=$club_id;
+			$arr = $this->relation('meeting_id')->where($condition)->field('Id')->find();
+			return $arr['meeting_id'];
+			
+		}		
+		
 		public function get_club_info($club_id){
 			$condition['Id']=$club_id;
 			$result = $this->relation(true)->where($condition)->find();
