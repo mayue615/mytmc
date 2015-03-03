@@ -145,6 +145,9 @@ namespace Home\Api;
 			$result = $this->relation(true)->where($condition)->find();
 			return $result;
 		}
+		public function admin_modify_meeting($m_id){
+		
+		}
 		//public function set_club_meeting($club_id)
 		public function ut(){	
 			echo("<h1>ut test in VisualMeeting</h1>");

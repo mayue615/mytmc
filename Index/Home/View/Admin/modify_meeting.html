@@ -1,0 +1,43 @@
+<layout name="layout_homepage" />	  
+<div class="col-md-2">
+<include file="Public:admin_sub_menu" />
+</div>
+<div class="col-md-10">  
+<div id="content">
+<h1>Modify meeting</h1>
+	<form action="{:U('Admin/modify_meeting_deal')}" method="post">
+		<table class="table table-striped">		
+			<tr><th>Meeting Date:</th>
+			<td><select class="input-xlarge" name="meeting_num">
+			<volist name="data1" id="vo">			
+			<option>{$vo.m_date}</option>
+			</volist>
+			</select></td></tr>
+			<tr><th>Meeting Style:</th>
+			<td><select class="input-xlarge" name="meeting_style">	
+			<option>Common</option>
+			<option>Union</option>
+			<option>Holiday</option>
+			<option>Contest</option>
+			</select></td></tr>			
+			<tr><th>Meeting Language:</th>
+			<td><select class="input-xlarge" name="meeting_style">	
+			<option></option>
+			<option>English</option>
+			<option>Chinese</option>
+			</select></td></tr>
+			<tr><th>Note:</th><td><input type="text" name="note" id="note"></td></tr>			
+	
+			<tr><th>Toastmaster:</th>
+			<td><select class="input-xlarge" name="member_name">
+			<option value=""></option>			
+			<volist name="member" id="vo">
+			<option value="{$vo.Id}">{$vo.dis_name}</option>
+			</volist>
+			</select></td></tr>
+			<tr><td><button class="btn btn-success">Update</button></td><td></td><td></td></tr>
+		</table>	
+	</form>	
+</div>
+</div>
+

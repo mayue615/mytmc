@@ -23,8 +23,10 @@ use Home\Logic\MeetingLogic;
 			return $count;
 		}
 		public function set_meeting_role($m_id,$role_id,$user_id){
+			//echo("in function set_meeting_speech_role<br>");		
 			$data['Id']=$m_id;
 			$data[$role_id]=$user_id;
+			//dump($data);			
 			$this->save($data);			
 		}		
 		public function delete_meeting_role($m_id,$role_id,$user_id){
@@ -64,6 +66,12 @@ use Home\Logic\MeetingLogic;
 			'spk1_id','ev1_id','spk2_id','ev2_id','spk3_id','ev3_id','spk4_id','ev4_id','spk5_id','ev5_id',
 			'spk6_id','ev6_id','spk7_id','ev7_id','spk8_id','ev8_id','spk9_id','ev9_id');
 			return $roles_id;
+		}
+		public function add_meeting($data){
+			$this->relation('club')->add($data);
+		}
+		public function set_meeting_info($data){
+			$this->relation(true)->save($data);
 		}
 
 	}

@@ -12,7 +12,7 @@ class MemberController extends CommonController {
     public function club_info(){
 		$email_sum="";
 		$club_id = cookie('club_id');
-		$user_id=session('user_id');
+		$user_id=cookie('user_id');
 		$club=D('club','Api');
 		$arr=$club->get_users_info($club_id);
 		foreach($arr as $item){
@@ -36,7 +36,7 @@ class MemberController extends CommonController {
     public function history_PC(){
  		$current_date = date('Y-m-d',time());
 		$club_id = cookie('club_id');
-		$user_id = session('user_id');
+		$user_id = cookie('user_id');
 		$meeting=D('visualMeeting','Api');
 		$data=$meeting->get_visual_meeting_table($club_id);
 /* 		$meeting1=new MeetingController();
@@ -51,7 +51,7 @@ class MemberController extends CommonController {
     public function history_phone(){
  		$current_date = date('Y-m-d',time());
 		$club_id = cookie('club_id');
-		$user_id = session('user_id');
+		$user_id = cookie('user_id');
 		$dictionary1=new DictionaryController();
 		//$id2name_dict=$dictionary1->id2name_dict($club_id);
 		$id2role_dict=$dictionary1->id2role_dict($club_id);
@@ -84,25 +84,12 @@ class MemberController extends CommonController {
     public function booking(){
  		$current_date = date('Y-m-d',time());
 		$club_id = cookie('club_id');
-		$user_id = session('user_id');
+		$user_id = cookie('user_id');
 		$meeting=D('visualMeeting','Api');
 		$data=$meeting->get_visual_meeting_table($club_id);		
-		//$test=$this->test();
-		//dump($test);
-/* 		$dictionary1=new DictionaryController();
-		$meeting1=new MeetingController();
-		$each_page_num=12;
-		$result=$meeting1->all_meeting_page($club_id,2,$each_page_num);	
-		$roles_list=$dictionary1->id2role_dict();
-		$this->assign('roles',$roles_list); */
 		$this->assign('data',$data);		
 		//$this->assign('data',$result['data']);
 		$this->assign('page_method',$result['show']);	
-/* 		$user1=new UserController();
-		$arr_delete=$user1->get_user_has_role_meeting($club_id,$user_id);	
-		$this->assign('delete_role',$arr_delete);
-		$arr_add=$user1->get_user_has_no_role_meeting($club_id,$user_id);	
-		$this->assign('add_role',$arr_add);	 */	
 		$this->display('booking');
 	}
 /*	
@@ -130,8 +117,8 @@ class MemberController extends CommonController {
 	}*/	
 	public function booking_js(){
 	    $str=I('post.change_role');
-		$club_id = $_SESSION['club_id'];
-		$user_id = $_SESSION['user_id'];
+		$club_id = cookie('club_id');
+		$user_id = cookie('user_id');
 		$str=rtrim($str,";");
 		$arr=explode(";",$str);
 		$data=array();

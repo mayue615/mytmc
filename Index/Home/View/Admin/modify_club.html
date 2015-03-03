@@ -1,0 +1,116 @@
+<layout name="layout_homepage" />	  
+<div class="col-md-2">
+<include file="Public:admin_sub_menu" />
+</div>
+<div class="col-md-10">  
+<div id="content">
+<h1>Modify Club</h1>
+	<form action="{:U('Admin/modify_club_deal')}" method="post">
+		<table class="table table-striped">
+			<input type="hidden" name="Id" value="{$data.Id}"/>
+ 			<tr><th>Club Name:</th><td><input type="text" name="club_name" value="{$data.club_name}"/></td></tr>
+ 			<tr><th>Country:</th><td><input type="text" name="country" value="{$data.country}"/></td></tr>
+ 			<tr><th>City:</th><td><input type="text" name="city" value="{$data.city}"/></td></tr>
+ 			<tr><th>Division:</th><td><input type="text" name="division" value="{$data.division}"/></td></tr>
+ 			<tr><th>Street:</th><td><input type="text" name="street" value="{$data.street}"/></td></tr>
+ 			<tr><th>Create Time:</th><td><input type="text" name="create_time" value="{$data.create_time}"/></td></tr>		
+			<tr><th>Meeting Time:</th><td><input type="text" name="default_time" value="{$data.default_time}"/></td></tr>
+			<tr><th>Default Room:</th><td><input type="text" name="default_room" value="{$data.default_room}"/></td></tr>
+			<tr><th>First Meeting Number<br> in Database:</th><td><input type="first_num" name="first_num" value="{$data.first_num}"/></td></tr>				
+			<tr><th>President:</th>
+				<td>
+				<select class="input-xlarge" name="president">
+					<option></option>
+					<volist name="member" id="vo">
+						<if condition="$data['president'] eq $vo['Id']">
+							<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+						<else/>
+							<option value="{$vo.Id}">{$vo.english_name}</option>
+						</if>
+					</volist>
+				</select>				
+				</td>
+			</tr>
+			<tr><th>VPE:</th>
+				<td>
+				<select class="input-xlarge" name="vpe">
+					<option></option>
+					<volist name="member" id="vo">
+						<if condition="$data['vpe'] eq $vo['Id']">
+							<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+						<else/>
+							<option value="{$vo.Id}">{$vo.english_name}</option>
+						</if>
+					</volist>
+				</select>				
+				</td>
+			</tr>	
+				<tr><th>VPM:</th>
+				<td>
+				<select class="input-xlarge" name="vpm">
+					<option></option>
+					<volist name="member" id="vo">
+						<if condition="$data['vpm'] eq $vo['Id']">
+							<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+						<else/>
+							<option value="{$vo.Id}">{$vo.english_name}</option>
+						</if>
+					</volist>
+				</select>				
+				</td>
+			</tr>
+			<tr><th>VPPR:</th>
+				<td>
+				<select class="input-xlarge" name="vppr">
+					<option></option>
+					<volist name="member" id="vo">
+						<if condition="$data['vppr'] eq $vo['Id']">
+							<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+						<else/>
+							<option value="{$vo.Id}">{$vo.english_name}</option>
+						</if>
+					</volist>
+				</select>				
+				</td>
+			</tr>
+			<tr><th>SAA:</th>
+				<td>
+				<select class="input-xlarge" name="saa">
+					<option></option>
+					<volist name="member" id="vo">
+						<if condition="$data['saa'] eq $vo['Id']">
+							<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+						<else/>
+							<option value="{$vo.Id}">{$vo.english_name}</option>
+						</if>
+					</volist>
+				</select>				
+				</td>
+			</tr>
+			<tr><th>Treasurer:</th>
+				<td>
+				<select class="input-xlarge" name="treasurer">
+					<option></option>
+					<volist name="member" id="vo">
+						<if condition="$data['treasurer'] eq $vo['Id']">
+							<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+						<else/>
+							<option value="{$vo.Id}">{$vo.english_name}</option>
+						</if>
+					</volist>
+				</select>				
+				</td>
+			</tr>			
+			<tr><th>President A:</th><td><input type="text" name="president_a" value="{$data.president_a}"/></td></tr>
+			<tr><th>VPE A:</th><td><input type="text" name="vpe_a" value="{$data.vpe_a}"/></td></tr>	
+			<tr><th>VPM A:</th><td><input type="text" name="vpm_a" value="{$data.vpm_a}"/></td></tr>	
+			<tr><th>VPPR A:</th><td><input type="text" name="vppr_a" value="{$data.vppr_a}"/></td></tr>	
+			<tr><th>SAA A:</th><td><input type="text" name="saa_a" value="{$data.saa_a}"/></td></tr>	
+			<tr><th>Treasurer A:</th><td><input type="text" name="treasurer_a" value="{$data.treasurer_a}"/></td></tr>	
+			<tr><th>Secretary A:</th><td><input type="text" name="secretary_a" value="{$data.secretary_a}"/></td></tr>			
+			<tr><td><button class="btn btn-success">Submit</button></td><td></td></tr>		
+		</table>	
+	</form>	
+
+</div>
+</div>

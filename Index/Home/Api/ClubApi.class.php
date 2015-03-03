@@ -39,9 +39,14 @@ use Home\Logic\ClubLogic;
 		
 		public function get_club_info($club_id){
 			$condition['Id']=$club_id;
-			$result = $this->relation(true)->where($condition)->find();
+			$result = $this->where($condition)->find();
 			return $result;
 		}
+		public function get_club_users($club_id){
+			$condition['Id']=$club_id;
+			$result = $this->relation('user')->where($condition)->find();
+			return $result['user'];
+		}		
 		//public function set_club_meeting($club_id)
 		public function ut(){	
 			echo("<h1>ut test in ClubApi</h1>");
