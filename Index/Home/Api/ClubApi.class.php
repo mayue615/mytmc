@@ -9,7 +9,7 @@ use Home\Logic\ClubLogic;
 		}
 		public function get_meetings_info($club_id){
 			$condition['Id']=$club_id;
-			$arr = $this->relation('meeting')->where($condition)->find();
+			$arr = $this->relation('meeting')->where($condition)->order('m_date')->find();
 /* 			$user=D('user','Api');
 			$id2name_dict=$user->get_user_name_dictionary(); */
 /* 			$meeting=D('meeting','Api');
@@ -29,7 +29,11 @@ use Home\Logic\ClubLogic;
 		public function get_meetings_id($club_id){
 			$condition['Id']=$club_id;
 			$arr = $this->relation('meeting_id')->where($condition)->field('Id')->find();
-			return $arr['meeting_id'];
+			$arr_id=array();
+			foreach($arr['meeting_id'] as $item){
+				array_push($arr_id,$item['Id']);
+			}
+			return $arr_id;
 			
 		}		
 		

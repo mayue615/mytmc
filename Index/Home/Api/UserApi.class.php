@@ -7,6 +7,8 @@ use Home\Logic\UserLogic;
 			$user_id=$this->is_phone_exist($user_name,$password);			
 		else  	
 			$user_id=$this->is_user_exist($user_name,$password);
+			//dump($user_id);
+			//exit;
 			if(!$user_id){
 				return false;
 			}
@@ -61,7 +63,11 @@ use Home\Logic\UserLogic;
 				return $m->add($data);
 			}
 		}
-		
+		public function get_user_speech($user_id){
+			$condition['Id']=$user_id;
+			$result = $this->relation('speech')->where($condition)->find();
+			return $result;						
+		}		
 		
 
 		public function ut(){	

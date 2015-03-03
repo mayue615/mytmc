@@ -8,9 +8,12 @@ namespace Home\Api;
 
 			$meeting=D('meeting','Api');			
 			$meetings_id=$club->get_meetings_id($club_id);
+			//dump($meetings_id);
 			$meeting_info=array();
 			foreach($meetings_id as $m_id){
+				//dump($m_id);
 				$arr=$meeting->get_meeting_info($m_id);
+				//dump($arr);
 				array_push($meeting_info,$arr);
 			}
 			return $meeting_info;
@@ -41,9 +44,6 @@ namespace Home\Api;
 		}
 		public function get_visual_meeting_table($club_id){
 			$meetings=$this->get_meetings_info_role_name($club_id);
-			//$speeches=$meetings['speech'];
-			//array_pop($meetings);
-			//dump($speeches);
 			$roles=array('spk1_id','ev1_id','spk2_id','ev2_id','spk3_id','ev3_id','spk4_id','ev4_id','spk5_id','ev5_id',
 						 'spk6_id','ev6_id','spk7_id','ev7_id','spk8_id','ev8_id','spk9_id','ev9_id');
 			foreach($meetings as &$meeting){
@@ -61,6 +61,85 @@ namespace Home\Api;
 			return $meetings;
 
 		}
+
+		public function get_visual_meeting_table_page($club_id,$type,$each_page_num){
+			$table=$this->get_visual_meeting_table($club_id);
+			
+		}
+		
+		public function set_visualmeeting_role($m_id,$role_id,$user_id){
+			$temp=substr($role_id,0,2);
+			$meeting=D('meeting','Api');
+			$speeches=$meeting->get_meeting_speeches($m_id);
+			$count=$meeting->get_meeting_speech_count($m_id);
+			if($temp=='sp'){
+				$num=substr($role_id,3,1);
+				$role_id='spk_id';
+				//dump($num);
+				//dump($count);
+				if($num>$count){
+					$meeting->add_meeting_speech_role($m_id,$role_id,$user_id);
+				}
+				else{
+					$id=$speeches[$num-1]['Id'];
+					$meeting->set_meeting_speech_role($id,$role_id,$user_id);	
+				}
+			}
+			else if($temp=='ev'){
+				$num=substr($role_id,2,1);	
+				$role_id='ev_id';
+				if($num>$count){
+					$meeting->add_meeting_speech_role($m_id,$role_id,$user_id);
+				}
+				else{
+					$id=$speeches[$num-1]['Id'];
+					$meeting->set_meeting_speech_role($id,$role_id,$user_id);	
+				}				
+			}
+			else{
+
+				$meeting->set_meeting_role($m_id,$role_id,$user_id);			
+			}
+		}
+		public function delete_visualmeeting_role($m_id,$role_id,$user_id){
+			$temp=substr($role_id,0,2);
+			$meeting=D('meeting','Api');	
+			$speeches=$meeting->get_meeting_speeches($m_id);
+			$count=$meeting->get_meeting_speech_count($m_id);
+			//dump($speeches);
+			if($temp=='sp'){
+				$num=substr($role_id,3,1);
+				//dump($num);
+				$role_id='spk_id';
+				//dump($speeches[$num-1]['ev_id']);
+				if($speeches[$num-1]['ev_id']!=null){
+					$id=$speeches[$num-1]['Id'];					
+					$meeting->set_meeting_speech_role($id,$role_id,null);
+				}
+				else{
+					$id=$speeches[$num-1]['Id'];				
+					$meeting->delete_meeting_speech_role($id);	
+				}							
+			}
+			else if($temp=='ev'){
+				$num=substr($role_id,2,1);
+				//dump($num);
+				$role_id='ev_id';
+				//dump($speeches[$num-1]['spk_id']);
+				if($speeches[$num-1]['spk_id']!=null){
+					$id=$speeches[$num-1]['Id'];					
+					$meeting->set_meeting_speech_role($id,$role_id,null);
+				}
+				else{
+					$id=$speeches[$num-1]['Id'];				
+					$meeting->delete_meeting_speech_role($id);	
+				}					
+			}
+			else{
+				$meeting=D('meeting','Api');
+				$meeting->delete_meeting_role($m_id,$role_id,$user_id);			
+			}
+		}		
 		public function get_club_info($club_id){
 			$condition['Id']=$club_id;
 			$result = $this->relation(true)->where($condition)->find();
@@ -70,11 +149,11 @@ namespace Home\Api;
 		public function ut(){	
 			echo("<h1>ut test in VisualMeeting</h1>");
 			echo("<h2>get_meetings_info</h2>");
-			//dump($this->get_meetings_info(1));
-			echo("<h2>get_meetings_info_role_name</h2>");
-			//dump($this->get_meetings_info_role_name(1));	
+			dump($this->get_meetings_info(1));
+/* 			echo("<h2>get_meetings_info_role_name</h2>");
+			dump($this->get_meetings_info_role_name(1));	
 			echo("<h2>get_visual_meeting_table</h2>");
-			dump($this->get_visual_meeting_table(1));			
+			dump($this->get_visual_meeting_table(1)); */			
 		}
 
 	}

@@ -50,8 +50,8 @@ class MemberController extends CommonController {
 
     public function history_phone(){
  		$current_date = date('Y-m-d',time());
-/* 		$club_id = $_SESSION['club_id'];
-		$user_id = $_SESSION['user_id'];
+		$club_id = cookie('club_id');
+		$user_id = session('user_id');
 		$dictionary1=new DictionaryController();
 		//$id2name_dict=$dictionary1->id2name_dict($club_id);
 		$id2role_dict=$dictionary1->id2role_dict($club_id);
@@ -75,34 +75,37 @@ class MemberController extends CommonController {
 			$temp=array('num'=>$num,'m_date'=>$m_date,'role'=>$rolename);
 			array_push($result,$temp);
 			$rolename="";
-		} */	
+		}	
 				
 		$this->assign('data',$result);//$arr(num,m_date,role)
 		$this->display('history_phone');		
 	}
 	
-/*    public function booking(){
+    public function booking(){
  		$current_date = date('Y-m-d',time());
-		$club_id = $_SESSION['club_id'];
-		$user_id = $_SESSION['user_id'];
+		$club_id = cookie('club_id');
+		$user_id = session('user_id');
+		$meeting=D('visualMeeting','Api');
+		$data=$meeting->get_visual_meeting_table($club_id);		
 		//$test=$this->test();
 		//dump($test);
-		$dictionary1=new DictionaryController();
+/* 		$dictionary1=new DictionaryController();
 		$meeting1=new MeetingController();
 		$each_page_num=12;
 		$result=$meeting1->all_meeting_page($club_id,2,$each_page_num);	
 		$roles_list=$dictionary1->id2role_dict();
-		$this->assign('roles',$roles_list);
-		$this->assign('data',$result['data']);
+		$this->assign('roles',$roles_list); */
+		$this->assign('data',$data);		
+		//$this->assign('data',$result['data']);
 		$this->assign('page_method',$result['show']);	
-		$user1=new UserController();
+/* 		$user1=new UserController();
 		$arr_delete=$user1->get_user_has_role_meeting($club_id,$user_id);	
 		$this->assign('delete_role',$arr_delete);
 		$arr_add=$user1->get_user_has_no_role_meeting($club_id,$user_id);	
-		$this->assign('add_role',$arr_add);		
+		$this->assign('add_role',$arr_add);	 */	
 		$this->display('booking');
 	}
-	
+/*	
 	public function test(){
 		$club_id = $_SESSION['club_id'];
 		$user_id = $_SESSION['user_id'];
@@ -124,7 +127,7 @@ class MemberController extends CommonController {
 	}
 	public function booking_delete_meeting_role_ajax(){
 			$this->ajaxReturn($roles);	
-	}	
+	}*/	
 	public function booking_js(){
 	    $str=I('post.change_role');
 		$club_id = $_SESSION['club_id'];
@@ -136,25 +139,24 @@ class MemberController extends CommonController {
 			$arr_temp=explode(",",$item);
 			array_push($data,$arr_temp);
 		}
-		$role1=new RoleController();
-		$user1=new UserController();
+		//dump($data);
+		//exit;
+		$meeting=D('visualMeeting','Api');		
 		foreach($data as $item){
-			$i=$item[1];
-			$j=$item[2];						
+			$m_id=$item[1];
+			$role_id=$item[2];
+			//dump($item);
 			if($item[0]=="add"){
-				$result=$role1->add($club_id,$i,$j,$user_id);			
+				$result=$meeting->set_visualmeeting_role($m_id,$role_id,$user_id);			
 			}
 			elseif($item[0]=="delete"){
-				if($j=="null"){
-					$j=$user1->get_user_role_id($club_id,$i,$user_id);
-				}
-				$result=$role1->delete($club_id,$i,$j,$user_id);			
+				$result=$meeting->delete_visualmeeting_role($m_id,$role_id,$user_id);			
 
 			}
 			else{
 			
 			}
-		}
+		} 
 		$this->success("Succeed to update roles");
 	}
 	public function booking_form_deal(){
@@ -206,7 +208,7 @@ class MemberController extends CommonController {
 			$this->error("You must select both meeting number and role");
 		}
 	}	
-	public function agenda(){
+/*	public function agenda(){
 	$club_id = $_SESSION['club_id'];
 	$index1=new IndexController();
 	$index1->agenda_show($club_id);

@@ -12,16 +12,15 @@ use Think\Model\RelationModel;
 		),
 		'speech' => array(
 		'mapping_type'      =>  self::HAS_MANY,
-		'class_name'        =>  'User_speech',//子表名称
-		'foreign_key'       =>  'user_id',
-		'relation_foreign_key' => 'id',
+		'class_name'        =>  'user_speech',//子表名称
+		'foreign_key'       =>  'spk_id',
+		'mapping_order'       =>  'Id',
 		//'mapping_fields' => array('level,body,title'),//默认所有的字段都查询
 		),
 		'article' => array(
 		'mapping_type'      =>  self::HAS_MANY,
 		'class_name'        =>  'article',//子表名称
 		'foreign_key'       =>  'user_id',
-		'relation_foreign_key' => 'id',
 		//'mapping_fields' => array('level,body,title'),//默认所有的字段都查询
 		),		
 		

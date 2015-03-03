@@ -27,7 +27,7 @@ $(this).attr("style", "BACKGROUND-COLOR: #98FB98");
  }
 });	
 
-$("#add_meeting_id").change(function() {
+/*$("#add_meeting_id").change(function() {
 	var temp = $("#add_meeting_id").val()
 	$.get("__APP__/Home/Member/booking_add_meeting_role_ajax",{add_role_date:temp},function(data){
 	var count=data.length
@@ -36,10 +36,10 @@ $("#add_meeting_id").change(function() {
 		$("#add_meeting_role").append("<option value="+data[i].role_id+">"+data[i].role_name+"</option>");
 	}
    })
-});
+});*/
 
 $('#submit').click(function(){
-	if($('#add_meeting_id option:selected').text()!=""){
+/*	if($('#add_meeting_id option:selected').text()!=""){
 		command="";
 		command="add"+","+$('#add_meeting_id option:selected').val()+","+$('#add_meeting_role option:selected').val()+";";
 		if($('#delete_meeting_id option:selected').text()!=""){
@@ -51,7 +51,7 @@ $('#submit').click(function(){
 		command="";
 		command="delete"+","+$('#delete_meeting_id option:selected').val()+","+"null"+";";
 	}	
-	//alert(command);
+	//alert(command);*/
 	$("#change_role").val(command);
 	//$("documentForm").submit("__APP__/Home/Member/booking_js");
 });	
@@ -59,7 +59,7 @@ $('#submit').click(function(){
 	
 });
 </script>
-<input type="hidden" id="username" value="{$username}">
+<input type="hidden" id="username" value="{$user_name}">
 
 	<div class="table-responsive">
 		<table class="table table-bordered">
@@ -68,7 +68,7 @@ $('#submit').click(function(){
 		</thead>
 		<tbody>
 			<volist name="data" id="vo">
-			<tr num="{$vo.m_date}"><td role="num">{$vo.num}</td><td role="date">{$vo.m_date}</td><td>{$vo.language}</td><td role="note">{$vo.note}</td><td role="toast_id">{$vo.toast_id}</td><td role="joke_id">{$vo.joke_id}</td><td role="ge_id">{$vo.ge_id}</td><td role="timer_id">{$vo.timer_id}</td><td role="gramm_id">{$vo.gramm_id}</td><td role="aha_id">{$vo.aha_id}</td><td role="table1_id">{$vo.table1_id}</td><td role="table2_id">{$vo.table2_id}</td><td role="spk1_id">{$vo.spk1_id}</td><td role="ev1_id">{$vo.ev1_id}</td><td role="spk2_id">{$vo.spk2_id}</td><td role="ev2_id">{$vo.ev2_id}</td>
+			<tr num="{$vo.Id}"><td role="num">{$vo.num}</td><td role="date">{$vo.m_date}</td><td>{$vo.language}</td><td role="note">{$vo.note}</td><td role="toast_id">{$vo.toast_id}</td><td role="joke_id">{$vo.joke_id}</td><td role="ge_id">{$vo.ge_id}</td><td role="timer_id">{$vo.timer_id}</td><td role="gramm_id">{$vo.gramm_id}</td><td role="aha_id">{$vo.aha_id}</td><td role="table1_id">{$vo.table1_id}</td><td role="table2_id">{$vo.table2_id}</td><td role="spk1_id">{$vo.spk1_id}</td><td role="ev1_id">{$vo.ev1_id}</td><td role="spk2_id">{$vo.spk2_id}</td><td role="ev2_id">{$vo.ev2_id}</td>
 			<td role="spk3_id">{$vo.spk3_id}</td><td role="ev3_id">{$vo.ev3_id}</td><td role="spk4_id">{$vo.spk4_id}</td><td role="ev4_id">{$vo.ev4_id}</td><td role="spk5_id">{$vo.spk5_id}</td><td role="ev5_id">{$vo.ev5_id}</td><td role="spk6_id">{$vo.spk6_id}</td><td role="spk7_id">{$vo.spk7_id}</td><td role="spk8_id">{$vo.spk8_id}</td><td role="spk9_id">{$vo.spk9_id}</td></tr>
 			</volist>
 		</tbody>
@@ -88,16 +88,13 @@ $('#submit').click(function(){
   <!--<form action="{:U('booking_form_deal')}" class="form-horizontal">-->
   <form method="post" id="documentForm" action="{:U('booking_js')}">
 	<input id="change_role" type="hidden" name="change_role" value="">
-      Add:&nbsp&nbsp&nbsp&nbsp
+<!--       Add:&nbsp&nbsp&nbsp&nbsp
       <select id="add_meeting_id" class="input-xlarge" name="add_meeting_id">
 	  <option></option>
 	  <volist name="add_role" id="vo">
       <option>{$vo}</option>
 	  </volist>
       </select>
-
-
-
       <select id="add_meeting_role" class="input-xlarge" name="add_meeting_role">
 	  <option></option>
 	  </volist></select>
@@ -109,7 +106,7 @@ $('#submit').click(function(){
       <option>{$vo}</option>
 	  </volist>
 	  </select>	  
-	  <br/><br/>
+	  <br/><br/> -->
       <button class="btn btn-success" id="submit">Submit</button>
 
   </form>

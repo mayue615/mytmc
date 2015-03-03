@@ -14,6 +14,7 @@ use Think\Model\RelationModel;
 			'mapping_type'      =>  self::HAS_MANY,
 			'class_name'        =>  'user_speech',//子表名称
 			'foreign_key'       =>  'm_id',
+			'mapping_order'       =>  'Id',			
 			//'mapping_fields' => array('level,body,title'),//默认所有的字段都查询
 			),				
 		);
