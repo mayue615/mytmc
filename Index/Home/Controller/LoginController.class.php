@@ -26,6 +26,7 @@ class LoginController extends Controller {
 			else
 				$login = 1;;
 			$date = date('Y-m-d H:i:s',time());
+			$data['Id']=$user_id;			
 			$data['login_times']=$login;
 			$data['last_login']=$date;
 			$user->set_user_info($data);

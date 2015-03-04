@@ -1,0 +1,35 @@
+<layout name="layout_homepage" />	  
+<div class="col-md-2">
+<include file="Public:admin_sub_menu" />
+</div>
+<div class="col-md-10">  
+<div id="content">
+<h1>Modify Single Member</h1>
+	<form action="{:U('Admin/modify_single_member_deal')}" method="post">
+		<input type="hidden" name="Id" value="{$data.Id}"/>
+		<table class="table table-striped">	
+			<tr><th>User Name</th><td><input type="text" name="user_name" value="{$data.user_name}"/></td></tr>
+			<tr><th>English Name</th><td><input type="text" name="english_name" value="{$data.english_name}"/></td></tr>
+			<tr><th>Chinese Name</th><td><input type="text" name="chinese_name" value="{$data.chinese_name}"/></td></tr>
+			<tr><th>Phone</th><td><input type="text" name="phone" value="{$data.phone}"/></td></tr>
+			<tr><th>Email</th><td><input type="text" name="email" value="{$data.email}"/></td></tr>
+			<tr><th>Authority</th>
+				<td>
+					<select class="input-xlarge" name="authority">
+						<volist name="authority_type" id="vo">
+							<if condition="$data['authority'] eq $vo">
+								<option value="{$vo}" selected>{$vo}</option>						
+							<else/>
+								<option value="{$vo}">{$vo}</option>
+							</if>
+						</volist>
+					</select>									
+				</td>
+			</tr>
+			<tr><th>Birthday</th><td><input type="text" name="birthday" value="{$data.birthday}"/></td></tr>
+			<tr><td><button class="btn btn-success">Submit</button></td><td></td></tr>				
+		</table>	
+	</form>	
+</div>
+</div>
+

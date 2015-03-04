@@ -4,9 +4,9 @@
 <div id="content" class="row-fluid">
 	<div class="table-responsive">
 		<table class="table table-striped">	
-			<tr><th>User Name</th><th>Phone</th><th>Email</th><th>Last login</th></tr>
+			<tr><th>User Name</th><th>Phone</th><th>Email</th><th>Last login</th><th>Login times</th></tr>
 			<volist name="data" id="vo">
-			<tr><td>{$vo.english_name}</td><td>{$vo.phone}</td><td><a href="mailto:{$vo.email}">{$vo.email}</a></td><td>{$vo.last_login}</td></tr>
+			<tr><td>{$vo.english_name}</td><td>{$vo.phone}</td><td><a href="mailto:{$vo.email}">{$vo.email}</a></td><td>{$vo.last_login}</td><td>{$vo.login_times}</td></tr>
 			</volist>
 		</table>
 	</div>

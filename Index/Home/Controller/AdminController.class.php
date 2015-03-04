@@ -27,10 +27,28 @@ class AdminController extends CommonController {
 		$this->success();
 	}	
 	public function modify_member(){
+		$club_id = cookie('club_id');
+		$user_id=cookie('user_id');
+		$club=D('club','Api');
+		$arr=$club->get_users_info($club_id);
+		//dump($arr);
+		$this->assign('data',$arr);
 		$this->display();	
 	}
-	public function modify_member_deal(){
-		$this->success();	
+	public function modify_single_member(){
+		$member_id=I('get.member_id');
+		$user=D('user','Api');
+		$arr=$user->get_user_info_by_id($member_id);
+		$authority_type=array('admin','member','guest');
+		$this->assign('authority_type',$authority_type);		
+		$this->assign('data',$arr);
+		$this->display();		
+	}	
+	public function modify_single_member_deal(){
+		$user=D('user','Api');
+		$data=$user->create();		
+		$user->save();
+		$this->success();
 	}	
 	public function deal_message(){
 		$this->display();	
