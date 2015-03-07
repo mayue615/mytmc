@@ -9,6 +9,48 @@ use Home\Logic\MeetingLogic;
 			//dump($result);
 			return $result;
 		}
+		public function get_meeting_info_role_name($m_id){
+			$meeting=$this->get_meeting_info($m_id);
+			$user=D('user','Api');
+			$id2name_dict=$user->get_user_name_dictionary();
+			$roles=array('owner_id','toast_id','joke_id','ge_id','gramm_id','timer_id','aha_id','table1_id','table2_id','table1_ev_id','table2_ev_id');
+			$roles_speech=array('spk_id','ev_id');
+			foreach($roles as $role){
+				if($meeting[$role] != ""){
+					$i=$meeting[$role];
+					$meeting[$role]=$id2name_dict[$i];
+				}
+			}
+			foreach($meeting['speech'] as &$speech){
+				foreach($roles_speech as $role_speech){
+					if($speech[$role_speech] != ""){
+						$i=$speech[$role_speech];
+						$speech[$role_speech]=$id2name_dict[$i];
+					}
+				}
+			}
+			return $meeting;
+		}
+		public function get_visual_meeting_table($m_id){
+			$meeting=$this->get_meeting_info_role_name($m_id);
+			$roles=array('spk1_id','ev1_id','spk2_id','ev2_id','spk3_id','ev3_id','spk4_id','ev4_id','spk5_id','ev5_id',
+						 'spk6_id','ev6_id','spk7_id','ev7_id','spk8_id','ev8_id','spk9_id','ev9_id');
+				$i=0;
+				$speeches=$meeting['speech'];
+				array_pop($meeting);
+				foreach($speeches as $speech){
+					$meeting[$roles[$i]]=$speech['spk_id'];
+					$i=$i+1;
+					$meeting[$roles[$i]]=$speech['ev_id'];
+					$i=$i+1;
+				}
+			//dump($m_id);
+			//dump($meeting);
+			return $meeting;
+
+		}
+
+		
 		public function get_meeting_speeches($m_id){
 
 			$m=M('user_speech');		
@@ -29,7 +71,7 @@ use Home\Logic\MeetingLogic;
 			//dump($data);			
 			$this->save($data);			
 		}		
-		public function delete_meeting_role($m_id,$role_id,$user_id){
+		public function delete_meeting_role($m_id,$role_id){
 			$data['Id']=$m_id;
 			$data[$role_id]=null;
 			$this->save($data);			
@@ -72,6 +114,12 @@ use Home\Logic\MeetingLogic;
 		}
 		public function set_meeting_info($data){
 			$this->relation(true)->save($data);
+		}
+		public function add_meeting_club($m_id,$club_id){
+			$m=M('club_meeting');
+			$data['m_id']=$m_id;
+			$data['club_id']=$club_id;
+			$m->add($data);
 		}
 
 	}

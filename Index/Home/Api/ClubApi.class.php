@@ -55,6 +55,11 @@ use Home\Logic\ClubLogic;
 			echo("<h2>get_club_info in ClubApi</h2>");
 			dump($this->get_club_info(1));		
 		}
-
+		public function get_clubs(){
+			return $this->field('Id,club_name')->select();
+		}
+		public function get_other_clubs($club_id){
+			return $this->where("Id<>'$club_id'")->field('Id,club_name')->select();
+		}
 	}
 ?>

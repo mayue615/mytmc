@@ -101,7 +101,7 @@ namespace Home\Api;
 				$meeting->set_meeting_role($m_id,$role_id,$user_id);			
 			}
 		}
-		public function delete_visualmeeting_role($m_id,$role_id,$user_id){
+		public function delete_visualmeeting_role($m_id,$role_id){
 			$temp=substr($role_id,0,2);
 			$meeting=D('meeting','Api');	
 			$speeches=$meeting->get_meeting_speeches($m_id);
@@ -137,7 +137,7 @@ namespace Home\Api;
 			}
 			else{
 				$meeting=D('meeting','Api');
-				$meeting->delete_meeting_role($m_id,$role_id,$user_id);			
+				$meeting->delete_meeting_role($m_id,$role_id);			
 			}
 		}		
 		public function get_club_info($club_id){
@@ -145,9 +145,7 @@ namespace Home\Api;
 			$result = $this->relation(true)->where($condition)->find();
 			return $result;
 		}
-		public function admin_modify_meeting($m_id){
-		
-		}
+
 		//public function set_club_meeting($club_id)
 		public function ut(){	
 			echo("<h1>ut test in VisualMeeting</h1>");

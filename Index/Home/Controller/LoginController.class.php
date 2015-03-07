@@ -19,7 +19,10 @@ class LoginController extends Controller {
 			$dis_name=$user_info['english_name'];
 			$user_id=$user_info['Id'];
 			$user_authority=$user_info['authority'];
+			$club_id=$user_info['club'][0]['Id'];
 			cookie('user_id',$user_id);
+			cookie('club_id',$club_id);
+			cookie('user_authority',$user_authority);			
 			$login_times = $user_info['login_times'];
 			if($login_times != "")
 				$login = intval($login_times)+1;
@@ -30,9 +33,6 @@ class LoginController extends Controller {
 			$data['login_times']=$login;
 			$data['last_login']=$date;
 			$user->set_user_info($data);
-			//cookie('user_id',$id);
-			//cookie('club_id',$club_id);
-			cookie('user_authority',$user_authority);
 			if($user_authority=="admin"){
 				$this->redirect('Admin/members');
 			}
@@ -52,6 +52,7 @@ class LoginController extends Controller {
 		//echo("delete cookie");
 		cookie("user_authority",null);
 		cookie("user_id",null);
+		cookie("club_id",null);		
     	//cookie(null);//清空所有session信息,这个函数有bug
 		$this->redirect('Index/index');
     }

@@ -137,7 +137,7 @@ class MemberController extends CommonController {
 				$result=$meeting->set_visualmeeting_role($m_id,$role_id,$user_id);			
 			}
 			elseif($item[0]=="delete"){
-				$result=$meeting->delete_visualmeeting_role($m_id,$role_id,$user_id);			
+				$result=$meeting->delete_visualmeeting_role($m_id,$role_id);			
 
 			}
 			else{

@@ -1,43 +1,44 @@
 <layout name="layout_homepage" />	  
+			
 <div class="col-md-2">
 <include file="Public:admin_sub_menu" />
 </div>
 <div class="col-md-10">  
 <div id="content">
 <h1>Modify meeting</h1>
-	<form action="{:U('Admin/modify_meeting_deal')}" method="post">
-		<table class="table table-striped">		
-			<tr><th>Meeting Date:</th>
-			<td><select class="input-xlarge" name="meeting_num">
-			<volist name="data1" id="vo">			
-			<option>{$vo.m_date}</option>
+	<div class="table-responsive">
+		<table class="table table-bordered">
+		<thead>
+			<tr><th>No.</th><th>Date</th><th>Type</th><th>Language</th><th>Note</th><th>ToastMaster</th><th>JokeMaster</th><th>General Evaluator</th><th>Timer</th>
+			<th>Grammarian</th><th>Aha Counter</th><th>Table Master1</th><th>Table Master2</th><th>Speaker1</th><th>Evaluator1</th><th>Speaker2</th><th>Evaluator2</th>
+			<th>Speaker3</th><th>Evaluator3</th><th>Speaker4</th><th>Evaluator4</th><th>Speaker5</th><th>Evaluator5</th><th>Speaker6</th><th>Evaluator6</th><th>Speaker7</th>
+			<th>Evaluator7</th><th>Speaker8</th><th>Evaluator8</th><th>Speaker9</th><th>Evaluator9</th></tr>
+		</thead>
+		<tbody>
+			<volist name="data" id="vo">
+			<tr><td role="num">{$vo.num}</td><td role="date"><a href="{:U('Admin/modify_single_meeting',array('m_id'=>$vo['Id']))}">{$vo.m_date}</td><td>{$vo.type}</td>
+			<td>{$vo.language}</td><td role="note">{$vo.note}</td><td role="toast_id">{$vo.toast_id}</td><td role="joke_id">{$vo.joke_id}</td><td role="ge_id">{$vo.ge_id}</td>
+			<td role="timer_id">{$vo.timer_id}</td><td role="gramm_id">{$vo.gramm_id}</td><td role="aha_id">{$vo.aha_id}</td><td role="table1_id">{$vo.table1_id}</td>
+			<td role="table2_id">{$vo.table2_id}</td><td role="spk1_id">{$vo.spk1_id}</td><td role="ev1_id">{$vo.ev1_id}</td><td role="spk2_id">{$vo.spk2_id}</td>
+			<td role="ev2_id">{$vo.ev2_id}</td>
+			<td role="spk3_id">{$vo.spk3_id}</td><td role="ev3_id">{$vo.ev3_id}</td><td role="spk4_id">{$vo.spk4_id}</td><td role="ev4_id">{$vo.ev4_id}</td>
+			<td role="spk5_id">{$vo.spk5_id}</td><td role="ev5_id">{$vo.ev5_id}</td><td role="spk6_id">{$vo.spk6_id}</td><td role="ev6_id">{$vo.ev6_id}</td>
+			<td role="spk7_id">{$vo.spk7_id}</td><td role="ev7_id">{$vo.ev7_id}</td><td role="spk8_id">{$vo.spk8_id}</td><td role="ev8_id">{$vo.ev8_id}</td>
+			<td role="spk9_id">{$vo.spk9_id}</td><td role="ev9_id">{$vo.ev9_id}</td></tr>
 			</volist>
-			</select></td></tr>
-			<tr><th>Meeting Style:</th>
-			<td><select class="input-xlarge" name="meeting_style">	
-			<option>Common</option>
-			<option>Union</option>
-			<option>Holiday</option>
-			<option>Contest</option>
-			</select></td></tr>			
-			<tr><th>Meeting Language:</th>
-			<td><select class="input-xlarge" name="meeting_style">	
-			<option></option>
-			<option>English</option>
-			<option>Chinese</option>
-			</select></td></tr>
-			<tr><th>Note:</th><td><input type="text" name="note" id="note"></td></tr>			
-	
-			<tr><th>Toastmaster:</th>
-			<td><select class="input-xlarge" name="member_name">
-			<option value=""></option>			
-			<volist name="member" id="vo">
-			<option value="{$vo.Id}">{$vo.dis_name}</option>
-			</volist>
-			</select></td></tr>
-			<tr><td><button class="btn btn-success">Update</button></td><td></td><td></td></tr>
-		</table>	
-	</form>	
+		</tbody>
+		<tfoot>
+              <tr>
+                <td colspan="6">
+                  <div class="pagination">               	  
+                  	{$page_method}
+                  </div>                 
+                  <div class="clear"></div>
+                </td>
+              </tr>
+        </tfoot> 	
+		</table>
+	</div>
 </div>
 </div>
 

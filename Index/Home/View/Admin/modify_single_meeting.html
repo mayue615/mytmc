@@ -1,0 +1,466 @@
+<layout name="layout_homepage" />	  
+<script language="javascript">
+$(document).ready(function(){
+	var temp = $("#type").val();	
+	if(temp=="Union"){	
+		$("#club").show();
+	}
+	else{
+		$("#club").hide();
+	}
+	$("#type").change(function() {
+		var temp = $("#type").val();		
+		if(temp=="Union"){	
+			$("#club").show();
+		}
+		else{
+			$("#club").hide();
+		}
+	});
+});
+</script>			
+			
+			
+<div class="col-md-2">
+<include file="Public:admin_sub_menu" />
+</div>
+<div class="col-md-10">  
+<div id="content">
+<h1>Modify meeting</h1>
+	<form action="{:U('Admin/modify_single_meeting_deal')}" method="post">
+		<input type="hidden" name="Id" id="Id"  value={$data.Id}>
+		<table class="table table-striped">		
+		<tr><th>Meeting Date:</th><td>
+			<input type="text" name="m_date" id="m_date" value={$data.m_date}>
+		</td>
+		
+		</tr>	
+		<tr><th>Meeting Type:</th><td>
+			<select class="input-xlarge" name="type" id="type">
+				<volist name="type" id="vo">
+					<if condition="$data['type'] eq $vo['type']">
+						<option selected>{$vo.type}</option>						
+					<else/>
+						<option>{$vo.type}</option>
+					</if>
+				</volist>			
+			</select>
+			<select class="input-xlarge" name="club" id="club">
+					<volist name="clubs" id="vo">
+						<option value="{$vo.Id}">{$vo.club_name}</option>
+					</volist>
+			</select>			
+		</td></tr>
+		<tr><th>Language:</th><td>
+			<select class="input-xlarge" name="language" id="language"  value={$data.language}>
+				<volist name="language" id="vo">
+					<if condition="$data['language'] eq $vo['language']">
+						<option selected>{$vo.language}</option>						
+					<else/>
+						<option>{$vo.language}</option>
+					</if>
+				</volist>			
+			</select>
+		</td></tr>		
+		<tr><th>Meeting Room:</th><td><input type="text" name="room" id="room"  value={$data.room}></td></tr>
+		<tr><th>Meeting Time:</th><td><input type="text" name="time" id="time"  value={$data.time}></td></tr>	
+		<tr><th>Note</th><td><input type="text" name="note" id="note"  value={$data.note}></td></tr>
+		<tr><th>Sharing</th><td><input type="text" name="sharing" id="sharing"  value={$data.sharing}></td></tr>		
+		<tr><th>Toastmaster:</th>
+			<td>
+			<select class="input-xlarge" name="toast_id" id="toast_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['toast_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>		
+		<tr><th>Jokemaster:</th>
+			<td>
+			<select class="input-xlarge" name="joke_id" id="joke_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['joke_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>General Evaluator:</th>
+			<td>
+			<select class="input-xlarge" name="ge_id" id="ge_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['ge_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Timer:</th>
+			<td>
+			<select class="input-xlarge" name="timer_id" id="timer_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['timer_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Grammarian:</th>
+			<td>
+			<select class="input-xlarge" name="gramm_id" id="gramm_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['gramm_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Aha Counter:</th>
+			<td>
+			<select class="input-xlarge" name="aha_id" id="aha_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['aha_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Table master1:</th>
+			<td>
+			<select class="input-xlarge" name="table1_id" id="table1_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['table1_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Table master2:</th>
+			<td>
+			<select class="input-xlarge" name="table2_id" id="table2_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['table2_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Table evaluator1:</th>
+			<td>
+			<select class="input-xlarge" name="table1_ev_id" id="table1_ev_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['table1_ev_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Table evaluator2:</th>
+			<td>
+			<select class="input-xlarge" name="table2_ev_id" id="table2_ev_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['table2_ev_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Speaker1:</th>
+			<td>
+			<select class="input-xlarge" name="spk1_id" id="spk1_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['spk1_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Evaluator1:</th>
+			<td>
+			<select class="input-xlarge" name="ev1_id" id="ev1_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['ev1_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>	
+		<tr><th>Speaker2:</th>
+			<td>
+			<select class="input-xlarge" name="spk1_id" id="spk1_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['spk2_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Evaluator2:</th>
+			<td>
+			<select class="input-xlarge" name="ev1_id" id="ev1_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['ev2_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>	
+		<tr><th>Speaker3:</th>
+			<td>
+			<select class="input-xlarge" name="spk3_id" id="spk3_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['spk3_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Evaluator3:</th>
+			<td>
+			<select class="input-xlarge" name="ev3_id" id="ev3_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['ev3_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Speaker4:</th>
+			<td>
+			<select class="input-xlarge" name="spk4_id" id="spk4_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['spk4_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Evaluator4:</th>
+			<td>
+			<select class="input-xlarge" name="ev4_id" id="ev4_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['ev4_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Speaker5:</th>
+			<td>
+			<select class="input-xlarge" name="spk5_id" id="spk5_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['spk5_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Evaluator5:</th>
+			<td>
+			<select class="input-xlarge" name="ev5_id" id="ev5_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['ev5_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Speaker6:</th>
+			<td>
+			<select class="input-xlarge" name="spk6_id" id="spk6_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['spk6_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Evaluator6:</th>
+			<td>
+			<select class="input-xlarge" name="ev6_id" id="ev6_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['ev6_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Speaker7:</th>
+			<td>
+			<select class="input-xlarge" name="spk7_id" id="spk7_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['spk7_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Evaluator7:</th>
+			<td>
+			<select class="input-xlarge" name="ev7_id" id="ev7_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['ev7_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Speaker8:</th>
+			<td>
+			<select class="input-xlarge" name="spk8_id" id="spk8_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['spk8_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Evaluator8:</th>
+			<td>
+			<select class="input-xlarge" name="ev8_id" id="ev8_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['ev8_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Speaker9:</th>
+			<td>
+			<select class="input-xlarge" name="spk9_id" id="spk9_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['spk9_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>
+		<tr><th>Evaluator9:</th>
+			<td>
+			<select class="input-xlarge" name="ev9_id" id="ev9_id">
+				<option></option>
+				<volist name="member" id="vo">
+					<if condition="$data['ev9_id'] eq $vo['english_name']">
+						<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.english_name}</option>
+					</if>
+				</volist>
+			</select>				
+			</td>
+		</tr>		
+			<tr><td><button class="btn btn-success">Update</button></td></tr>
+		</table>	
+	</form>	
+</div>
+</div>
+
