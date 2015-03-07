@@ -1,7 +1,7 @@
 ﻿<include file="Public:header" />
 <div class="container-fluid">
 <div class="row-fluid">
-   <h1>MyTMC<small>大马小马，一起过河&nbsp;&nbsp;&nbsp;{$user_name_2}
+   <h1>MyTMC<small>大马小马，一起过河&nbsp;&nbsp;&nbsp;<a href="{:U('Member/personal_info')}">{$user_name_2}</a>
 	<volist name="club_info" id="vo">
 		<if condition="$_COOKIE['club_id'] eq $vo[Id]">
 		<a href="{:U('Member/club_choose',array('club_id'=>$vo[Id]))}" style="background-color:Yellow;">{$vo.club_name}</a>

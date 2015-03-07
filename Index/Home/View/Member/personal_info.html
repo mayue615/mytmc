@@ -1,0 +1,22 @@
+<layout name="layout_homepage" />
+	
+<h2>Personal Information</h2>
+<form action="personal_info_deal" method="post">
+<div class="table-responsive">
+	<table class="table table-striped">	
+		<input type="hidden" name="Id" value="{$user['Id']}">
+		<tr><th>English Name</br>(Relogin required)</th><td><input type="text" name="english_name" value="{$user['english_name']}"></td></tr>
+		<tr><th>Chinese Name</th><td><input type="text" name="chinese_name" value="{$user['chinese_name']}"></td></tr>		
+		<tr><th>Email</th><td><input type="text" name="email" value="{$user['email']}"></td></tr>					
+		<tr><th>Phone</th><td><input type="text" name="phone" value="{$user['phone']}"></td></tr>
+		<tr><th>Password</th><td><input type="text" name="password" value="{$user['password']}"></td></tr>		
+		<tr><th>Birthday</th><td><input type="date" name="birthday" value="{$user['birthday']}"></td></tr>			
+		<tr><th>Register Date</th><td>{$user['register_date']}</td></tr>
+		<tr><th>Authority</th><td>{$user['authority']}</td></tr>		
+		<tr><td><button class="btn btn-success">Update</button></td><td></td></tr>	
+	</table>
+</div>	
+</form>
+
+						
+						

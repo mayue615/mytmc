@@ -9,6 +9,25 @@ class MemberController extends CommonController {
 		$this->success();
 
 	}
+	
+	public function personal_info(){
+		$club_id = cookie('club_id');
+		$user_id=cookie('user_id');
+		$user=D('user','Api');
+		$data=$user->get_user_info($user_id);		
+		$this->assign('user',$data);	
+		$this->display();		
+	}	
+	
+	public function personal_info_deal(){
+		$club_id = cookie('club_id');
+		$user_id=cookie('user_id');	
+		$user=D('user','Api');
+		$data=$user->create();
+		$user->save($data);
+		$this->success();		
+	}
+	
     public function club_info(){
 		$email_sum="";
 		$club_id = cookie('club_id');
@@ -22,9 +41,11 @@ class MemberController extends CommonController {
 		} 
 		$this->assign('email_sum',$email_sum);
 		$this->assign('data',$arr);		
-		$this->display('clubmember');
+		$this->display('club_info');
 	}
-
+    public function meeting(){
+		$this->display();
+	}	
  	public function history(){
 		$agent = $_SERVER['HTTP_USER_AGENT'];
 		if(strstr($agent,'Windows'))

@@ -68,6 +68,7 @@ namespace Home\Api;
 		}
 		
 		public function set_visualmeeting_role($m_id,$role_id,$user_id){
+			//echo("In set_visualmeeting_role: $m_id,$role_id,$user_id<br>");
 			$temp=substr($role_id,0,2);
 			$meeting=D('meeting','Api');
 			$speeches=$meeting->get_meeting_speeches($m_id);
@@ -102,6 +103,7 @@ namespace Home\Api;
 			}
 		}
 		public function delete_visualmeeting_role($m_id,$role_id){
+			//echo("In delete_visualmeeting_role: $m_id,$role_id<br>");		
 			$temp=substr($role_id,0,2);
 			$meeting=D('meeting','Api');	
 			$speeches=$meeting->get_meeting_speeches($m_id);

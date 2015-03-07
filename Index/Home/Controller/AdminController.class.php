@@ -91,13 +91,16 @@ class AdminController extends CommonController {
 		$meeting=D('meeting','Api');
 		$visual_meeting=D('visualMeeting','Api');
 		$data=$meeting->create();
+		$m_id=$data['Id'];
 		$meeting->save();
-		$roles=array('spk1_id','ev1_id','spk2_id','ev2_id','spk3_id','ev3_id','spk4_id','ev4_id','spk5_id','ev5_id',
+		$roles=array('toast_id','joke_id','ge_id','gramm_id','timer_id','aha_id','table1_id','table2_id','table1_ev_id','table2_ev_id',
+					'spk1_id','ev1_id','spk2_id','ev2_id','spk3_id','ev3_id','spk4_id','ev4_id','spk5_id','ev5_id',
 					'spk6_id','ev6_id','spk7_id','ev7_id','spk8_id','ev8_id','spk9_id','ev9_id');
 		foreach($roles as $role_id){
 			$temp='post.'.$role_id;
 			$user_id=I($temp);
 			//dump($value);
+			//echo("$m_id,$role_id,$user_id<br>");
      		if($user_id!=""){
 				$result=$visual_meeting->set_visualmeeting_role($m_id,$role_id,$user_id);			
 			}
@@ -106,7 +109,6 @@ class AdminController extends CommonController {
 
 			}			
 		}
-
 		$this->success();			
 	}	
 	public function get_clubs_ajax(){

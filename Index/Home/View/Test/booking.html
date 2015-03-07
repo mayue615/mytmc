@@ -1,0 +1,34 @@
+<layout name="layout_homepage" />
+<script language="javascript">
+$(document).ready(function(){
+
+
+$("#type").change(function() {
+	var temp = $("#type").val()
+	$.get("__APP__/Home/Test/booking_add_meeting_role_ajax",function(data){
+	//alert(data['Id']);
+	console.log(data); 
+   })
+});
+
+
+	
+});
+</script>
+
+
+  <!--<form action="{:U('booking_form_deal')}" class="form-horizontal">-->
+  <form method="post" id="documentForm" action="{:U('booking_js')}">
+
+			<select class="input-xlarge" name="type" id="type">
+			<option>Common</option>
+			<option>Union</option>
+			<option>Holiday</option>
+			<option>Contest</option>
+			</select>
+
+
+  </form>
+	
+						
+						
