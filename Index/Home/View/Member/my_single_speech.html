@@ -1,0 +1,39 @@
+<layout name="layout_homepage" />	  
+<js href="__PUBLIC__/ueditor/ueditor.config.js" />    
+<js href="__PUBLIC__/ueditor/ueditor.all.min.js" />
+<script>
+$(function(){
+	var ue = UE.getEditor('container',{
+		serverUrl :'{:U('Home/Member/ueditor')}'
+	});
+})
+</script>
+<div id="content">
+<h1>Modify Speech</h1>
+	<form action="{:U('Member/my_single_speech_deal')}" method="post">
+		<table class="table table-striped">
+			<input type="hidden" name="Id" value="{$data.Id}"/>
+ 			<tr><th>Date:</th><td>{$data.m_date}</td></tr>
+ 			<tr><th>Evaluator:</th><td>{$data.ev_name}</td></tr>
+			<tr><th>Level</th>
+				<td>
+				<select class="input-xlarge" name="level">
+					<volist name="levels" id="vo">
+						<if condition="$data['level'] eq $vo['Id']">
+							<option value="{$vo.Id}" selected>{$vo.level}</option>						
+						<else/>
+							<option value="{$vo.Id}">{$vo.level}</option>
+						</if>
+					</volist>
+				</select>				
+				</td>
+			</tr>				
+ 			<tr><th>Title:</th><td><input type="text" name="title" value="{$data.title}"/></td></tr>
+ 			<tr><th>Content:</th><td>
+				<script id="container" name="content" type="text/plain">{$data.content}</script>
+			</td></tr>			
+
+			<tr><td><button class="btn btn-success">Submit</button></td><td></td></tr>		
+		</table>	
+	</form>	
+</div>

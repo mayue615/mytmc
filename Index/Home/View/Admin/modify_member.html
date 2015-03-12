@@ -9,7 +9,7 @@
 		<table class="table table-striped">	
 			<tr><th>User Name</th><th>English Name</th><th>Chinese Name</th><th>Phone</th><th>Email</th><th>Authority</th><th>Birthday</th><th>Last login</th><th>Login times</th></tr>
 			<volist name="data" id="vo">
-			<tr><td><a href="{:U('Admin/modify_single_member',array('member_id'=>$vo['Id']))}">{$vo.user_name}</td><td>{$vo.english_name}</td><td>{$vo.chinese_name}</td><td>{$vo.phone}</td><td><a href="mailto:{$vo.email}">{$vo.email}</a></td><td>{$vo.authority}</td><td>{$vo.birthday}</td><td>{$vo.last_login}</td><td>{$vo.login_times}</td></tr>
+			<tr><td><a href="{:U('Admin/modify_single_member',array('member_id'=>$vo['Id']))}">{$vo.user_name}</a></td><td>{$vo.english_name}</td><td>{$vo.chinese_name}</td><td>{$vo.phone}</td><td><a href="mailto:{$vo.email}">{$vo.email}</a></td><td>{$vo.authority}</td><td>{$vo.birthday}</td><td>{$vo.last_login}</td><td>{$vo.login_times}</td></tr>
 			</volist>
 		</table>	
 	</form>	

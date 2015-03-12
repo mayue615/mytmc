@@ -3,11 +3,11 @@ namespace Home\Api;
 	
 	class VisualMeetingApi {
 
-		public function get_meetings_info($club_id){
+		public function get_meetings_info($club_id,$type){
 			$club=D('club','Api');
 
 			$meeting=D('meeting','Api');			
-			$meetings_id=$club->get_meetings_id($club_id);
+			$meetings_id=$club->get_meetings_id($club_id,$type);
 			//dump($meetings_id);
 			$meeting_info=array();
 			foreach($meetings_id as $m_id){
@@ -18,8 +18,8 @@ namespace Home\Api;
 			}
 			return $meeting_info;
 		}
-		public function get_meetings_info_role_name($club_id){
-			$arr=$this->get_meetings_info($club_id);
+		public function get_meetings_info_role_name($club_id,$type){
+			$arr=$this->get_meetings_info($club_id,$type);
 			$user=D('user','Api');
 			$id2name_dict=$user->get_user_name_dictionary();
 			$roles=array('owner_id','toast_id','joke_id','ge_id','gramm_id','timer_id','aha_id','table1_id','table2_id','table1_ev_id','table2_ev_id');
@@ -42,8 +42,8 @@ namespace Home\Api;
 			}
 			return $arr;
 		}
-		public function get_visual_meeting_table($club_id){
-			$meetings=$this->get_meetings_info_role_name($club_id);
+		public function get_visual_meeting_table($club_id,$type){
+			$meetings=$this->get_meetings_info_role_name($club_id,$type);
 			$roles=array('spk1_id','ev1_id','spk2_id','ev2_id','spk3_id','ev3_id','spk4_id','ev4_id','spk5_id','ev5_id',
 						 'spk6_id','ev6_id','spk7_id','ev7_id','spk8_id','ev8_id','spk9_id','ev9_id');
 			foreach($meetings as &$meeting){
@@ -61,7 +61,13 @@ namespace Home\Api;
 			return $meetings;
 
 		}
+		public function get_visual_past_meeting_table($club_id){
+			return $this->get_visual_meeting_table($club_id,"past");
 
+		}
+		public function get_visual_future_meeting_table($club_id){
+			return $this->get_visual_meeting_table($club_id,"future");
+		}
 		public function get_visual_meeting_table_page($club_id,$type,$each_page_num){
 			$table=$this->get_visual_meeting_table($club_id);
 			

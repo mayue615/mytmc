@@ -1,0 +1,53 @@
+<layout name="layout_homepage" />
+<script language="javascript">
+$(document).ready(function(){
+
+
+$("#type").change(function() {
+	var temp = $("#type").val()
+	//alert("test");
+	/*$.get("__APP__/Home/Test/booking_add_meeting_role_ajax",function(data){
+		alert("test");
+
+   });*/
+	$.ajax(
+		{ 	url: "__APP__/Home/Test/booking_add_meeting_role_ajax",
+			//async:false,
+			//dataType: "json",
+			//contentType: "application/json; charset=utf-8",
+			success: function(data){
+						$('#text1').val("success");
+				},
+			error: 	function(data){
+						$('#text1').val("error");
+					//console.log();
+					console.log(data); 
+					//alert(data);
+				}
+		}
+	);	   
+   
+   
+});
+
+
+	
+});
+</script>
+
+
+  <!--<form action="{:U('booking_form_deal')}" class="form-horizontal">-->
+  <form method="post" id="documentForm" action="{:U('booking_js')}">
+
+			<select class="input-xlarge" name="type" id="type">
+			<option>Common</option>
+			<option>Union</option>
+			<option>Holiday</option>
+			<option>Contest</option>
+			</select>
+	<input type="text" id="text1" name="text1" value="dddddd"/>			
+
+  </form>
+
+						
+						

@@ -12,7 +12,7 @@ use Think\Model\RelationModel;
 			),
 			'meeting_id' => array(
 			'mapping_type'      =>  self::MANY_TO_MANY,
-			'mapping_fields'		=>  'Id',
+			'mapping_fields'		=>  'Id,m_date',
 			'class_name'        =>  'meeting',
 			'foreign_key'       =>  'club_id',
 			'relation_foreign_key'  =>  'm_id',

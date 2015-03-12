@@ -26,17 +26,41 @@ use Home\Logic\ClubLogic;
 			} */			
 			return $arr['meeting'];		
 		}
-		public function get_meetings_id($club_id){
+		public function get_meetings_id($club_id,$type){
+			$current_date = date('Y-m-d',time());	
 			$condition['Id']=$club_id;
 			$arr = $this->relation('meeting_id')->where($condition)->field('Id')->find();
 			$arr_id=array();
 			foreach($arr['meeting_id'] as $item){
-				array_push($arr_id,$item['Id']);
+				if($type=="past"){
+					if($item['m_date']<$current_date){
+						array_push($arr_id,$item['Id']);
+						$temp=array_reverse($arr_id);
+						$arr_id=$temp;
+					}
+				}
+				else if($type=="future"){
+					if($item['m_date']>=$current_date){
+						array_push($arr_id,$item['Id']);
+					}				
+				}
+				else{
+					array_push($arr_id,$item['Id']);				
+				}
 			}
 			return $arr_id;
 			
 		}		
-		
+		public function get_next_meetings_id($club_id){
+			$data=$this->get_meetings_id($club_id,"future");
+			return $data[0];
+			
+		}
+		public function get_meeting_time($club_id){
+			$condition['Id']=$club_id;
+			$arr = $this->where($condition)->field('default_time')->find();
+			return $arr['default_time'];
+		}
 		public function get_club_info($club_id){
 			$condition['Id']=$club_id;
 			$result = $this->where($condition)->find();

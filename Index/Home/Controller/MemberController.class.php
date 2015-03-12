@@ -47,11 +47,11 @@ class MemberController extends CommonController {
 		$this->display();
 	}	
  	public function history(){
-		$agent = $_SERVER['HTTP_USER_AGENT'];
-		if(strstr($agent,'Windows'))
+		//$agent = $_SERVER['HTTP_USER_AGENT'];
+		//if(strstr($agent,'Windows'))
 			$this->history_PC();
-		else
-			$this->history_phone();
+		//else
+		//	$this->history_phone();
 	}
 	
     public function history_PC(){
@@ -59,7 +59,7 @@ class MemberController extends CommonController {
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');
 		$meeting=D('visualMeeting','Api');
-		$data=$meeting->get_visual_meeting_table($club_id);
+		$data=$meeting->get_visual_past_meeting_table($club_id);
 /* 		$meeting1=new MeetingController();
 		$each_page_num=8;
 		$result=$meeting1->all_meeting_page($club_id,1,$each_page_num);	 */
@@ -107,7 +107,7 @@ class MemberController extends CommonController {
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');
 		$meeting=D('visualMeeting','Api');
-		$data=$meeting->get_visual_meeting_table($club_id);		
+		$data=$meeting->get_visual_future_meeting_table($club_id);		
 		$this->assign('data',$data);		
 		//$this->assign('data',$result['data']);
 		$this->assign('page_method',$result['show']);	
@@ -136,7 +136,7 @@ class MemberController extends CommonController {
 	public function booking_delete_meeting_role_ajax(){
 			$this->ajaxReturn($roles);	
 	}*/	
-	public function booking_js(){
+	public function booking_deal(){
 	    $str=I('post.change_role');
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');
@@ -167,135 +167,56 @@ class MemberController extends CommonController {
 		} 
 		$this->success("Succeed to update roles");
 	}
-	public function booking_form_deal(){
-		$club_id = $_SESSION['club_id'];
-		$user_id = $_SESSION['user_id'];	
-		$i=I('get.add_meeting_id');
-		$j=I('get.add_meeting_role');
-		$k=I('get.delete_meeting_id');
-		$l=I('get.delete_meeting_role');;
-		
-		$role1=new RoleController();
-		$user1_id=$role1->role2user_id_dict($club_id,$i,$j);
-		$user2_id=$role1->role2user_id_dict($club_id,$k,$l);
-		//echo($user1_id.",".$user2_id.",");
-
-		if($i!="" AND $j!=""){
-			if($user1_id==0){
-				$result=$role1->add($club_id,$i,$j,$user_id);
-				if($result==1){
-					$this->success("You succeeded to add a role");
-				}
-				else{
-					$this->error("You failed to add a role");
-				}
-			}
-			else{
-				$this->error("This role is applied!");
-			}
-		}
-
-
-		elseif($k!="" AND $l!=""){
-			if($user_id==$user2_id){		
-				//$role_id=$role2id_dict[$l];
-				$result=$role1->delete($club_id,$k,$l,$user_id);
-				if($result==1){
-					$this->success("You succeeded to delete a role");
-				}
-				else{
-					$this->error("You failed to delete a role");
-				}		
-			}
-			else{
-				$this->error("This role is not yours!");		
-			}			
-
-		}
-		else{
-			$this->error("You must select both meeting number and role");
-		}
+	public function myspeech(){
+		$club_id = cookie('club_id');
+		$user_id = cookie('user_id');	
+		$speech=D('userspeech','Api');
+		//$speech->ut();
+		$data=$speech->get_user_speech($user_id);
+/* 		foreach($data as &$item){
+			$item['content']=htmlspecialchars_decode($item['content']);
+			//$item['content']=substr(htmlspecialchars_decode($item['content']),0,60);
+		} */
+		//dump($data);
+		$this->assign('data',$data);
+		$this->display(); 
+	}
+	public function my_single_speech(){
+		header("Content-Type:text/html; charset=utf-8");	
+		$club_id = cookie('club_id');
+		$user_id = cookie('user_id');
+		$speech_id=I('get.speech_id');
+		$userspeech=D('userspeech','Api');
+		$data=$userspeech->get_single_speech($speech_id);
+		$data['content']=htmlspecialchars_decode($data['content']);
+ 		$speech=D('speech','Api');
+		$levels=$speech->get_levels_info();
+		//dump($data);
+		$this->assign('levels',$levels);
+		$this->assign('data',$data);
+		$this->display(); 
 	}	
-/*	public function agenda(){
-	$club_id = $_SESSION['club_id'];
-	$index1=new IndexController();
-	$index1->agenda_show($club_id);
+	public function my_single_speech_deal(){
+ 		$userspeech=D('userspeech','Api');
+		$data=$userspeech->create();
+		$data['lastmodifytime']=date("Y-m-d H:i:s");				
+		//$data['content']=htmlspecialchars(stripslashes($data['content']));
+		//dump($data);		
+		$userspeech->save($data);
+		$this->success();
+	}	
+	public function ueditor(){
+		$data = new \Org\Util\Ueditor();
+		echo $data->output();
+	}	
+	
+	public function agenda(){
+		$club_id = cookie('club_id');
+		$user_id = cookie('user_id');	
+		$index1=new IndexController();
+		$index1->agenda_show($club_id);
 	
 	}
-	public function mypage_speech_deal(){
-		$club_id = $_SESSION['club_id'];
-		$user_id = $_SESSION['user_id'];
-		$dictionary1=new DictionaryController();
-		$person_speech=$dictionary1->person_speech_list($club_id,$user_id);				
-		$number=I('get.number');
-		$level=I('get.level');		
-		$title=I('get.title');		
-		$m=M('rolebooking');
-		$arr=$m->where("num='$number'")->find();
-		foreach($person_speech as $item){
-			if($item['num']==$number){
-				if($item['spk_id']=='spk1_id'){
-					$data['spk1_level']=$level;
-					$data['spk1_title']=$title;
-					$m->where("num='$number'")->save($data);
-					//dump($data);
-				}
-				if($item['spk_id']=='spk2_id'){
-					$data['spk2_level']=$level;
-					$data['spk2_title']=$title;
-					$m->where("num='$number'")->save($data);
-				}
-				if($item['spk_id']=='spk3_id'){
-					$data['spk3_level']=$level;
-					$data['spk3_title']=$title;
-					$m->where("num='$number'")->save($data);
-				}
-				if($item['spk_id']=='spk4_id'){
-					$data['spk4_level']=$level;
-					$data['spk4_title']=$title;
-					$m->where("num='$number'")->save($data);
-				}
-				if($item['spk_id']=='spk5_id'){
-					$data['spk5_level']=$level;
-					$data['spk5_title']=$title;
-					$m->where("num='$number'")->save($data);
-				}				
-				
-			}
-		
-		}
-		$this->success("update success!");
-	}
-	public function mypage_info_deal(){
-		$club_id = $_SESSION['club_id'];
-		$user_id = $_SESSION['user_id'];
-		$data['Id']=$user_id;
-		$data['dis_name']=I('get.dis_name');
-		$data['phone']=I('get.phone');
-		$data['mail']=I('get.mail');
-		$data['password']=I('get.password');
-		$data['speech_level']=I('get.speech_level');
-		$data['birthday']=I('get.birthday');
-		$data['date_join']=I('get.date_join');	
-		$user1=new UserController();
-		$user1->modify_user_info($data);
-		$this->success("Your information updated!");
 
-	}
-	public function myarticle(){
-		$club_id = $_SESSION['club_id'];
-		$user_id = $_SESSION['user_id'];	
-		$article1=new ArticleController();
-		$article=$article1->show_user_article_page($user_id);
-		$this->assign('article_list',$article['data']);
-		$this->assign('page_method_article',$article['show']);	
-			//foreach($news_list as &$item){
-			//	$item['author']=$id2name_dict[$item['author']];
-			//}
-			//$this->assign('news_count',$count);
-			//$this->assign('news_list',$news_list);
-			//$this->assign('page_method',$show);		
-			$this->display();
-	} */
 }
 ?>

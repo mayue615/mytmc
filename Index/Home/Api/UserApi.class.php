@@ -64,9 +64,11 @@ use Home\Logic\UserLogic;
 			}
 		}
 		public function get_user_speech($user_id){
+			//dump($user_id);
 			$condition['Id']=$user_id;
 			$result = $this->relation('speech')->where($condition)->find();
-			return $result;						
+			//dump($result);			
+			return $result['speech'];						
 		}		
 		
 

@@ -12,9 +12,9 @@ use Think\Model\RelationModel;
 		),
 		'speech' => array(
 		'mapping_type'      =>  self::HAS_MANY,
-		'class_name'        =>  'user_speech',//子表名称
+		'class_name'        =>  'userspeech',//子表名称
 		'foreign_key'       =>  'spk_id',
-		'mapping_order'       =>  'Id',
+		'mapping_order'       =>  'level',
 		//'mapping_fields' => array('level,body,title'),//默认所有的字段都查询
 		),
 		'article' => array(

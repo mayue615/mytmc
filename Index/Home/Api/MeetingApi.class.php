@@ -9,6 +9,7 @@ use Home\Logic\MeetingLogic;
 			//dump($result);
 			return $result;
 		}
+	
 		public function get_meeting_info_role_name($m_id){
 			$meeting=$this->get_meeting_info($m_id);
 			$user=D('user','Api');
@@ -53,13 +54,13 @@ use Home\Logic\MeetingLogic;
 		
 		public function get_meeting_speeches($m_id){
 
-			$m=M('user_speech');		
+			$m=M('userspeech');		
 			$condition['m_id']=$m_id;
 			$result=$m->where($condition)->order('Id')->select();
 			return $result;
 		}		
 		public function get_meeting_speech_count($m_id){
-			$m=M('user_speech');		
+			$m=M('userspeech');		
 			$condition['m_id']=$m_id;
 			$count=$m->where($condition)->count();
 			return $count;
@@ -78,7 +79,7 @@ use Home\Logic\MeetingLogic;
 		}
 		public function set_meeting_speech_role($id,$role_id,$user_id){
 			//echo("in function set_meeting_speech_role<br>");
-			$m=M('user_speech');
+			$m=M('userspeech');
 			$data['Id']=$id;
 			$data[$role_id]=$user_id;
 			//dump($data);
@@ -86,7 +87,7 @@ use Home\Logic\MeetingLogic;
 		}		
 		public function add_meeting_speech_role($m_id,$role_id,$user_id){
 			//echo("in function add_meeting_speech_role<br>");
-			$m=M('user_speech');
+			$m=M('userspeech');
 			$data['m_id']=$m_id;
 			$data[$role_id]=$user_id;	
 			//dump($data);	
@@ -95,7 +96,7 @@ use Home\Logic\MeetingLogic;
 		public function delete_meeting_speech_role($id){
 			//echo("in function delete_meeting_speech_role<br>");
 			//dump($id);
-			$m=M('user_speech');		
+			$m=M('userspeech');		
 			$m->delete($id);			
 		}		
 		public function get_meeting_club($meeting_id){
