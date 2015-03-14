@@ -9,7 +9,7 @@ use Home\Logic\ClubLogic;
 		}
 		public function get_meetings_info($club_id){
 			$condition['Id']=$club_id;
-			$arr = $this->relation('meeting')->where($condition)->order('m_date')->find();
+			$arr = $this->relation('meeting')->where($condition)->find();
 /* 			$user=D('user','Api');
 			$id2name_dict=$user->get_user_name_dictionary(); */
 /* 			$meeting=D('meeting','Api');
@@ -63,7 +63,7 @@ use Home\Logic\ClubLogic;
 		}
 		public function get_club_info($club_id){
 			$condition['Id']=$club_id;
-			$result = $this->where($condition)->find();
+			$result = $this->relation(array('president','vpe','vpm','vppr','saa','treasurer','secretary'))->where($condition)->find();
 			return $result;
 		}
 		public function get_club_users($club_id){
@@ -85,5 +85,20 @@ use Home\Logic\ClubLogic;
 		public function get_other_clubs($club_id){
 			return $this->where("Id<>'$club_id'")->field('Id,club_name')->select();
 		}
+		public function set_meetings_num($club_id){
+			$club_info=$this->get_club_info($club_id);
+			$first_num=$club_info['first_num'];
+			$club_meeting=$this->get_meetings_info($club_id);
+			$m=M('meeting');
+			foreach($club_meeting as $item){
+				$arr['Id']=$item['Id'];
+				$arr['num']=$first_num;
+				$first_num=$first_num+1;
+				$m->save($arr);
+				
+			}
+		}		
+		
+		
 	}
 ?>

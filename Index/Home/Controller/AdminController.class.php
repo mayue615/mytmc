@@ -88,6 +88,7 @@ class AdminController extends CommonController {
 		$this->display();
 	}	
 	public function modify_single_meeting_deal(){
+		$club_id = cookie('club_id');	
 		$meeting=D('meeting','Api');
 		$visual_meeting=D('visualMeeting','Api');
 		$data=$meeting->create();
@@ -109,28 +110,15 @@ class AdminController extends CommonController {
 
 			}			
 		}
+		$club=D('club','Api');
+		$club->set_meetings_num($club_id);
 		$this->success();			
 	}	
 	public function get_clubs_ajax(){
 		$club=D('club','Api');
 		$data=$club->get_clubs();
-		//$club_id=I('get.id');
-		//$data="test";
-		//$test=D('test');
-		//$temp['test']=$club_id;
-		//$test->add($temp);
-		//dump($data);
-		//$data1=json_encode($data);
-		$this->ajaxReturn($data);
-		//$data1="{\"sitename\":\"K JSON\"}";
-		//echo($data1);
-		
+		$this->ajaxReturn($data);	
 	}
-	public function booking_add_meeting_role_ajax(){
-
-		$arr['Id']=1;
-		$this->ajaxReturn($arr);	
-	}	
 	public function get_users(){
 			$club_id=I('get.club_id');
 			//$club1=new ClubController();
@@ -139,49 +127,11 @@ class AdminController extends CommonController {
 			$this->ajaxReturn($club_id);		
 	}	
 	public function add_meeting(){
-		//$meeting=D('meeting','Api');
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');			
 		$club=D('club','Api');
 		$data=$club->get_other_clubs($club_id);		
 		$this->assign('clubs',$data);
-/* 		$data['num']=1;			
-		$data['owner_id']=1;			
-		$data['type']=1;
-		$data['language']=1;
-		$data['note']=1;
-		$data['room']=1;			
-		$data['m_date']=1;	
-		$data['time']=1;				
-		$data['toast_id']=1;
-		$data['joke_id']=1;
-		$data['ge_id']=1;
-		$data['gramm_id']=1;
-		$data['timer_id']=1;
-		$data['aha_id']=1;
-		$data['table1_id']=1;	
-		$data['table2_id']=1;
-		$data['table1_ev_id']=1;
-		$data['table2_ev_id']=1;
-		$data['spk1_id']=1;
-		$data['ev1_id']=1;
-		$data['spk2_id']=1;
-		$data['ev2_id']=1;
-		$data['spk3_id']=1;
-		$data['ev3_id']=1;
-		$data['spk4_id']=1;
-		$data['ev4_id']=1;
-		$data['spk5_id']=1;
-		$data['ev5_id']=1;
-		$data['spk6_id']=1;
-		$data['ev6_id']=1;
-		$data['spk7_id']=1;
-		$data['ev7_id']=1;
-		$data['spk8_id']=1;
-		$data['ev8_id']=1;	
-		$data['spk9_id']=1;
-		$data['ev9_id']=1;	 */		
-		//$meeting->add();
 		$this->display();		
 	}
 	public function add_meeting_deal(){
@@ -199,6 +149,8 @@ class AdminController extends CommonController {
 			dump($union_club_id);
 			$meeting->add_meeting_club($new_meeting_id,$union_club_id);		
 		}
+		$club=D('club','Api');
+		$club->set_meetings_num($club_id);		
 		$this->success();
 	}
 }

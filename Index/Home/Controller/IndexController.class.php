@@ -12,52 +12,36 @@ class IndexController extends Controller {
 	
 	}
     public function agenda_show($club_id){
-/* 		$club=D('club','Api');
-		$m_id=$club->get_next_meetings_id($club_id);
-		$meeting=D('Meeting','Api');
-		$data=$meeting->get_visual_meeting_table($m_id);	 */
-		//dump($data);
-		
-/*  		$dictionary1=new DictionaryController();
-		$club_id2name_dict=$dictionary1->club_id2name_dict($club_id);
-		$club1=new ClubController();
-		$meeting_time=$club1->get_meeting_time($club_id);
-		$room1=new RoomController();
-		$m_date=$club1->get_latest_date($club_id);
-		$meeting_room=$room1->get_meeting_room($club_id,$m_date);
-		$meeting_num=$club1->get_latest_meeting_num($club_id);
-		$qr1=new QRController();
-		$qr_pic=$club_id."_".$m_date;		
-		$qr1->test_pic_tmc_meeting($club_id,$m_date);
-
- 		if($meeting_num%10==1){
-			$i=$meeting_num."st";
-		}
-		elseif($meeting_num%10==2){
-			$i=$meeting_num."nd";
-		}
-		else{
-			$i=$meeting_num."th";
-		}
-		$meeting_time=$m_date." ".$meeting_time;
-
-		$officer=$club1->get_club_officer($club_id);
-		$officer_a=$club1->get_club_officer_a($club_id);*/		
+		$club=D('club','Api');
+		$m_id=$club->get_next_meetings_id($club_id);		
 		$agenda1=new AgendaController();
 		//$template_id=$agenda1->get_defalut_template($club_id);
 		//echo($template_id);
 		//exit;
-		$table=$agenda1->agenda1($club_id,$m_id,1);
-		//dump($table);
-		//exit;
+		$arr=$agenda1->agenda1($club_id,$m_id,1);
+		$table=$arr['table'];
+		$time_range=$arr['time_range'];
+		$club_info=$club->get_club_info($club_id);
+		$meeting=D('meeting','Api');
+		$meeting_info=$meeting->get_meeting_info($m_id);
+ 		if($meeting_info['num']%10==1){
+			$meeting_info['num']=$meeting_info['num']."st";
+		}
+		elseif($meeting_info['num']%10==2){
+			$meeting_info['num']=$meeting_info['num']."nd";
+		}
+		else{
+			$meeting_info['num']=$meeting_info['num']."th";
+		}
+		$meeting_info['time_range']=$time_range;
+		$qr1=new QRController();
+		$qr_pic=$club_id."_".$m_date;		
+		$qr1->test_pic_tmc_meeting($club_id,$m_date,$m_id);		
+		
 		$this->assign('qr_pic',$qr_pic);
 		$this->assign('table',$table);
-		$this->assign('officer',$officer);
-		$this->assign('officer_a',$officer_a);		
-		$this->assign('clubname',$club_id2name_dict[$club_id]);
-		$this->assign('meeting_num',$i);
-		$this->assign('meeting_room',$meeting_room);
-		$this->assign('meeting_time',$meeting_time);
+		$this->assign('club_info',$club_info);
+		$this->assign('meeting_info',$meeting_info);
 		$this->display('Index/agenda'); 
 	}	
 	

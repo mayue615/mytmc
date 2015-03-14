@@ -215,6 +215,8 @@ class MemberController extends CommonController {
 		$user_id = cookie('user_id');	
 		$index1=new IndexController();
 		$index1->agenda_show($club_id);
+
+		
 	
 	}
 

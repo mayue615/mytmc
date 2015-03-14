@@ -3,7 +3,7 @@ namespace Home\Api;
 use Home\Logic\MeetingLogic;
 	class MeetingApi extends MeetingLogic{
 		public function get_meeting_info($m_id){
-
+			//dump($m_id);
 			$condition['Id']=$m_id;
 			$result = $this->relation('speech')->where($condition)->order('Id')->find();
 			//dump($result);
@@ -122,6 +122,7 @@ use Home\Logic\MeetingLogic;
 			$data['club_id']=$club_id;
 			$m->add($data);
 		}
+
 
 	}
 ?>

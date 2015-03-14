@@ -44,9 +44,9 @@ $(document).ready(function(){
 		<div class="col-md-6">
 			<div class="col-md-8">
 			<br/>
-			<h3 class="text-center">{$clubname} {$meeting_num} meeting</h3>
-			<p class="text-center">Time:{$meeting_time}</p> 
-			<p class="text-center">Venue:{$meeting_room}</p>
+			<h3 class="text-center">{$club_info.club_name} {$meeting_info.num} meeting</h3>
+			<p class="text-center">Time:{$meeting_info.time_range}</p> 
+			<p class="text-center">Venue:{$meeting_info.room}</p>
 			</div>
 			<div class="col-md-4">
 			<img src="__ROOT__/temp/qrpic/{$qr_pic}.png" class="img-responsive" alt="Responsive image">
@@ -161,21 +161,17 @@ $(document).ready(function(){
 			 							
 				<tr>
 					<td >Postion</td>				
-					<volist name="officer" id="vo">
-					<td>{$key}</td>
-					</volist>
+					<td>President</td><td>VPE</td><td>VPM</td><td>VPPR</td><td>SAA</td><td>Treasurer</td><td>Secretary</td>
 				</tr>
 				<tr>
 					<td >Officer Name</td>
-					<volist name="officer" id="vo">
-					<td>{$vo}</td>
-					</volist>
+					<td>{$club_info.president_name}</td><td>{$club_info.vpe_name}</td><td>{$club_info.vpm_name}</td><td>{$club_info.vppr_name}</td><td>{$club_info.saa_name}</td>	
+					<td>{$club_info.treasurer_name}</td><td>{$club_info.secretary_name}</td>
 				</tr>
 				<tr>
 					<td >Officer Assistant</td>
-					<volist name="officer_a" id="vo">
-					<td>{$vo}</td>
-					</volist>			
+					<td>{$club_info.president_a}</td><td>{$club_info.vpe_a}</td><td>{$club_info.vpm_a}</td><td>{$club_info.vppr_a}</td><td>{$club_info.saa_a}</td>	
+					<td>{$club_info.treasurer_a}</td><td>{$club_info.secretary_a}</td>
 				</tr>
 			</table>
 			<table class="table table-condensed">

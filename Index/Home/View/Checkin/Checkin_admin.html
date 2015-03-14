@@ -1,0 +1,83 @@
+<layout name="layout_homepage" />
+<script language="javascript">
+	$(document).ready(function(){
+
+	$("#club_name").change(function() {
+	var temp = $("#club_name").val()
+	$.get("__APP__/Home/Luckydraw/get_users",{club_id:temp},function(data){
+	var count=data.length
+	$("#member_name").empty()
+	for(var i=0;i<count;i++){
+		$("#member_name").append("<option value="+data[i].Id+">"+data[i].dis_name+"</option>");
+	}
+   })
+});
+});
+</script>
+
+
+      <div id="legend" class="">
+        <legend class="">{$activity_name} Check In</legend>
+		<p>Meeting date:{$m_date}</p>
+      </div>  
+      <div id="legend" class="">
+        <legend class="">Guest checkin QR</legend>
+      </div> 	
+<div class="container-fluid">	  
+	  <div class="row-fluid">
+	  <div class="col-md-12">
+	  <img src="__ROOT__/temp/qrpic/{$qr_pic}.png" class="img-responsive" alt="Responsive image">
+	  <h3><a href="{:U('Checkin/feature_page',array('club_id'=>$club_id,'m_date'=>$m_date))}">Check in for guest</a><h3>
+	  </div>
+	  </div>
+</div>
+<div id="content" class="container-fluid">
+<form class="form-horizontal" method="post" action="{:U('admin_checkin_deal')}">	  
+<div class="row-fluid">	  
+      <div id="legend" class="">
+        <legend class="">Club Members</legend>
+      </div> 
+		<input type="hidden" name="club_id" value="{$club_id}">
+		<input type="hidden" name="m_date" value="{$m_date}">		
+		<volist name="members" id="vo">
+		<div class="col-md-2">		
+		<if condition="$vo.checked eq 1">
+		<input type="checkbox" name="members2[]" value="{$vo.Id}" checked ="checked" />{$vo.dis_name}
+		<else />
+		<input type="checkbox" name="members2[]" value="{$vo.Id}"/>{$vo.dis_name}
+		</if>
+		</div>			
+		</volist>
+</div>
+		<!--<div class="row-fluid">	
+		<div class="col-md-3">		
+          <label class="control-label" for="input01">Name</label></br>		
+			<select class="input-xlarge" name="member_name" id="member_name">
+			<option value=""></option>			
+			<volist name="members" id="vo">
+			<option value="{$vo.Id}">{$vo.dis_name}</option>
+			</volist>
+			</select>
+		</div>	
+		</div>-->
+		<div class="row-fluid">
+		<div class="col-md-12">
+			<button class="btn btn-default">Check in</button>
+		</div>
+		</div>	  
+</form>
+</div>
+ 
+      <div id="legend" class="">
+        <legend class="">Checked in persons</legend>
+      </div>
+	  <table class="table table-striped">
+	  <tr><th>No.</th><th>Name</th><th>Type</th></tr>
+	  <volist name="guests" id="guest">
+	  <tr>
+	  <td>{$guest.num}</td><td>{$guest.name}</td><td>{$guest.type}</td>
+	  </tr>
+	  </volist>
+	  </table>
+						
+						

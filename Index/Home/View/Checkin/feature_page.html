@@ -1,0 +1,29 @@
+<layout name="layout_checkin" />
+<script type="text/javascript">  
+$(document).ready(function(){
+
+});
+</script>
+
+  <div class="container-fluid">
+  <div class="row-fluid">
+  <form class="form-horizontal" method="get" action="{:U('Checkin/checkin_tmc_deal')}">	  
+		<input type="hidden" name="club_id" value="{$club_id}">
+		<input type="hidden" name="m_date" value="{$m_date}">	
+		<input type="hidden" name="m_id" value="{$m_id}">			
+		<div id="content" class="col-md-12">
+          <h1 class="text-center"><a href="{:U('Checkin/checkin_tmc',array('club_id'=>$club_id,'m_date'=>$m_date,'m_id'=>$m_id))}">Guest checkin</a></h1></br>
+		</div>
+		<div id="content" class="col-md-12">
+          <h1 class="text-center"><a href="{:U('Checkin/vote',array('club_id'=>$club_id,'m_date'=>$m_date,'m_id'=>$m_id))}">Vote</a></h1></br>
+		</div>
+		<div id="content" class="col-md-12">			
+          <h1 class="text-center"><a href="{:U('Checkin/agenda',array('club_id'=>$club_id,'m_date'=>$m_date,'m_id'=>$m_id))}">Agenda</a></h1></br>
+		</div>
+	</form>
+	</div>
+	</div>
+
+
+						
+						

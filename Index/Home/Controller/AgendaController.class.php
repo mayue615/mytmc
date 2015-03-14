@@ -15,14 +15,13 @@ class AgendaController extends Controller {
 		return $arr;
 	}
 	
-    public function agenda1($club_id,$meeting_num,$template_id){
+    public function agenda1($club_id,$m_id,$template_id){
 		$club=D('club','Api');
-		$m_id=$club->get_next_meetings_id($club_id);
 		$meeting=D('Meeting','Api');
 		$meeting_info=$meeting->get_visual_meeting_table($m_id);		
 		$meeting_time=$club->get_meeting_time($club_id);
 		$arr=explode("~",$meeting_time);
-		$start_time=$arr[0];	
+		$start_time=$meeting_info['time'];	
 		$m=M('agenda');
 		$data=array();
 		$arr=$m->where("Id='$template_id'")->find();//assign template number
@@ -302,10 +301,12 @@ class AgendaController extends Controller {
 			array_push($data,$temp);
 			$start_time_session=$this->clac_time($start_time_session,$arr['toastmaster_end']);			
 		}
+		$arr['table']=$data;
+		$arr['time_range']=$start_time."~".$start_time_session;
 
 
 		
-		return $data;
+		return $arr;
 		//$start_time=strstr($meeting_time,'~');
 
 	}
