@@ -49,14 +49,14 @@ class QRController extends Controller {
 	
 	}
 	// used for tmc regular meeting
-	public function test_pic_tmc_meeting($club_id,$m_date,$m_id){
+	public function test_pic_tmc_meeting($club_id,$m_id){
 	    //$act_id=I('get.act_id');
 		//echo($act_id);
 		//exit;
 		vendor('phpqrcode.phpqrcode');
 		$QRcode = new \QRcode();
-		$activity_id=$club_id.'_'.$m_date;
-		$data = 'http://www.mytmc.cn/index.php/Home/Checkin/feature_page/club_id/'.$club_id.'/m_date/'.$m_date.'/m_id/'.$m_id;
+		$activity_id=$club_id.'_'.$m_id;
+		$data = 'http://www.mytmc.cn/index.php/Home/Checkin/feature_page/club_id/'.$club_id.'/m_id/'.$m_id;
 		//echo($data);
 		//exit;
 		// 纠错级别：L、M、Q、H

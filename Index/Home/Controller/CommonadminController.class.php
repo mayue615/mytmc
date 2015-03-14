@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-	class CommonController extends Controller{
+	class CommonadminController extends Controller{
 		Public function _initialize(){
    		// 初始化的时候检查用户权限
    			if(!isset($_COOKIE['user_id']) || $_COOKIE['user_id']==''){
@@ -15,8 +15,15 @@ use Think\Controller;
 				$this->assign('club_info',$club_info);
 				$this->assign('user_name',$user_name);	
 				$this->assign('user_name_2',$user_name."@");
+				$this->common_para();
 			}
 		}
-		
+		public function common_para(){
+			$club_id = cookie('club_id');
+			$club=D('club','Api');
+			$m_id=$club->get_next_meetings_id($club_id);
+			$this->assign('club_id',$club_id);
+			$this->assign('m_id',$m_id);			
+		}		
 	}
 ?>

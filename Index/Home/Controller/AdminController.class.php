@@ -2,18 +2,21 @@
 namespace Home\Controller;
 use Think\Controller;
 
-class AdminController extends CommonController {
+class AdminController extends CommonadminController {
+
 	public function admin_introduce(){
 		$this->display();	
 	}
+	public function checkin_port(){
+		$checkin = new CheckinController();
+		$checkin->feature_page();
+	}	
 	public function modify_club(){
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');	
 		$club=D('Club','Api');
 		$data=$club->get_club_info($club_id);
 		$users=$club->get_club_users($club_id);
-		//dump($data);
-		//dump($users);
 		$this->assign('data',$data);
 		$this->assign('member',$users);		
 		$this->display();	
@@ -32,7 +35,7 @@ class AdminController extends CommonController {
 		$club=D('club','Api');
 		$arr=$club->get_users_info($club_id);
 		//dump($arr);
-		$this->assign('data',$arr);
+		$this->assign('data',$arr);	
 		$this->display();	
 	}
 	public function modify_single_member(){

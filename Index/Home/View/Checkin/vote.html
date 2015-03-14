@@ -1,4 +1,4 @@
-<layout name="layout_checkin" />
+<layout name="layout_blank" />
 <script type="text/javascript">  
 $(document).ready(function(){
 
@@ -7,9 +7,8 @@ $(document).ready(function(){
 
   <div class="container-fluid">
   <div class="row-fluid">
-  <form class="form-horizontal" method="get" action="{:U('checkin_tmc_deal')}">	  
+  <form class="form-horizontal" method="get" action="{:U('vote_deal')}">	  
 		<input type="hidden" name="club_id" value="{$club_id}">
-		<input type="hidden" name="m_date" value="{$m_date}">	
 		<input type="hidden" name="m_id" value="{$m_id}">			
 		<div id="content" class="col-md-12">
           <h1 class="text-center">Best Speech</h1>

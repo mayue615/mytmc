@@ -33,7 +33,8 @@ class LoginController extends Controller {
 			$data['login_times']=$login;
 			$data['last_login']=$date;
 			$user->set_user_info($data);
-			if($user_authority=="admin"){
+			$this->redirect('Member/club_info');			
+/* 			if($user_authority=="admin"){
 				$this->redirect('Admin/members');
 			}
 			elseif($user_authority=="superadmin"){
@@ -44,7 +45,7 @@ class LoginController extends Controller {
 			}
 			else{
 				$this->redirect('Member/club_info');
-			}
+			} */
 		}
 
 	}

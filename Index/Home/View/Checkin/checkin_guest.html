@@ -1,0 +1,15 @@
+<layout name="layout_blank" />
+  <form class="form-signin" method="post" action="{:U('checkin_guest_deal')}">
+	<h2 class="form-signin-heading">Guest Checkin</h2>
+	<input type="hidden" name="club_id" value="{$club_id}">
+	<input type="hidden" name="m_id" value="{$m_id}">	
+	<input type="tel" id="phone" class="form-control" name="phone" placeholder="Telephone" required="" autofocus="">	
+	<input type="email" id="email" class="form-control" name="email" placeholder="Email@" required="" autofocus="">		
+	<input type="text" id="chinese_name" class="form-control" name="chinese_name" placeholder="Chinese Name" required="" autofocus="">
+	<input type="text" id="english_name" class="form-control" name="english_name" placeholder="English Name" required="" autofocus="">
+	<input type="text" id="introducer" class="form-control" name="introducer" placeholder="Introducer" required="" autofocus="">	
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Check in</button><button class="btn btn-lg btn-primary btn-block" type="reset">Reset</button>
+	<h3><a href="{:U('Checkin/feature_page',array('club_id'=>$club_id,'m_id'=>$m_id))}">Return</a></h3>
+	
+  </form>
+

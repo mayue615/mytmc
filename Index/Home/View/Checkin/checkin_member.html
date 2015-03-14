@@ -1,0 +1,26 @@
+<layout name="layout_blank" />
+<form class="form-horizontal" method="get" action="{:U('checkin_member_deal')}">	  
+	<div class="row-fluid">	  
+		  <div id="legend" class="">
+			<legend class="">Club Members</legend>
+		  </div> 
+			<input type="hidden" name="club_id" value="{$club_id}">
+			<input type="hidden" name="m_id" value="{$m_id}">		
+			<volist name="members" id="vo">
+			<div class="col-md-2">		
+			<if condition="$vo.checked eq 1">
+			<input type="checkbox" name="members2[]" value="{$vo.Id}" checked ="checked" />{$vo.english_name}
+			<else />
+			<input type="checkbox" name="members2[]" value="{$vo.Id}"/>{$vo.english_name}
+			</if>
+			</div>			
+			</volist>
+	</div>
+
+	<div class="row-fluid">
+		<div class="col-md-12">
+			<button class="btn btn-default">Check in</button>
+		</div>
+	</div>	  
+</form>
+
