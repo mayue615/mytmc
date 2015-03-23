@@ -22,6 +22,21 @@ return array(
 	'MAIL_PASSWORD' =>'123zjuZJU',//邮箱密码
 	'MAIL_CHARSET' =>'utf-8',//设置邮件编码
 	'MAIL_ISHTML' =>TRUE, // 是否HTML格式邮件 */
+	//数据库配置2
+	'DB_CONFIG2' => array(
+		 'db_type'  => 'mysql',
+		 'db_user'  => 'root',
+		 'db_pwd'   => 'root',
+		 'db_host'  => 'localhost',
+		 'db_port'  => '3306',
+		 'db_name'  => 'mytmc'
+),
+	
+	
+	
 );
+
+
+
 
  ?>

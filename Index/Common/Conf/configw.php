@@ -1,17 +1,17 @@
 <?php
 return array(
 	//'配置项'=>'配置值'
- 'DB_TYPE'	 =>	'mysql',
- 'DB_HOST'	 =>	'hdm-130.hichina.com',
- 'DB_NAME'	 =>	'hdm1300036_db',//'rubydb',//需要新建一个数据库！名字叫
- 'DB_USER'	 =>	'hdm1300036',	 //数据库用户名 
- 'DB_PWD'	 =>	'123liuLIU',//数据库登录密码
- 'DB_PORT'	 =>	'3306',
- 'DB_PREFIX'	 =>	'',//'think_',//数据库表名前缀
- 'TMPL_TEMPLATE_SUFFIX' => '.html', // 默认模板文件后缀 
- //'SHOW_PAGE_TRACE'=>'true',
- 'URL_MODEL'             =>  1,  // URL访问模式,可选参数0、1、2、3,代表以下四种模式:0 (普通模式); 1 (PATHINFO 模式); 2 (REWRITE  模式); 3 (兼容模式)  默认为PATHINFO 模式
- 'DB_PARAMS'    =>    array(\PDO::ATTR_CASE=>  \PDO::CASE_NATURAL),//update to thinkphp3.2.3 
+	'DB_TYPE'	 =>	'mysql',
+	'DB_HOST'	 =>	'hdm134137352.my3w.com',
+	'DB_NAME'	 =>	'hdm134137352_db',//'rubydb',//需要新建一个数据库！名字叫
+	'DB_USER'	 =>	'hdm134137352',	 //数据库用户名 
+	'DB_PWD'	 =>	'123nsnNSN',//数据库登录密码
+	'DB_PORT'	 =>	'3306',
+	'DB_PREFIX'	 =>	'',//'think_',//数据库表名前缀
+	'TMPL_TEMPLATE_SUFFIX' => '.html', // 默认模板文件后缀 
+	 //'SHOW_PAGE_TRACE'=>'true',
+	'URL_MODEL'             =>  1,  // URL访问模式,可选参数0、1、2、3,代表以下四种模式:0 (普通模式); 1 (PATHINFO 模式); 2 (REWRITE  模式); 3 (兼容模式)  默认为PATHINFO 模式
+	'DB_PARAMS'    =>    array(\PDO::ATTR_CASE=>  \PDO::CASE_NATURAL),//update to thinkphp3.2.3 
 	// 配置邮件发送服务器
 	'MAIL_HOST' =>'SMTP.qq.com',//smtp服务器的名称
 	//'MAIL_PORT'   => '465', //SMTP服务器端口

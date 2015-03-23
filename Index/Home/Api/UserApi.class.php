@@ -53,7 +53,6 @@ use Home\Logic\UserLogic;
 			$data['club_id']=$club_id;			
 			$m=M('club_user');
 			$result=$m->where($data)->find();
-			dump($result);
 			$data['is_active']=$is_active;
 			if($result!=NULL){
 				$data['Id']=$result['Id'];

@@ -1,0 +1,22 @@
+<layout name="layout_homepage" />
+	
+<h2>Apply Club</h2>
+<form action="apply_club_deal" method="post">
+<div class="table-responsive">
+	<table class="table table-striped">	
+<!-- 		<input type="hidden" name="Id" value="{$user['Id']}"> -->
+		<tr><th>Club Name</th><td>
+		<select name="club">
+		<volist name="clubs" id="vo">
+			<option value="{$vo.Id}">{$vo.club_name}</option>
+		</volist>
+		</select>
+		
+		</td></tr>	
+		<tr><td><button class="btn btn-success">Update</button></td><td></td></tr>	
+	</table>
+</div>	
+</form>
+
+						
+						

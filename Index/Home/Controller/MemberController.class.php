@@ -9,7 +9,7 @@ class MemberController extends CommonController {
 		$this->success();
 
 	}
-	
+
 	public function personal_info(){
 		$club_id = cookie('club_id');
 		$user_id=cookie('user_id');
@@ -147,13 +147,10 @@ class MemberController extends CommonController {
 			$arr_temp=explode(",",$item);
 			array_push($data,$arr_temp);
 		}
-		//dump($data);
-		//exit;
 		$meeting=D('visualMeeting','Api');		
 		foreach($data as $item){
 			$m_id=$item[1];
 			$role_id=$item[2];
-			//dump($item);
 			if($item[0]=="add"){
 				$result=$meeting->set_visualmeeting_role($m_id,$role_id,$user_id);			
 			}

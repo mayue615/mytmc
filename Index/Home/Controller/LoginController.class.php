@@ -5,6 +5,39 @@ class LoginController extends Controller {
 	public function login(){
 	    $this->display('login');
 	}
+	public function register(){
+	    $this->display('register');
+	}
+	
+	public function register_deal(){
+	    $user=D('user','Api');
+		$data=$user->create();
+		dump($data);		
+		//$data['authority']="member";
+		//$data['register_date']=date('Y-m-d H:i:s',time());
+		dump($data);
+		exit;
+		$user_id=$user->add($data);
+		cookie('user_id',$user_id);		
+		cookie('user_authority',"member");			
+		$this->redirect('apply_club');
+	}	
+	public function apply_club(){
+		$club=D('club','Api');
+		$arr=$club->select();
+		$this->assign('clubs',$arr);
+	    $this->display('apply_club');
+	}
+	public function apply_club_deal(){
+		$club=D('club','Api');
+		$club_id=I('post.club');
+		$is_active=0;
+		$user=D('user','Api');	
+		$user_id=cookie('user_id');
+		$user->set_user_club($club_id,$user_id,$is_active);
+		$this->success();
+	}	
+	
 	public function login_deal(){
 		$username = I('post.username');
 		$password = I('post.password');
