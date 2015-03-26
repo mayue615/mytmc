@@ -18,13 +18,21 @@ class CheckinController extends Controller {
 		$index1->agenda_show($club_id);
 	}
 	public function vote(){
-		$this->common_para();	
+		$this->common_para();
+		$m_id=I('get.m_id');
+		$meeting=D('meeting','Api');
+		$data=$meeting->get_meeting_each_role($m_id);
+		//dump($data);
+		$this->assign('spk',$data['spk']);
+		$this->assign('ev',$data['ev']);
+		$this->assign('role',$data['role']);
+		$this->assign('table',$data['table']);		
 		$this->display('vote');
 	}	
 	public function vote_deal(){
 		$vote=D('vote');
 		$data=$vote->create();
-		$checkin->add($data);
+		//$checkin->add($data);
 		$this->success();
 	}		
 	public function checkin_member(){

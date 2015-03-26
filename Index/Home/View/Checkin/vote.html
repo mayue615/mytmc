@@ -5,23 +5,51 @@ $(document).ready(function(){
 });
 </script>
 
-  <div class="container-fluid">
+  <div id="content" class="container-fluid">
   <div class="row-fluid">
   <form class="form-horizontal" method="get" action="{:U('vote_deal')}">	  
 		<input type="hidden" name="club_id" value="{$club_id}">
-		<input type="hidden" name="m_id" value="{$m_id}">			
+		<input type="hidden" name="m_id" value="{$m_id}">	
+		<div id="content" class="col-md-12">			
+          <h3>Best table topic</h3>
+		  <volist name="table" id="vo">
+		  <div class="col-md-2">
+		  <input type="radio" name="table" value="{$vo}">{$vo}
+		  </div>
+		  </volist>		  
+		</div>
+		
 		<div id="content" class="col-md-12">
-          <h1 class="text-center">Best Speech</h1>
+          <h3>Best Speech</h3>
+		  <volist name="spk" id="vo">
+		  <div class="col-md-2">		  
+		  <input type="radio" name="speech" value="{$vo}">{$vo}
+		  </div>
+		  </volist>
 		</div>
+
 		<div id="content" class="col-md-12">			
-          <h1 class="text-center">Best table topic</h1>
-		</div>
-		<div id="content" class="col-md-12">			
-          <h1 class="text-center">Best Evaluator</h1>
+          <h3>Best Evaluator</h3>
+		  <volist name="ev" id="vo">
+		  <div class="col-md-2">
+		  <input type="radio" name="ev" value="{$vo}">{$vo}
+		  </div>
+		  </volist>		  
 		</div>	
+		
 		<div id="content" class="col-md-12">			
-          <h1 class="text-center">Best Role</h1>
-		</div>		
+          <h3>Best Role</h3>
+		  <volist name="role" id="vo">
+		  <div class="col-md-2">		  
+		  <input type="radio" name="role" value="{$vo}">{$vo}
+		  </div>
+		  </volist>		  
+		</div>
+	<div class="row-fluid">
+		<div class="col-md-12">
+			<button class="btn btn-default">Check in</button>
+		</div>
+	</div>
 	</form>
 	</div>
 	</div>

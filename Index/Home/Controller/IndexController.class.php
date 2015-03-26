@@ -3,7 +3,10 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     public function index(){
-		$this->display('homepage');
+		$donation=$this->show_donation_page();
+		$this->assign('donation_list',$donation['data']);
+		$this->assign('page_method_donation',$donation['show']);		
+		$this->display('homepage');	
 
     }
 	public function timecard(){

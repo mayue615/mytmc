@@ -32,6 +32,37 @@ use Home\Logic\MeetingLogic;
 			}
 			return $meeting;
 		}
+		public function get_meeting_each_role($m_id){
+			$arr=$this->get_meeting_info_role_name($m_id);
+			$arr_role=array();				
+			$roles=array('toast_id','ge_id','aha_id','timer_id','gramm_id','joke_id','table1_id','table2_id','table1_ev_id','table2_ev_id');
+			foreach($roles as $role){
+				if($arr[$role]!=NULL){
+					array_push($arr_role,$arr[$role]);					
+				}
+			}
+			$table=array(1,2,3,4,5,6,7,8,9,10);
+			$data=array();
+			$arr_spk=array();	
+			$arr_ev=array();				
+			$speeches=$arr['speech'];
+			//dump($speeches);
+			foreach($speeches as $item){
+				if($item['spk_id']!=NULL){
+					array_push($arr_spk,$item['spk_id']);
+				}
+				if($item['ev_id']!=NULL){				
+					array_push($arr_ev,$item['ev_id']);
+				}
+			}
+
+			$data['spk']=$arr_spk;
+			$data['ev']=$arr_ev;
+			$data['role']=$arr_role;
+			$data['table']=$table;				
+			return $data;
+		
+		}
 		public function get_visual_meeting_table($m_id){
 			$meeting=$this->get_meeting_info_role_name($m_id);
 			$roles=array('spk1_id','ev1_id','spk2_id','ev2_id','spk3_id','ev3_id','spk4_id','ev4_id','spk5_id','ev5_id',
