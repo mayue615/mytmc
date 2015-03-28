@@ -156,5 +156,45 @@ class AdminController extends CommonadminController {
 		$club->set_meetings_num($club_id);		
 		$this->success();
 	}
+	public function show_checkin(){
+		$club_id = cookie('club_id');	
+		$club=D('club','Api');
+		$meetings_date=$club->get_meetings_date($club_id,"past");
+		$m_id=I('get.m_id');
+		if($m_id==""){
+			$m_id=$meetings_date[0]['Id'];
+			$condition['m_id']=$m_id;
+		}
+		else if($m_id=="all"){
+			$condition="";
+			foreach($meetings_date as $item){
+				$condition1="m_id=".$item['Id'];
+				$condition=$condition.$condition1."||";
+				//$condition="m_id=76||m_id=75";
+			}
+			$condition=substr($condition,0,strlen($condition)-2);
+		}
+		else{
+			$condition['m_id']=$m_id;
+		}
+		//echo($condition);
+		$m=D('Usercheckin','Api');
+		$users=$m->relation(true)->where($condition)->select();
+		$m=D('Guestcheckin','Api');
+		$guests=$m->relation(true)->where($condition)->select();
+		$this->assign('m_id',$m_id);		
+		$this->assign('m_dates',$meetings_date);
+		$this->assign('users',$users);
+		$this->assign('guests',$guests);		
+		$this->display();	
+	}
+	
+	public function get_checkin_ajax(){
+		$m_id=I('get.m_id');
+		$condition['m_id']=$m_id;
+		
+		
+		$this->ajaxReturn($data);
+	}
 }
 ?>

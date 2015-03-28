@@ -1,7 +1,7 @@
 <?php
 namespace Home\Model;
 use Think\Model\RelationModel;
-	class GuestModel extends RelationModel{
+	class GuestcheckinModel extends RelationModel{
 	protected $_link = array(
 		'meeting' => array(
 		'mapping_type'      =>  self::BELONGS_TO,

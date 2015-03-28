@@ -33,10 +33,10 @@ use Home\Logic\ClubLogic;
 			$arr_id=array();
 			foreach($arr['meeting_id'] as $item){
 				if($type=="past"){
-					if($item['m_date']<$current_date){
+					if($item['m_date']<=$current_date){
 						array_push($arr_id,$item['Id']);
-						$temp=array_reverse($arr_id);
-						$arr_id=$temp;
+						//$temp=array_reverse($arr_id);
+						//$arr_id=$temp;
 					}
 				}
 				else if($type=="future"){
@@ -48,9 +48,46 @@ use Home\Logic\ClubLogic;
 					array_push($arr_id,$item['Id']);				
 				}
 			}
+			if($type=="past"){
+				$temp=array_reverse($arr_id);
+				$arr_id=$temp;			
+			}
 			return $arr_id;
 			
 		}		
+		public function get_meetings_date($club_id,$type){
+			$current_date = date('Y-m-d',time());	
+			$condition['Id']=$club_id;
+			$arr = $this->relation('meeting_id')->where($condition)->field('Id')->find();
+			//dump($arr['meeting_id']);
+			//exit;
+			$arr_id=array();
+			foreach($arr['meeting_id'] as $item){
+				if($type=="past"){
+					if($item['m_date']<=$current_date){
+						//dump($item);
+						array_push($arr_id,$item);
+						//$temp=array_reverse($arr_id);
+						//$arr_id=$temp;
+					}
+				}
+				else if($type=="future"){
+					if($item['m_date']>=$current_date){
+						array_push($arr_id,$item);
+					}				
+				}
+				else{
+					array_push($arr_id,$item);				
+				}
+			}
+			if($type=="past"){
+				$temp=array_reverse($arr_id);
+				$arr_id=$temp;			
+			}
+			//dump($arr_id);
+			return $arr_id;
+			
+		}			
 		public function get_next_meetings_id($club_id){
 			$data=$this->get_meetings_id($club_id,"future");
 			return $data[0];

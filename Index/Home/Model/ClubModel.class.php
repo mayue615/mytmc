@@ -66,7 +66,7 @@ use Think\Model\RelationModel;
 			'relation_foreign_key'  =>  'm_id',
 			'mapping_order' => 'm_date',			
 			'relation_table'    =>  'club_meeting', //此处应显式定义中间表名称，且不能使用C函数读取表前缀
-			),		
+			),					
 			'meeting' => array(
 			'mapping_type'      =>  self::MANY_TO_MANY,
 			'class_name'        =>  'meeting',
