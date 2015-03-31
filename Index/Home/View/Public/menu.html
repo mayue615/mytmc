@@ -1,5 +1,5 @@
-﻿<nav class="navbar navbar-default" role="navigation">
-	<div>		
+﻿<div class="container-fluid">
+<nav class="navbar navbar-default" role="navigation">		
 	<if condition="$_COOKIE['user_authority'] eq 'member'">
 		<ul class="nav navbar-nav">
 			<li><a href="{:U('Index/index')}">Homepage</a></li>
@@ -51,5 +51,5 @@
 			<li><a href="{:U('Login/register')}">Register</a></li>	
 		</ul>	
 	</if>
-	</div>
 </nav>
+</div>

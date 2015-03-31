@@ -11,32 +11,35 @@ class LoginController extends Controller {
 	
 	public function register_deal(){
 	    $user=D('user','Api');
-		$data=$user->create();
-		dump($data);		
-		//$data['authority']="member";
-		//$data['register_date']=date('Y-m-d H:i:s',time());
+		$data['user_name']=I('post.user_name');
+		$data['password']=I('post.password');	
+		$data['english_name']=I('post.english_name');	
+		$data['chinese_name']=I('post.chinese_name');	
+		$data['email']=I('post.email');	
+		$data['phone']=I('post.phone');	
+		$data['birthday']=I('post.birthday');		
+		//$data1=$user->create();
+		//dump($data1);		
+		//dump($data);		
+		$data['authority']="member";
+		$data['register_date']=date('Y-m-d H:i:s',time());
 		dump($data);
-		exit;
 		$user_id=$user->add($data);
 		cookie('user_id',$user_id);		
 		cookie('user_authority',"member");			
-		$this->redirect('apply_club');
+		$this->redirect('Member/apply_club');
 	}	
-	public function apply_club(){
-		$club=D('club','Api');
-		$arr=$club->select();
-		$this->assign('clubs',$arr);
-	    $this->display('apply_club');
+	public function is_user_exist_ajax(){
+		$user_name=I('get.user_name');
+		$user=D('user','Api');
+		$result=$user->is_user_exist($user_name);
+		if($result==false)
+			$data=0;
+		else
+			$data=1;
+		$this->ajaxReturn($data);
 	}
-	public function apply_club_deal(){
-		$club=D('club','Api');
-		$club_id=I('post.club');
-		$is_active=0;
-		$user=D('user','Api');	
-		$user_id=cookie('user_id');
-		$user->set_user_club($club_id,$user_id,$is_active);
-		$this->success();
-	}	
+
 	
 	public function login_deal(){
 		$username = I('post.username');
@@ -67,18 +70,6 @@ class LoginController extends Controller {
 			$data['last_login']=$date;
 			$user->set_user_info($data);
 			$this->redirect('Member/club_info');			
-/* 			if($user_authority=="admin"){
-				$this->redirect('Admin/members');
-			}
-			elseif($user_authority=="superadmin"){
-				$this->redirect('Superadmin/clubs');
-			}			
-			elseif($user_authority=="activity"){
-				$this->redirect('Luckydraw/activity');
-			}
-			else{
-				$this->redirect('Member/club_info');
-			} */
 		}
 
 	}

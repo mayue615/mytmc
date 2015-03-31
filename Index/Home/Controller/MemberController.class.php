@@ -3,6 +3,24 @@ namespace Home\Controller;
 use Think\Controller;
 
 class MemberController extends CommonController {
+	public function apply_club(){
+		$club=D('club','Api');
+		$arr=$club->select();
+		$this->assign('clubs',$arr);
+	    $this->display('apply_club');
+	}
+	public function apply_club_deal(){
+		$club=D('club','Api');
+		$club_id=I('post.club');
+		$is_active=0;
+		$user=D('user','Api');	
+		$user_id=cookie('user_id');
+		$user->set_user_club($club_id,$user_id,$is_active);
+		cookie('club_id',$club_id);
+		$this->redirect('Member/club_info');
+	}	
+
+
 	public function club_choose(){
 		$club_id=I('get.club_id');
 		cookie('club_id',$club_id);		
