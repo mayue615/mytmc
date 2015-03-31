@@ -1,4 +1,20 @@
 <layout name="layout_blank" />
+<script language="javascript">
+$(document).ready(function(){
+	$("#phone").change(function() { //jquery 中change()函数 
+	var temp = $("#phone").val()
+	$.get("__APP__/Home/Checkin/checkin_guest_ajax",{phone:temp},function(data){
+		$("#email").val(data.email);
+		$("#chinese_name").val(data.chinese_name);
+		$("#english_name").val(data.english_name);		
+   })
+
+});
+	
+});
+</script>	
+
+
   <form class="form-signin" method="post" action="{:U('checkin_guest_deal')}">
 	<h2 class="form-signin-heading">Guest Checkin</h2>
 	<input type="hidden" name="club_id" value="{$club_id}">

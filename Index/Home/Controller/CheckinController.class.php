@@ -75,6 +75,26 @@ class CheckinController extends Controller {
 		$this->common_para();	
 		$this->display('checkin_guest');
 	}	
+	public function checkin_guest_ajax(){
+		$phone=I('get.phone');
+		$data=$this->check_phone($phone);
+		$this->ajaxReturn($data);
+	}	
+	public function check_phone($phone){
+		$condition['phone']=$phone;
+		$m=D('user','Api');
+		$data=$m->where($condition)->find();
+		if($data==null){
+			$m=D('guestcheckin','Api');
+			$data=$m->where($condition)->find();			
+		}
+		$result['chinese_name']=$data['chinese_name'];
+		$result['english_name']=$data['english_name'];
+		$result['phone']=$data['phone'];
+		$result['email']=$data['email'];		
+		return $result;
+	
+	}
 	public function checkin_guest_deal(){
 		$checkin=D('guestcheckin');
 		$data=$checkin->create();
