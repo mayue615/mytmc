@@ -17,9 +17,24 @@ class MemberController extends CommonController {
 		$user_id=cookie('user_id');
 		$user->set_user_club($club_id,$user_id,$is_active);
 		cookie('club_id',$club_id);
-		$this->redirect('Member/club_info');
+		$this->redirect('Member/personal_info');
 	}	
-
+	public function exit_club(){
+		$club=D('club','Api');
+		$arr=$club->select();
+		$this->assign('clubs',$arr);
+	    $this->display('exit_club');
+	}
+	public function exit_club_deal(){
+		$club=D('club','Api');
+		$club_id=I('post.club');
+		$is_active=0;
+		$user=D('user','Api');	
+		$user_id=cookie('user_id');
+		$user->delete_user_club($club_id,$user_id,$is_active);
+		cookie('club_id',$club_id);
+		$this->redirect('Member/personal_info');
+	}	
 
 	public function club_choose(){
 		$club_id=I('get.club_id');

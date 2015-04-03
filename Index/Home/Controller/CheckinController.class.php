@@ -96,12 +96,22 @@ class CheckinController extends Controller {
 	
 	}
 	public function checkin_guest_deal(){
+		$club_id=I('post.club_id');
+		$m_id=I('post.m_id');		
 		$checkin=D('guestcheckin');
 		$data=$checkin->create();
 		$checkin->add($data);
-		$this->success();
+		$this->redirect('show_guests',array('club_id'=>$club_id,'m_id'=>$m_id));
 	}	
-	
+	public function show_guests(){
+		$this->common_para();	
+		$club_id=I('get.club_id');
+		$m_id=I('get.m_id');			
+		$checkin=D('guestcheckin','Api');	
+		$data=$checkin->get_guests($m_id);
+		$this->assign('guests',$data);
+		$this->display('show_guests');
+	}	
 
 
 }

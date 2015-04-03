@@ -66,6 +66,20 @@ use Home\Logic\UserLogic;
 				return $m->add($data);
 			}
 		}
+		public function delete_user_club($club_id,$user_id,$is_active){
+			$data['user_id']=$user_id;
+			$data['club_id']=$club_id;			
+			$m=M('club_user');
+			$result=$m->where($data)->find();
+			$data['is_active']=$is_active;
+			if($result!=NULL){
+				$data['Id']=$result['Id'];
+				return $m->delete($data['Id']);			
+			}	
+			else{
+				return false;
+			}
+		}		
 		public function get_user_speech($user_id){
 			//dump($user_id);
 			$condition['Id']=$user_id;

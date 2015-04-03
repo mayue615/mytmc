@@ -3,7 +3,24 @@ namespace Home\Controller;
 use Think\Controller;
 
 class AdminController extends CommonadminController {
-
+	public function delete_member(){
+		$club_id = cookie('club_id');
+		$user_id = cookie('user_id');		
+		$club=D('club','Api');
+		$arr=$club->get_users_info($club_id);
+		$this->assign('members',$arr);
+	    $this->display('delete_member');
+	}
+	public function delete_member_deal(){
+		$club_id=cookie('club_id');	
+		$club=D('club','Api');
+		$user_id=I('post.member');
+		//dump($user_id);
+		$is_active=0;
+		$user=D('user','Api');	
+		$user->delete_user_club($club_id,$user_id,$is_active);
+		$this->redirect('modify_member');
+	}
 	public function admin_introduce(){
 		$this->display();	
 	}
