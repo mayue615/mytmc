@@ -1,0 +1,14 @@
+<layout name="layout_homepage" />
+
+<div id="content">
+
+		<h3>Guests Info</h3>
+		<table class="table table-striped">	
+			<tr><th>Meeting Date</th><th>English Name</th><th>Chinese Name</th><th>Phone</th><th>Email</th><th>Introducer</th></tr>
+			<volist name="guests" id="vo">
+			<tr><td>{$vo.m_date}</td><td>{$vo.chinese_name}</td><td>{$vo.english_name}</td><td>{$vo.phone}</td><td>{$vo.email}</td><td>{$vo.introducer}</td></tr>
+			</volist>
+		</table>
+	<h3><a href="{:U('Checkin/feature_page',array('club_id'=>$club_id,'m_id'=>$m_id))}">Return</a></h3>			
+</div>
+
