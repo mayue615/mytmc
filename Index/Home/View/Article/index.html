@@ -1,0 +1,60 @@
+<layout name="layout_homepage" />	
+    <js href="__PUBLIC__/ueditor/ueditor.config.js" />    
+    <js href="__PUBLIC__/ueditor/ueditor.all.min.js" />
+	<script>
+	$(function(){
+		var ue = UE.getEditor('container',{
+			serverUrl :'{:U('Home/Article/ueditor')}'
+		});
+	})
+	</script>	
+
+<style type="text/css">
+    body {
+      background-color: #eee;
+    }
+    #content {
+      background-color: #FFF;
+      border-radius: 5px;
+    }
+    #content .main {
+      padding: 20px;
+    }
+    #content .sidebar {
+      padding: 10px;
+    }
+    #content p {
+      line-height: 30px;
+    }
+</style>
+
+</head>
+
+<body>
+ 	<div class="container-fluid">   
+   	<!-- 实例化百度编辑器 -->
+
+   	<form action="__URL__/{$btn_ok_act}"  method="post">
+   		<p class="subtit">文章标题</p>
+		<div>
+<!-- 			<select id="selType">
+				<option value="0">请选择</option>
+				<option value="1">原创</option>
+				<option value="2">转载</option>
+				<option value="4">翻译</option>
+			</select> -->
+			<input type="text" id="txtTitle" name="title" style="width:560px; height:20px; float:left;" maxlength="100" value="{$article_item.title}"/>
+		</div>
+		<br>
+		<p class="subtit">文章内容</p>
+		<script id="container" name="body" type="text/plain">
+			{$article_item.body}
+		</script>		
+		<br></br>
+		<input type="hidden" value="{$article_item.Id}" name="Id"/>
+		<input type="hidden" value="{$article_item.type}" name="type"/>
+		<input type="submit" value="{$btn_ok_text}"/>
+	</form>
+	</div>
+    <div class="clear"></div>
+        

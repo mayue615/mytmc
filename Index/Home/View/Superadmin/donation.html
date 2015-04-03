@@ -1,0 +1,30 @@
+<layout name="layout_homepage" />
+<div class="col-md-2">
+<include file="Public:superadmin_sub_menu" />
+</div>
+<div class="col-md-10">  
+<div id="content">
+	<h3>Add donation item</h3>
+	<form action="donation_add">
+	<div class="table-responsive">
+		<table class="table table-striped">	
+			<tr><th>Name:</th><td><input type="text" name="name" value=""/></td></tr>
+			<tr><th>Money:</th><td><input type="text" name="money" value=""/></td></tr>	
+			<tr><td><button class="btn btn-success">Submit</button></td><td></td></tr>				
+		</table>
+	</div>	
+	</form>
+	<h3>Donations info</h3>	
+	<div class="table-responsive">
+		<table class="table table-striped">	
+			<tr><th>Name</th><th>Money</th><th>Unit</th></tr>
+			<volist name="data" id="vo">
+			<tr><td>{$vo.name}</td><td>{$vo.money}</td><td>{$vo.unit}</td></tr>		
+			</volist>
+		</table>
+	</div>	
+</div>
+</div>
+
+						
+						

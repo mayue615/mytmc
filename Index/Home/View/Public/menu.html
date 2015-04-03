@@ -21,7 +21,7 @@
 			<li><a href="{:U('Member/history')}">History</a></li>
 			<li><a href="{:U('Member/booking')}">Booking</a></li>
 			<li><a href="{:U('Member/agenda')}">Agenda</a></li>
-<!-- 			<li><a href="{:U('Member/myarticle')}">My Article</a></li> -->
+<!-- 		<li><a href="{:U('Member/myarticle')}">My Article</a></li> -->
 			<li><a href="{:U('Member/myspeech')}">My Speech</a></li>
 			<li><a href="{:U('Index/timecard')}">Timer Card</a></li>	
 			<li><a href="{:U('Admin/admin_introduce')}">Admin</a></li>	
@@ -30,17 +30,21 @@
 		<li><a href="{:U('Login/logout')}">Log out</a></li>
 		</ul>	
 	<elseif condition="$_COOKIE['user_authority'] eq 'superadmin'"/>
-		<ul class="nav navbar-nav">		
-			<li><a href="{:U('Index/index')}">Homepage</a></li>			
-			<li><a href="{:U('Superadmin/Clubs')}">Clubs</a></li>		
-			<li><a href="{:U('Article/admin')}">Articles</a></li>		
-			<li><a href="{:U('Superadmin/donation')}">Donations</a></li>	
-			<li><a href="{:U('Superadmin/mypage')}">My Info</a></li>			  			
+		<ul class="nav navbar-nav">
+			<li><a href="{:U('Index/index')}">Homepage</a></li>
+			<li><a href="{:U('Member/club_info')}">Club</a></li>
+			<li><a href="{:U('Member/history')}">History</a></li>
+			<li><a href="{:U('Member/booking')}">Booking</a></li>
+			<li><a href="{:U('Member/agenda')}">Agenda</a></li>
+			<li><a href="{:U('Article/member_all_article')}">My Article</a></li>
+			<li><a href="{:U('Member/myspeech')}">My Speech</a></li>
+			<li><a href="{:U('Index/timecard')}">Timer Card</a></li>	
+			<li><a href="{:U('Admin/admin_introduce')}">Admin</a></li>	
+			<li><a href="{:U('Superadmin/Clubs')}">SuperAdmin</a></li>				
 		</ul>
-		<ul class="nav navbar-nav pull-right">
-			<li><a href="{:U('Login/logout')}">Log out</a></li>
-		</ul>
-	
+		<ul class="nav navbar-nav navbar-right">
+		<li><a href="{:U('Login/logout')}">Log out</a></li>
+		</ul>			
 	<else />
 		<ul class="nav navbar-nav">
 			<li><a href="{:U('Index/index')}">Homepage</a></li>

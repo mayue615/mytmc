@@ -2,13 +2,33 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
+
+
     public function index(){
+		$article1=new ArticleController();
+		$article=$article1->show_article_page();
+		$this->assign('article_list',$article['data']);
+		$this->assign('page_method_article',$article['show']);	
+		$news=$article1->show_news_page();
+		$this->assign('news_list',$news['data']);
+		$this->assign('page_method_news',$news['show']);		
+	
 		$donation=$this->show_donation_page();
 		$this->assign('donation_list',$donation['data']);
 		$this->assign('page_method_donation',$donation['show']);		
 		$this->display('homepage');	
 
     }
+	public function article(){
+		$article_id=I('get.article_id');
+		$article1=new ArticleController();
+		$article=$article1->get_article($article_id);
+		$article['body']=htmlspecialchars_decode($article['body']);
+		$this->assign('article',$article);
+		$this->display('article');	
+	}	
+	
+	
 	public function timecard(){
 	
 		$this->display('timercard');

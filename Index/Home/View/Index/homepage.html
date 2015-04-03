@@ -7,7 +7,7 @@
             <tbody>
               <volist name="news_list" id="vo">
               <tr>
-                <td><a href="{:U('Index/article',array('article_id'=>$vo['Id']))}">{$vo['subject']}</a></td>
+                <td><a href="{:U('Index/article',array('article_id'=>$vo['Id']))}">{$vo['title']}</a></td>
               </tr>  
               </volist>                        
             </tbody>
@@ -26,7 +26,7 @@
 	  <a href="http://www.toastmasters.org/">Toastmasters</a>
 </div>
 <div class="col-md-8">  
-	<h3>World Speech</h3>
+	<h3>Hot Articles</h3>
         <table class="table table-striped">
             <thead>
               <tr>
@@ -44,9 +44,9 @@
               <volist name="article_list" id="vo">
               <tr>
                 <td></td>
-                <td><a href="{:U('Index/article',array('article_id'=>$vo['Id']))}">{$vo['subject']}</a></td>
+                <td><a href="{:U('Index/article',array('article_id'=>$vo['Id']))}">{$vo['title']}</a></td>
                 <td>{$vo['author']}</td>
-                <td>{$vo['createtime']}</td>
+                <td>{$vo['create_time']}</td>
               </tr>  
               </volist>                        
             </tbody>

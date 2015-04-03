@@ -119,6 +119,9 @@ use Home\Logic\ClubLogic;
 		public function get_clubs(){
 			return $this->field('Id,club_name')->select();
 		}
+		public function get_clubs_all(){
+			return $this->relation(array('president','vpe','vpm','vppr','saa','treasurer','secretary'))->select();
+		}		
 		public function get_other_clubs($club_id){
 			return $this->where("Id<>'$club_id'")->field('Id,club_name')->select();
 		}

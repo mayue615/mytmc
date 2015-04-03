@@ -1,0 +1,70 @@
+<layout name="layout_homepage" />
+<div class="container-fluid"> 	
+    <ul class="shortcut-buttons-set">
+	<div class="col-md-2">
+      <li>
+      	<a class="shortcut-button" href="{:U('Article/index',array('type'=>'article'))}">
+      		<span> 
+      			<img src="__PUBLIC__/img/admin/icons/pencil_48.png" alt="icon" /><br />
+        		Write Article
+        	</span>
+        </a>
+      </li>
+    </div>  
+	<div class="col-md-2">	
+      <li>
+      	<a class="shortcut-button" href="{:U('Article/index',array('type'=>'news'))}">
+      		<span> 
+      			<img src="__PUBLIC__/img/admin/icons/paper_content_pencil_48.png" alt="icon" /><br />
+        		Write News
+        	</span>
+        </a>
+      </li>
+	</div>
+    </ul>  
+          
+          <!-- 表头 -->
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>
+                 
+                </th>
+                <th>Title</th>
+                <th>Author</th>
+				<th>Type</th>
+                <th>Create Time</th>
+                <th>Last Modify</th>	 
+                <th>Action</th>
+              </tr>
+            </thead>
+              
+            <!-- 表内容部分 -->
+            <tbody>
+              <volist name="article_list" id="vo">
+              <tr>
+                <td></td>
+                <td><a href="{:U('Index/article',array('article_id'=>$vo['Id']))}">{$vo['title']}</a></td>
+                <td>{$vo['author']}</a></td>
+				<td>{$vo['type']}</a></td>
+                <td>{$vo['create_time']}</td>
+                <td>{$vo['last_modify']} </td>
+                <td>
+                  <!-- Icons -->
+                  <a href="{:U('Article/index',array('id'=>$vo['Id']))}" title="编辑"><img src="__PUBLIC__/img/admin/icons/pencil.png" alt="编辑" /></a> 
+                  <a href="{:U('Article/delete',array('id'=>$vo['Id']))}" title="删除"><img src="__PUBLIC__/img/admin/icons/cross.png" alt="删除" /></a> 
+                </td>
+              </tr>  
+              </volist>                        
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6">
+                  <div class="pagination">               	  
+                  	{$page_method_article}
+                  </div>                 
+                  <div class="clear"></div>
+                </td>
+              </tr>
+            </tfoot>            
+          </table>

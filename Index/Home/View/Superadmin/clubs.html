@@ -1,0 +1,29 @@
+<layout name="layout_homepage" />
+<div class="col-md-2">
+<include file="Public:superadmin_sub_menu" />
+</div>
+<div class="col-md-10">  
+<div id="content">
+<h3>Add new club</h3>
+	<table class="table table-striped">	
+	<form action="{:U('clubs_add_club')}" method="post">
+		<tr><th>Club Name:</th><td><input type="text" name="club_name" value=""/></td></tr>
+		<tr><th>Meeting Time:</th><td><input type="text" name="meeting_time" value=""/></td></tr>
+		<tr><th>Location:</th><td><input type="text" name="location" value=""/></td></tr>		
+		<tr><td><button class="btn btn-success">Submit</button></td><td></td></tr>		
+	</form>
+	</table>
+<h3>Clubs info</h3>
+	<div class="table-responsive">
+		<table class="table table-striped">	
+			<tr><th>Club Name</th><th>Meeting Time</th><th>Location</th><th>Template</th><th>First Num</th>
+			<th>President</th><th>VPE</th><th>VPM</th><th>VPPR</th><th>SAA</th><th>Treasurer</th><th>Secretary</th></tr>
+			<volist name="data" id="vo">
+			<tr><td>{$vo.club_name}</td><td>{$vo.meeting_time}</td><td>{$vo.location}</td><td>{$vo.default_template}</td><td>{$vo.first_num}</td>
+			<td>{$vo.president_name}</td><td>{$vo.vpe_name}</td><td>{$vo.vpm_name}</td><td>{$vo.vppr_name}</td><td>{$vo.saa_name}</td>
+			<td>{$vo.treasurer_name}</td><td>{$vo.secretary_name}</td></tr>		
+			</volist>
+		</table>
+	</div>	
+</div>
+</div>

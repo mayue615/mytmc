@@ -16,6 +16,10 @@ use Home\Logic\UserLogic;
 				return $this->get_user_info_by_id($user_id);
 			}
 		}
+		public function get_all_users(){
+			$ds=$this->select();
+			return $ds;
+		}
 		public function get_user_name_dictionary(){
 			$ds=$this->select();
 			$id2name_dict = array();
