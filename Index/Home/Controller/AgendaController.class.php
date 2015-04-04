@@ -28,7 +28,7 @@ class AgendaController extends Controller {
 		$m=M('agenda');
 		$data=array();
 		$arr=$m->where("Id='$template_id'")->find();//assign template number
-		$start_time_session="";
+		$start_time_session=$start_time;
 		$speaker_num=0;
 		if($arr['prepare']!=0){
 			$temp['time']=$start_time;
