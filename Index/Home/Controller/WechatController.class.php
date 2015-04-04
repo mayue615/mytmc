@@ -13,9 +13,9 @@ class WechatController extends Controller {
  *  usage:*/
     $options = array(
  			'token'=>'weixin', //填写你设定的key
- 			'encodingaeskey'=>'encodingaeskey', //填写加密用的EncodingAESKey
- 			'appid'=>'wxdk1234567890', //填写高级调用功能的app id
- 			'appsecret'=>'xxxxxxxxxxxxxxxxxxx' //填写高级调用功能的密钥
+ 			'encodingaeskey'=>'iZXuoi12gK03L418uxlVtg6m17YefygwXf7XhEbExKA', //填写加密用的EncodingAESKey
+ 			'appid'=>'wx8379661e96b3d086', //填写高级调用功能的app id
+ 			'appsecret'=>'11082da8128501114af26eda81629190' //填写高级调用功能的密钥
  		);
  	 $weObj = new \Wechat($options);
     $weObj->valid();
