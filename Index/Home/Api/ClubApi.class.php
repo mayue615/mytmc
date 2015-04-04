@@ -137,7 +137,21 @@ use Home\Logic\ClubLogic;
 				$m->save($arr);
 				
 			}
-		}		
+		}
+		public function cl_report($club_id){
+			$users=$this->get_users_info($club_id);
+			$m=D('user','Api');
+			$arr=array();
+			foreach($users as $user){
+				$data['name']=$user['english_name'];
+				$data['past']=$m->get_user_roles_number($user['Id'],"past");
+				$data['future']=$m->get_user_roles_number($user['Id'],"future");
+				$data['all']=$m->get_user_roles_number($user['Id'],"all");				
+				array_push($arr,$data);
+			
+			}
+			return $arr;
+		}
 		
 		
 	}

@@ -1,0 +1,31 @@
+<layout name="layout_homepage" />
+<div class="col-md-2">
+<include file="Public:admin_sub_menu" />
+</div>
+<div class="col-md-10"> 
+<div id="content" class="row-fluid">
+	<div class="table-responsive">
+		<table class="table table-bordered ">
+
+			<b>Note:Except these roles, CL also needs 1 Mentor role, 1 activity organizer.</b>
+			<tr><th>Member Name</th><th>Type</th><th>Speaker</th><th>Toastmaster</th><th>Jokemaster</th><th>General Evaluator</th><th>Timer</th>
+			<th>Grammarian</th><th>Aha counter</th><th>Evaluator</th><th>Table Topic</th></tr>
+			<tr><th>CL need</th><th>2</th><th>5</th><th>0</th><th>6</th><th>1</th>
+			<th>4</th><th>1</th><th>4</th><th>3</th></tr>			
+			<volist name="roles" id="vo">
+			<tr><td rowspan="3">{$vo.name}</td><td>{$vo.past.type}</td><td rowspan="3">{$vo.past.Speaker}</td><td>{$vo.past.Toastmaster}</td><td>{$vo.past.Jokemaster}</td>
+			<td>{$vo.past.General Evaluator}</td><td>{$vo.past.Timer}</td><td>{$vo.past.Grammarian}</td><td>{$vo.past.Aha counter}</td>
+			<td rowspan="3">{$vo.past.Evaluator}</td><td>{$vo.past.Table Topic Master}</td></tr>
+			<tr><td>{$vo.future.type}</td><td>{$vo.future.Toastmaster}</td><td>{$vo.future.Jokemaster}</td>
+			<td>{$vo.future.General Evaluator}</td><td>{$vo.future.Timer}</td><td>{$vo.future.Grammarian}</td><td>{$vo.future.Aha counter}</td>
+			<td>{$vo.future.Table Topic Master}</td></tr>	
+			<tr><td>{$vo.all.type}</td><td>{$vo.all.Toastmaster}</td><td>{$vo.all.Jokemaster}</td>
+			<td>{$vo.all.General Evaluator}</td><td>{$vo.all.Timer}</td><td>{$vo.all.Grammarian}</td><td>{$vo.all.Aha counter}</td>
+			<td>{$vo.all.Table Topic Master}</td></tr>			
+			</volist>
+		</table>
+	</div>
+</div>
+</div>
+						
+						

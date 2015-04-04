@@ -38,10 +38,10 @@ class IndexController extends Controller {
 		$club=D('club','Api');
 		$m_id=$club->get_next_meetings_id($club_id);		
 		$agenda1=new AgendaController();
-		//$template_id=$agenda1->get_defalut_template($club_id);
+		$template_id=$agenda1->get_defalut_template($club_id);
 		//echo($template_id);
 		//exit;
-		$arr=$agenda1->agenda1($club_id,$m_id,1);
+		$arr=$agenda1->agenda1($club_id,$m_id,$template_id);
 		$table=$arr['table'];
 		$time_range=$arr['time_range'];
 		$club_info=$club->get_club_info($club_id);

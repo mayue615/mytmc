@@ -3,6 +3,51 @@ namespace Home\Controller;
 use Think\Controller;
 
 class AdminController extends CommonadminController {
+
+	public function cl_report(){
+		$club_id = cookie('club_id');	
+		$club=D('club','Api');
+		$data=$club->cl_report($club_id);
+		//dump($data);
+		$this->assign('roles',$data);
+		$this->display();
+	
+	}
+
+	public function modify_template(){
+		$club_id = cookie('club_id');
+		$t_id=I('get.t_id');
+		if($t_id==""){
+			$t_id=1;
+		}
+		$condition['Id']=$t_id;
+		$template=D('agenda');
+		$arr=$template->select();
+		$this->assign('arr',$arr);		
+		$data=$template->where($condition)->find();
+		$this->assign('t_id',$t_id);						
+		$this->assign('data',$data);
+		//dump($data);
+		$this->display();	
+	}
+
+	public function modify_template_deal(){
+		$t_id=I('post.t_id');
+		$template=D('agenda');
+		$data=$template->create();
+		$template->save($data);
+		$this->success();	
+	}
+	public function add_template(){
+		$this->display();		
+	}	
+	public function add_template_deal(){
+		$template=D('agenda');
+		$data=$template->create();	
+		$t_id=$template->add($data);
+		$this->redirect('modify_template',array('t_id'=>$t_id));		
+	}
+	
 	public function delete_member(){
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');		
@@ -35,7 +80,10 @@ class AdminController extends CommonadminController {
 		$data=$club->get_club_info($club_id);
 		$users=$club->get_club_users($club_id);
 		$this->assign('data',$data);
-		$this->assign('member',$users);		
+		$this->assign('member',$users);
+		$template=D('agenda');
+		$arr=$template->select();
+		$this->assign('template',$arr);		
 		$this->display();	
 	}
 	public function modify_club_deal(){

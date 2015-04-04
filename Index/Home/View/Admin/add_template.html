@@ -1,0 +1,32 @@
+<layout name="layout_homepage" />
+<!-- <script language="javascript">
+$(document).ready(function(){
+	$("#m_id").change(function() { //jquery 中change()函数 
+	var temp = $("#m_id").val()
+	$.get("__APP__/Home/Admin/get_checkin_ajax",{m_id:temp},function(data){
+		alert(data);
+		var count=data.length;
+
+   })
+
+});
+	
+});
+</script> -->	  
+<div class="col-md-2">
+<include file="Public:admin_sub_menu" />
+</div>
+<div class="col-md-10">  
+<div id="content">
+<h3>Add Template</h3>
+
+<form class="form-horizontal" method="post" action="{:U('add_template_deal')}">	
+	Template Name: <input type="text" name="tpl_name" value=""/>
+     <button class="btn btn-primary" id="submit">Add</button>	
+</form>
+
+		
+
+</div>
+</div>
+

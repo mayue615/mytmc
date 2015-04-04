@@ -16,7 +16,22 @@
  			<tr><th>Create Time:</th><td><input type="text" name="create_time" value="{$data.create_time}"/></td></tr>		
 			<tr><th>Meeting Time:</th><td><input type="text" name="default_time" value="{$data.default_time}"/></td></tr>
 			<tr><th>Default Room:</th><td><input type="text" name="default_room" value="{$data.default_room}"/></td></tr>
-			<tr><th>First Meeting Number<br> in Database:</th><td><input type="first_num" name="first_num" value="{$data.first_num}"/></td></tr>				
+			<tr><th>First Meeting Number<br> in Database:</th><td><input type="first_num" name="first_num" value="{$data.first_num}"/></td></tr>	
+			<tr><th>Default Agenda Template:</th>
+			<td>
+				<select class="input-xlarge" name="default_template">
+					<option></option>
+					<volist name="template" id="vo">
+						<if condition="$data['default_template'] eq $vo['Id']">
+							<option value="{$vo.Id}" selected>{$vo.tpl_name}</option>						
+						<else/>
+							<option value="{$vo.Id}">{$vo.tpl_name}</option>
+						</if>
+					</volist>
+				</select>			
+			
+			</td>
+			</tr>				
 			<tr><th>President:</th>
 				<td>
 				<select class="input-xlarge" name="president">

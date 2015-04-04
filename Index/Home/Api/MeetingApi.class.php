@@ -153,7 +153,12 @@ use Home\Logic\MeetingLogic;
 			$data['club_id']=$club_id;
 			$m->add($data);
 		}
-
+	public function meeting_roles(){
+		$role_list = array('toast_id'=>'ToastMaster', 'joke_id'=>'JokeMaster', 'ge_id'=>'General Evaluator', 'timer_id'=>'Timer',
+					'gramm_id'=>'Grammarian', 'aha_id'=>'Aha counter', 'table1_id'=>'Table Topic Master','table2_id'=>'Table Topic Master2',
+					'table1_ev'=>'Table Evaluator1','table2_ev'=>'Table Evaluator1','spk_id'=>'Speaker','ev_id'=>'Evaluator');				
+		return $role_list;
+	}
 
 	}
 ?>

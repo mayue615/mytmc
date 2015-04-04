@@ -1,0 +1,48 @@
+<layout name="layout_homepage" />
+<!-- <script language="javascript">
+$(document).ready(function(){
+	$("#m_id").change(function() { //jquery 中change()函数 
+	var temp = $("#m_id").val()
+	$.get("__APP__/Home/Admin/get_checkin_ajax",{m_id:temp},function(data){
+		alert(data);
+		var count=data.length;
+
+   })
+
+});
+	
+});
+</script> -->	  
+<div class="col-md-2">
+<include file="Public:admin_sub_menu" />
+</div>
+<div class="col-md-10">  
+<div id="content">
+<h3>Template Info</h3>
+<h4><a href="{:U('add_template')}">Add new template</a></h4>
+<form class="form-horizontal" method="get" action="{:U('modify_template')}">	
+	<select name="t_id" id="t_id">
+	<volist name="arr" id="vo">
+		<if condition="$t_id eq $vo['Id']">
+			<option value="{$vo.Id}" selected>{$vo.tpl_name}</option>						
+		<else/>
+			<option value="{$vo.Id}">{$vo.tpl_name}</option>
+		</if>
+	</volist>
+	</select>
+     <button class="btn btn-primary" id="submit">Query</button>	
+</form>
+<form class="form-horizontal" method="post" action="{:U('modify_template_deal')}">
+	<table class="table table-striped">		
+		<input type="hidden" name="Id" value="{$data.Id}"/>
+	<volist name="data" id="vo" offset="1">		
+		<tr><th>{$key}</th><td><input type="text" name="{$key}" value="{$vo}"/></td></tr>		
+	</volist>		
+	</table>
+     <button class="btn btn-primary" id="submit">Submit</button>	
+</form>
+		
+
+</div>
+</div>
+

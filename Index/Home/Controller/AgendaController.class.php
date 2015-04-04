@@ -4,7 +4,7 @@ use Think\Controller;
 class AgendaController extends Controller {
 
 	public function get_defalut_template($club_id){
-		$m=M('club_info');
+		$m=D('club','Api');
 		$arr=$m->where("Id='$club_id'")->find();
 		$default_template=$arr['default_template'];
 		return $default_template;
@@ -20,8 +20,11 @@ class AgendaController extends Controller {
 		$meeting=D('Meeting','Api');
 		$meeting_info=$meeting->get_visual_meeting_table($m_id);		
 		$meeting_time=$club->get_meeting_time($club_id);
-		$arr=explode("~",$meeting_time);
-		$start_time=$meeting_info['time'];	
+		$arr_time=explode("~",$meeting_time);
+		$start_time=$meeting_info['time'];
+		if($start_time==""){
+			$start_time=$arr_time[0];
+		}
 		$m=M('agenda');
 		$data=array();
 		$arr=$m->where("Id='$template_id'")->find();//assign template number
