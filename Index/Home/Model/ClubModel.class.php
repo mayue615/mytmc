@@ -8,6 +8,7 @@ use Think\Model\RelationModel;
 			'class_name'        =>  'user',
 			'foreign_key'       =>  'club_id',
 			'relation_foreign_key'  =>  'user_id',
+			'mapping_order'     =>  'english_name',
 			'relation_table'    =>  'club_user', //此处应显式定义中间表名称，且不能使用C函数读取表前缀
 			),
 			'president' => array(

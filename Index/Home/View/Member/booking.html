@@ -12,7 +12,7 @@ $("table tr:gt(0)").each(function(i){
 });
 
 $('td').click(function(){
-if($(this).text()=="" && !($(this).attr("role")=="note")){
+if($(this).text()=="" && !($(this).attr("role")=="note")&& !($(this).attr("role")=="type")){
 $(this).attr("style", "BACKGROUND-COLOR: #98FB98");
  $(this).text($('#username').val());
  //alert($(this).parent("tr").attr("num")+$(this).attr("role"));
@@ -116,7 +116,7 @@ function syncscroll(obj)
 		   </colgroup>		
 			<volist name="data" id="vo">  
 			<tr num="{$vo.Id}">
-			<td height="40">{$vo.type}</td><td>{$vo.language}</td><td role="note">{$vo.note}</td>
+			<td height="40" role="type">{$vo.type}</td><td>{$vo.language}</td><td role="note">{$vo.note}</td>
 			<td role="toast_id">{$vo.toast_id}</td><td role="joke_id">{$vo.joke_id}</td><td role="ge_id">{$vo.ge_id}</td><td role="timer_id">{$vo.timer_id}</td>
 			<td role="gramm_id">{$vo.gramm_id}</td><td role="aha_id">{$vo.aha_id}</td><td role="table1_id">{$vo.table1_id}</td><td role="table2_id">{$vo.table2_id}</td>
 			<td role="spk1_id">{$vo.spk1_id}</td><td role="ev1_id">{$vo.ev1_id}</td><td role="spk2_id">{$vo.spk2_id}</td><td role="ev2_id">{$vo.ev2_id}</td>
