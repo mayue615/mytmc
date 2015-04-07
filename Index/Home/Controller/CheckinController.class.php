@@ -13,6 +13,8 @@ class CheckinController extends Controller {
 		$this->display('Checkin/feature_page');
 	}
 	public function agenda(){
+		$club_id=I('get.club_id');
+		$m_id=I('get.m_id');		
 		$this->common_para();	
 		$index1=new IndexController();
 		$index1->agenda_show($club_id);

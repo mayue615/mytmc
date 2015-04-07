@@ -16,6 +16,8 @@ class AgendaController extends Controller {
 	}
 	
     public function agenda1($club_id,$m_id,$template_id){
+		//dump($m_id);
+		//dump($template_id);
 		$club=D('club','Api');
 		$meeting=D('Meeting','Api');
 		$meeting_info=$meeting->get_visual_meeting_table($m_id);		
