@@ -25,91 +25,10 @@ function syncscroll(obj)
 }
 </script>
 <input type="hidden" id="username" value="{$user_name}">
-	<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-		<td>
-  <!--*********左上-BEGIN***********-->
-		<table width="110" height="100%" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">
-		   <colgroup>
-		   <col width="30" >
-		   <col width="80" >
-		   </colgroup>		
-			<tr><td height="40">No.</td>
-			<td height="40">Date</td></tr>
-		</table>		
-  <!--**************左上-END**********-->
-		</td>
-		<td>
- <div id='scroll1' style="width:1200;overflow:hidden ">		
-  <!--***********右上-BEGIN********-->  
-		<table style="width:2320" height="100%" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">  
-		   <colgroup>
-		   <col width="80" ><col width="80" ><col width="80" ><col width="80" ><col width="80" ><col width="80" >	
-		   <col width="80" ><col width="80" ><col width="80" >
-		   <col width="80" ><col width="80" ><col width="80" ><col width="80" ><col width="80" ><col width="80" >
-		   <col width="80" ><col width="80" ><col width="80" >	<col width="80" ><col width="80" ><col width="80" >
-		   <col width="80" ><col width="80" ><col width="80" >	<col width="80" ><col width="80" ><col width="80" >
-		   <col width="80" ><col width="80" >		   
-		   </colgroup>		
-			<tr><td height="40">Type</td><td height="40">Language</td><td height="40">Note</td><td height="40">Toast Master</td>
-			<td height="40">Joke Master</td><td height="40">General Evaluator</td><td height="40">Timer</td>
-			<td height="40">Grammarian</td><td height="40">Aha Counter</td><td height="40">Table Master</td><td height="40">Table Evaluator</td>
-			<td height="40">Speaker1</td><td height="40">Evaluator1</td><td height="40">Speaker2</td><td height="40">Evaluator2</td>
-			<td height="40">Speaker3</td><td height="40">Evaluator3</td><td height="40">Speaker4</td><td height="40">Evaluator4</td>
-			<td height="40">Speaker5</td><td height="40">Evaluator5</td><td height="40">Speaker6</td><td height="40">Evaluator6</td>
-			<td height="40">Speaker7</td><td height="40">Evaluator7</td><td height="40">Speaker8</td><td height="40">Evaluator8</td>
-			<td height="40">Speaker9</td><td height="40">Evaluator9</td></tr>
-		</table>	
-  <!--************右上-END**********-->
- </div>   
-		</td>
-		</tr>
-		<tr>
-		<td>
- <div id='scroll2' style="height:500;overflow-y:hidden;overflow-x:scroll">		
-   <!--*************左下-BEGIN**************--> 
-		<table width="110" height="100%" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">     
-		   <colgroup>
-		   <col width="30" >
-		   <col width="80" >
-		   </colgroup>		
-			<volist name="data" id="vo">
-			<tr><td height="40" role="num">{$vo.num}</td><td role="date">{$vo.m_date}</td></tr>
-			</volist>
-		</table>				
-  <!--*************左下-END***********-->
- </div>
-		</td>
-		<td>
- <div style="width:1200;height:500;overflow:scroll " onscroll="javascript:syncscroll(this)">		
-  <!--***********右下-BEGIN***********-->
-		<table style="width:2320 " height="100" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">   
-		   <colgroup>
-		   <col width="80" ><col width="80" ><col width="80" ><col width="80" ><col width="80" ><col width="80" >	
-		   <col width="80" ><col width="80" ><col width="80" >
-		   <col width="80" ><col width="80" ><col width="80" ><col width="80" ><col width="80" ><col width="80" >
-		   <col width="80" ><col width="80" ><col width="80" >	<col width="80" ><col width="80" ><col width="80" >
-		   <col width="80" ><col width="80" ><col width="80" >	<col width="80" ><col width="80" ><col width="80" >
-		   <col width="80" ><col width="80" >	   
-		   </colgroup>		
-			<volist name="data" id="vo">  
-			<tr num="{$vo.Id}">
-			<td height="40">{$vo.type}</td><td>{$vo.language}</td><td role="note">{$vo.note}</td>
-			<td role="toast_id">{$vo.toast_id}</td><td role="joke_id">{$vo.joke_id}</td><td role="ge_id">{$vo.ge_id}</td><td role="timer_id">{$vo.timer_id}</td>
-			<td role="gramm_id">{$vo.gramm_id}</td><td role="aha_id">{$vo.aha_id}</td><td role="table1_id">{$vo.table1_id}</td><td role="table2_id">{$vo.table2_id}</td>
-			<td role="spk1_id">{$vo.spk1_id}</td><td role="ev1_id">{$vo.ev1_id}</td><td role="spk2_id">{$vo.spk2_id}</td><td role="ev2_id">{$vo.ev2_id}</td>
-			<td role="spk3_id">{$vo.spk3_id}</td><td role="ev3_id">{$vo.ev3_id}</td><td role="spk4_id">{$vo.spk4_id}</td><td role="ev4_id">{$vo.ev4_id}</td>
-			<td role="spk5_id">{$vo.spk5_id}</td><td role="ev5_id">{$vo.ev5_id}</td><td role="spk6_id">{$vo.spk6_id}</td><td role="ev6_id">{$vo.ev6_id}</td>
-			<td role="spk7_id">{$vo.spk7_id}</td><td role="ev7_id">{$vo.ev7_id}</td><td role="spk8_id">{$vo.spk8_id}</td><td role="ev8_id">{$vo.ev8_id}</td>
-			<td role="spk9_id">{$vo.spk9_id}</td><td role="ev9_id">{$vo.ev9_id}</td>
-			</tr>
-			</volist>	
-		</table>
-  <!--*************右下-END*****************-->	
-  </div> 
-		</td>
-		</tr>
-		</table>
+<div id="content">
+<h3>History</h3>
+<include file="visual_meeting_table" />
+</div>
 
 						
 						

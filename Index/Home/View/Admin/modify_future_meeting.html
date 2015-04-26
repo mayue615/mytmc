@@ -1,0 +1,23 @@
+<layout name="layout_homepage" />	  
+<script language="javascript">
+	function syncscroll(obj)
+	{
+	 //y.innerHTML = obj.scrollTop;
+	 //x.innerHTML = obj.scrollLeft;
+	 scroll1.children[0].style.position = "relative";
+	 scroll2.children[0].style.position = "relative";
+	 scroll1.children[0].style.left = "-"+obj.scrollLeft;
+	 scroll2.children[0].style.top =  "-"+obj.scrollTop;
+	 
+	}
+</script>			
+<div class="col-md-2">
+<include file="Public:admin_sub_menu" />
+</div>
+<div class="col-md-10">  
+<div id="content">
+<h3>Modify future meeting</h3>
+<include file="visual_meeting_table" />
+</div>
+</div>
+

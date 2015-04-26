@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html;charset=gb2312"/>  
+<meta http-equiv="Content-Language" content="zh-CN"/>    
+<title>Lucky Draw</title>  
+<load href="__ROOT__/Public/js/jquery-2.1.1.min.js" />
+<style type="text/css">  
+body {padding-top:100px;font:12px "\5B8B\4F53",sans-serif;text-align:center;}  
+.result_box {margin:0 auto;width:700px;padding:100px 0;text-align:center;border:3px solid #40AA53;background:#efe;}  
+.result_box #oknum {width:700px;color:#cc0000;font-size:50pt;font-family:Verdana;text-align:center;border:none;background:#efe;}  
+.button_box {margin:50px 0 0 0;}  
+.button_box .btn {cursor:pointer;padding:0 30px;margin:0 10px;color:#555;font-family:"\5B8B\4F53",sans-serif;font-size:40px;}  
+</style>  
+
+
+<script type="text/javascript">  
+//抽奖数据，以英文逗号分隔  
+	var alldata;
+	var alldataarr; 
+	var num; 
+	var timer;
+	var reset_flag=0;
+	var isRunning = 0;
+$(document).ready(function(){
+
+      if(reset_flag==0){
+	reset();
+	reset_flag=1;
+  }
+  
+  $("#btn1").click(function(){
+  
+
+  
+  if(isRunning==0){
+	$("#btn1").text("Stop");
+	isRunning=1;
+	start();
+  }
+  else
+  {
+  $("#btn1").text("Continue");
+	isRunning=0;
+	ok();
+  }
+	
+  });
+  //$("#btn3").click(function(){
+  //   reset();
+  //});
+});
+
+ function change(){     
+    //document.getElementById("oknum").value = alldataarr[GetRnd(0,num)]; 
+	$("#oknum").val(alldataarr[GetRnd(0,num)]);
+}  
+function start(){     
+    clearInterval(timer);     
+    timer = setInterval('change()',46); //随机数据变换速度，越小变换的越快
+}  
+function reset(){  
+	clearInterval(timer);  
+	alldata = $("#text2").text(); 
+	alldataarr = alldata.split(","); 
+	num = alldataarr.length-1; 
+	var temp=num+1;
+	//$("#oknum").val("People Excellence");
+	//$("#text1").text("参加抽奖人数："+temp);
+	
+}
+function ok(){  
+	 
+    clearInterval(timer);     
+    //以下代码表示获得奖的，不能再获奖了。  重置刷新页面即可。  
+    alldata = alldata.replace($("#oknum").val(),"").replace(",,",",");  
+    // 去掉前置，最末尾的,  
+    if (alldata.substr(0,1)==",")  
+    {  
+      alldata = alldata.substr(1,alldata.length);  
+    }  
+    if (alldata.substr(alldata.length-1,1)==",")  
+    {  
+      alldata = alldata.substring(0,alldata.length-1);  
+    }  
+    alldataarr = alldata.split(",");    
+    num = alldataarr.length-1; 
+	$("#text2").text(alldata);
+	var temp=$("#text3").text();
+	$("#text3").text(temp + $("#oknum").val()+",");
+	if(alldataarr=="")
+	{
+		$("#btn1").attr("disabled", true);
+	}
+}     
+function GetRnd(min,max){     
+    return parseInt(Math.random()*(max-min+1));     
+}  
+ 
+
+</script>  
+</head>     
+<body>  
+<div class="result_box"><input type="text" id="oknum" name="oknum" value={$activity_name} /></div>  
+<div class="button_box">
+<button class="btn" id="btn1" accesskey="s">Start(<U>S</U>)</button>
+</div>  
+
+<input type="hidden" name="data" id="draw_data1" value={$draw_data}>
+<p id="text1"></p>
+Winners:<h1 id="text3"></h1>
+Participants:<p id="text2">{$draw_data}</p>
+
+</body>     
+</html>  
+
+						
+						

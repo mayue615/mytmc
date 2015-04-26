@@ -40,7 +40,6 @@ class IndexController extends Controller {
 		$this->assign('donation_list',$donation['data']);
 		$this->assign('page_method_donation',$donation['show']);		
 		$this->display('homepage');	
-
     }
 	public function article(){
 		$article_id=I('get.article_id');
@@ -50,7 +49,13 @@ class IndexController extends Controller {
 		$this->assign('article',$article);
 		$this->display('article');	
 	}	
-	
+	public function single_article($article_id){
+		$article1=new ArticleController();
+		$article=$article1->get_article($article_id);
+		$article['body']=htmlspecialchars_decode($article['body']);
+		$this->assign('article',$article);
+		$this->display('article');	
+	}	
 	
 	public function timecard(){
 	

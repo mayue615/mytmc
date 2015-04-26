@@ -69,9 +69,9 @@ function add_title(element)
 		<table class="table table-striped">	
 			
 			
-			<th>Date</th><th>Level</th><th>Title</th><th>Evaluator</th>
+			<th>Date</th><th>Level</th><th>Title</th><th>Evaluator</th><th>Edit</th>
 			<volist name="data" id="vo">	
-			<tr><td><a href="{:U('Member/my_single_speech',array('speech_id'=>$vo['Id']))}">{$vo.m_date}</a></td><td>{$vo.speech_level}</td><td>{$vo.title}</td><td>{$vo.ev_name}</td>				
+			<tr><td>{$vo.m_date}</a></td><td>{$vo.speech_level}</td><td><a href="{:U('Member/my_single_speech_show',array('speech_id'=>$vo['Id']))}">{$vo.title}</td><td>{$vo.ev_name}</td><td><a href="{:U('Member/my_single_speech',array('speech_id'=>$vo['Id']))}">Edit</td>				
 			</volist>
 				
 

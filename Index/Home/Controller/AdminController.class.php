@@ -67,7 +67,12 @@ class AdminController extends CommonadminController {
 		$this->redirect('modify_member');
 	}
 	public function admin_introduce(){
-		$this->display();	
+		$article1=new ArticleController();
+		$article_id=3;
+		$article=$article1->get_article($article_id);
+		$article['body']=htmlspecialchars_decode($article['body']);
+		$this->assign('article',$article);
+		$this->display('article');		
 	}
 	public function checkin_port(){
 		$checkin = new CheckinController();
@@ -124,14 +129,23 @@ class AdminController extends CommonadminController {
 	public function deal_message_deal(){
 		$this->success();	
 	}	
-	public function modify_meeting(){
+	public function modify_future_meeting(){
  		$current_date = date('Y-m-d',time());
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');		
 		$visual_meeting=D('visualMeeting','Api');
-		$data=$visual_meeting->get_visual_meeting_table($club_id);		
+		$data=$visual_meeting->get_visual_meeting_table($club_id,'future');		
 		$this->assign('data',$data);
 		$this->display();
+	}	
+	public function modify_history_meeting(){
+ 		$current_date = date('Y-m-d',time());
+		$club_id = cookie('club_id');
+		$user_id = cookie('user_id');		
+		$visual_meeting=D('visualMeeting','Api');
+		$data=$visual_meeting->get_visual_meeting_table($club_id,'past');		
+		$this->assign('data',$data);
+		$this->display('modify_history_meeting');
 	}
 	public function modify_single_meeting(){
 		$club_id = cookie('club_id');
@@ -161,6 +175,8 @@ class AdminController extends CommonadminController {
 		$visual_meeting=D('visualMeeting','Api');
 		$data=$meeting->create();
 		$m_id=$data['Id'];
+		$m_date=$data['m_date'];
+ 		$current_date = date('Y-m-d',time());		
 		$meeting->save();
 		$roles=array('toast_id','joke_id','ge_id','gramm_id','timer_id','aha_id','table1_id','table2_id','table1_ev_id','table2_ev_id',
 					'spk1_id','ev1_id','spk2_id','ev2_id','spk3_id','ev3_id','spk4_id','ev4_id','spk5_id','ev5_id',
@@ -180,7 +196,13 @@ class AdminController extends CommonadminController {
 		}
 		$club=D('club','Api');
 		$club->set_meetings_num($club_id);
-		$this->success();			
+		
+		if($m_date>=$current_date){
+			$this->success("Update successfully.",U('modify_future_meeting'));	
+		}
+		else{
+			$this->success("Update successfully.",U('modify_history_meeting'));			
+		}
 	}	
 	public function get_clubs_ajax(){
 		$club=D('club','Api');

@@ -225,6 +225,22 @@ class MemberController extends CommonController {
 		$this->assign('levels',$levels);
 		$this->assign('data',$data);
 		$this->display(); 
+	}
+
+	public function my_single_speech_show(){
+		header("Content-Type:text/html; charset=utf-8");	
+		$club_id = cookie('club_id');
+		$user_id = cookie('user_id');
+		$speech_id=I('get.speech_id');
+		$userspeech=D('userspeech','Api');
+		$data=$userspeech->get_single_speech($speech_id);
+		$data['content']=htmlspecialchars_decode($data['content']);
+ 		$speech=D('speech','Api');
+		$levels=$speech->get_levels_info();
+		//dump($data);
+		$this->assign('levels',$levels);
+		$this->assign('data',$data);
+		$this->display(); 
 	}	
 	public function my_single_speech_deal(){
  		$userspeech=D('userspeech','Api');
@@ -233,7 +249,7 @@ class MemberController extends CommonController {
 		//$data['content']=htmlspecialchars(stripslashes($data['content']));
 		//dump($data);		
 		$userspeech->save($data);
-		$this->success();
+		$this->success("Modify speech successfully",U("myspeech"));
 	}	
 	public function ueditor(){
 		$data = new \Org\Util\Ueditor();
