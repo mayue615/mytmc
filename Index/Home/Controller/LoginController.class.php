@@ -23,11 +23,16 @@ class LoginController extends Controller {
 		//dump($data);		
 		$data['authority']="member";
 		$data['register_date']=date('Y-m-d H:i:s',time());
-		dump($data);
-		$user_id=$user->add($data);
-		cookie('user_id',$user_id);		
-		cookie('user_authority',"member");			
-		$this->redirect('Member/apply_club');
+		$user=D('user','Api');
+		$result=$user->is_user_exist($data['user_name']);
+		if($result!=false)
+			$this->error('user name exit!',U('register'));
+		else{	
+			$user_id=$user->add($data);
+			cookie('user_id',$user_id);		
+			cookie('user_authority',"member");			
+			$this->redirect('Member/apply_club');
+		}
 	}	
 	public function is_user_exist_ajax(){
 		$user_name=I('get.user_name');

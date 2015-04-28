@@ -17,7 +17,7 @@ use Home\Logic\UserLogic;
 			}
 		}
 		public function get_all_users(){
-			$ds=$this->select();
+			$ds=$this->order('user_name')->select();
 			return $ds;
 		}
 		public function get_user_name_dictionary(){
@@ -40,6 +40,11 @@ use Home\Logic\UserLogic;
 			$result = $this->where($condition)->find();
 			return $result['english_name'];			
 		}
+		public function get_user_email($user_id){
+			$condition['Id']=$user_id;
+			$result = $this->where($condition)->find();
+			return $result['email'];			
+		}		
 		public function get_user_club($user_id){
 			$condition['Id']=$user_id;
 			$result = $this->relation('club')->where($condition)->find();

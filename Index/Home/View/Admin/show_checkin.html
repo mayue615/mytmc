@@ -36,16 +36,17 @@ Choose Meeting Date:
 </form>
 		<h3>Guests Info</h3>
 		<table class="table table-striped">	
-			<tr><th>Meeting Date</th><th>English Name</th><th>Chinese Name</th><th>Phone</th><th>Email</th><th>Introducer</th></tr>
+			<tr><th>Meeting Date</th><th>English Name</th><th>Chinese Name</th><th>Phone</th><th>Email</th><th>Introducer</th><th>Edit</th></tr>
 			<volist name="guests" id="vo">
-			<tr><td>{$vo.m_date}</td><td>{$vo.chinese_name}</td><td>{$vo.english_name}</td><td>{$vo.phone}</td><td>{$vo.email}</td><td>{$vo.introducer}</td></tr>
+			<tr><td>{$vo.m_date}</td><td>{$vo.chinese_name}</td><td>{$vo.english_name}</td><td>{$vo.phone}</td><td>{$vo.email}</td><td>{$vo.introducer}</td>
+			<td><a href="{:U('Admin/delete_guestcheckin',array('guest_id'=>$vo['Id']))}">Delete</td></tr>
 			</volist>
 		</table>
 		<h3>Members Info</h3>
 		<table class="table table-striped">	
-			<tr><th>Meeting Date</th><th>English Name</th></tr>
+			<tr><th>Meeting Date</th><th>English Name</th><th>Edit</th></tr>
 			<volist name="users" id="vo">
-			<tr><td>{$vo.m_date}</td><td>{$vo.english_name}</td></tr>
+			<tr><td>{$vo.m_date}</td><td>{$vo.english_name}</td><td><a href="{:U('Admin/delete_membercheckin',array('member_id'=>$vo['Id']))}">Delete</td></tr>
 			</volist>
 		</table>
 		

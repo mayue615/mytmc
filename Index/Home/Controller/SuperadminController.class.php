@@ -21,6 +21,17 @@ class SuperadminController extends CommonController {
 		$this->assign('data',$data);   
 		$this->display('users');
 	}	
+	public function delete_member(){
+		$member_id=I('get.member_id');
+		$user=D('user','Api');
+		$result=$user->delete($member_id);
+		if($result){
+			$this->success('member Id '. $member_id .' is deleted');
+		}
+		else{
+			$this->error();
+		}		
+	}
 	public function clubs_add_club(){	
 		$club=D('club','Api');
 		$data=$club->create();

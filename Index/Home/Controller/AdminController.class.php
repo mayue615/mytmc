@@ -122,6 +122,28 @@ class AdminController extends CommonadminController {
 		$data=$user->create();		
 		$user->save();
 		$this->success();
+	}
+	public function delete_guestcheckin(){
+		$guest_id=I('get.guest_id');
+		$user=D('guestcheckin','Api');
+		$result=$user->delete($guest_id);
+		if($result){
+			$this->success('Guest Id '. $guest_id .' is deleted');
+		}
+		else{
+			$this->error();
+		}		
+	}	
+	public function delete_membercheckin(){
+		$member_id=I('get.member_id');
+		$user=D('usercheckin','Api');
+		$result=$user->delete($member_id);
+		if($result){
+			$this->success('Member Id '. $member_id .' is deleted');
+		}
+		else{
+			$this->error();
+		}		
 	}	
 	public function deal_message(){
 		$this->display();	
@@ -133,8 +155,12 @@ class AdminController extends CommonadminController {
  		$current_date = date('Y-m-d',time());
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');		
-		$visual_meeting=D('visualMeeting','Api');
-		$data=$visual_meeting->get_visual_meeting_table($club_id,'future');		
+		$visual_meeting=D('VisualMeeting','Api');
+		$meeting=D('Meeting','Api');
+		$data=$visual_meeting->get_visual_meeting_table($club_id,'future');	
+		$m_id=$data[0]['Id'];
+		$email_sum=$meeting->get_meeting_roles_email($m_id);
+		$this->assign('email_sum',$email_sum);		
 		$this->assign('data',$data);
 		$this->display();
 	}	

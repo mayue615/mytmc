@@ -9,7 +9,32 @@ use Home\Logic\MeetingLogic;
 			//dump($result);
 			return $result;
 		}
-	
+		public function get_meeting_roles_email($m_id){
+			$email_sum="";
+			$email="";
+			$condition['Id']=$m_id;
+			$user=D('User','Api');
+			$result = $this->relation('speech')->where($condition)->order('Id')->find();
+			foreach($result as $key=>$value){
+				if(substr($key,strlen($key)-2,strlen($key))=="id"){
+					if($value!=null){
+						$email=$user->get_user_email($value);
+						$email_sum=$email_sum.$email.";";
+					}
+				}
+			}
+			foreach($result['speech'] as $item){
+				foreach($item as $key=>$value){			
+					if($key=="spk_id"||$key=="ev_id"){
+						if($value!=null){
+							$email=$user->get_user_email($value);
+							$email_sum=$email_sum.$email.";";
+						}
+					}
+				}
+			}			
+			return $email_sum;
+		}	
 		public function get_meeting_info_role_name($m_id){
 			$meeting=$this->get_meeting_info($m_id);
 			$user=D('user','Api');

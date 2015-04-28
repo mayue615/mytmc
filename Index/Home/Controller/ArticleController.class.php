@@ -118,6 +118,8 @@ class ArticleController extends Controller {
 			$this->assign('btn_ok_act','update');
 			
 		}else{
+			$article_item['type']=I('get.type');
+			$this->assign('article_item',$article_item);				
 			$this->assign('btn_ok_act','add');
 			$this->assign('btn_ok_text','添加文章');
 		}
