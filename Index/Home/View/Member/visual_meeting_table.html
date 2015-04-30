@@ -43,13 +43,13 @@
 		<td>
  <div id='scroll2' style="height:450;overflow-y:hidden;overflow-x:scroll">		
    <!--*************左下-BEGIN**************--> 
-		<table width="80" height="100%" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">     
+		<table width="80" height="100" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">     
 		   <colgroup>
 		   <col width="30" >
 		   <col width="50" >
 		   </colgroup>		
 			<volist name="data" id="vo">
-			<tr><td height="40" role="num">{$vo.num}</td><td role="date"><a href="{:U('Admin/modify_single_meeting',array('m_id'=>$vo['Id']))}">{$vo.m_date}</td></tr>
+			<tr><td height="40" role="num">{$vo.num}</td><td role="date">{$vo.m_date}</td></tr>
 			</volist>
 		</table>				
   <!--*************左下-END***********-->

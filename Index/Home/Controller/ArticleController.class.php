@@ -197,9 +197,10 @@ class ArticleController extends Controller {
 		$data=$article->create();
 		$data['last_modify']=date("Y-m-d H:i:s");
 		//$data['body']=htmlspecialchars(stripslashes($_POST['body']));
-		dump($data);	
+		//dump($data);	
+		$article_id=$data['Id'];
 		$article->save($data); // 根据条件保存修改的数据
-		$this->success("Article update successfully!",U('Article/admin'));
+		$this->success("Article update successfully!",U('Index/article',array('article_id'=>$article_id)));
 	}
 	
 
