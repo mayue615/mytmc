@@ -1,10 +1,10 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-	class CommonadminController extends Controller{
+	class CommonsuperadminController extends Controller{
 		Public function _initialize(){
    		// 初始化的时候检查用户权限
-   			if(!isset($_COOKIE['user_authority']) || $_COOKIE['user_authority']=='admin'|| $_COOKIE['user_authority']=='superadmin'){
+   			if($_COOKIE['user_authority']=='superadmin'){
 				$user_id = $_COOKIE['user_id'];	
 				$user=D('user','Api');
 				$user_name=$user->get_user_name($user_id);
@@ -12,7 +12,7 @@ use Think\Controller;
 				$this->assign('club_info',$club_info);
 				$this->assign('user_name',$user_name);	
 				$this->assign('user_name_2',$user_name."@");
-				$this->common_para();
+				$this->common_para();				
 
 			}
 			else{

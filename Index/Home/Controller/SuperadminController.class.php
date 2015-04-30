@@ -2,7 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 
-class SuperadminController extends CommonController {
+class SuperadminController extends CommonsuperadminController {
 	public function clubs(){	
 		$club=D('club','Api');
 		$data=$club->get_clubs_all();
