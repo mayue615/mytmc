@@ -44,17 +44,18 @@ use Home\Logic\MeetingLogic;
 			foreach($roles as $role){
 				if($meeting[$role] != ""){
 					$i=$meeting[$role];
-					$meeting[$role]=$id2name_dict[$i];
+					$meeting[$role."_name"]=$id2name_dict[$i];
 				}
 			}
 			foreach($meeting['speech'] as &$speech){
 				foreach($roles_speech as $role_speech){
 					if($speech[$role_speech] != ""){
 						$i=$speech[$role_speech];
-						$speech[$role_speech]=$id2name_dict[$i];
+						$speech[$role_speech."_name"]=$id2name_dict[$i];
 					}
 				}
 			}
+			//dump($meeting);
 			return $meeting;
 		}
 		public function get_meeting_each_role($m_id){
@@ -63,10 +64,11 @@ use Home\Logic\MeetingLogic;
 			$roles=array('toast_id','ge_id','aha_id','timer_id','gramm_id','joke_id','table1_id','table2_id','table1_ev_id','table2_ev_id');
 			foreach($roles as $role){
 				if($arr[$role]!=NULL){
-					array_push($arr_role,$arr[$role]);					
+					array_push($arr_role,array("Id"=>$arr[$role],"name"=>$arr[$role."_name"]));					
 				}
 			}
-			$table=array(1,2,3,4,5,6,7,8,9,10);
+			//$table=array(1,2,3,4,5,6,7,8,9,10);
+			$arr_table=array();
 			$data=array();
 			$arr_spk=array();	
 			$arr_ev=array();				
@@ -74,17 +76,22 @@ use Home\Logic\MeetingLogic;
 			//dump($speeches);
 			foreach($speeches as $item){
 				if($item['spk_id']!=NULL){
-					array_push($arr_spk,$item['spk_id']);
+					array_push($arr_spk,array("Id"=>$item['spk_id'],"name"=>$item['spk_id'."_name"]));
 				}
 				if($item['ev_id']!=NULL){				
-					array_push($arr_ev,$item['ev_id']);
+					array_push($arr_ev,array("Id"=>$item['ev_id'],"name"=>$item['ev_id'."_name"]));
 				}
 			}
+			for($i=0;$i<10;$i++){
+				array_push($arr_table,array("Id"=>$i,"name"=>$i));
+				
+			}
+			
 
 			$data['spk']=$arr_spk;
 			$data['ev']=$arr_ev;
 			$data['role']=$arr_role;
-			$data['table']=$table;				
+			$data['table']=$arr_table;				
 			return $data;
 		
 		}
