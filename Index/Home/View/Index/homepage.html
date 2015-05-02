@@ -2,6 +2,26 @@
 
 	  
 <div class="col-md-2">
+	  <h3>Manuals</h3>
+	  <table class="table">
+            <tbody>
+              <volist name="manuals_list" id="vo">
+              <tr>
+                <td><a href="{:U('Index/article',array('article_id'=>$vo['Id']))}">{$vo['title']}</a></td>
+              </tr>  
+              </volist>                        
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6">
+                  <div class="pagination">               	  
+                  	{$manuals_method_news}
+                  </div>                 
+                  <div class="clear"></div>
+                </td>
+              </tr>
+            </tfoot>
+	  </table>
 	  <h3>News</h3>
 	  <table class="table">
             <tbody>
@@ -25,7 +45,7 @@
 	  <h3>Friend links</h3>
 	  <a href="http://www.toastmasters.org/">Toastmasters</a>
 </div>
-<div class="col-md-8">  
+<div class="col-md-8"> 
 	<h3>Hot Articles</h3>
         <table class="table table-striped">
             <thead>
@@ -63,8 +83,8 @@
           </table>
 </div>
 <div class="col-md-2">
-	  <h3>Donate Coffee</h3>	
-		<p>If you like our website, please give us a cup of coffee.</p>	
+	  <h3>Donate Website</h3>	
+		<p>We accept donation to pay for Ali Could server.</p>	
 		<!--<img src="__ROOT__/Public/img/wechat.PNG" class="img-responsive" alt="Responsive image"></img>
 		<br/>-->
 		<img src="__ROOT__/Public/img/alipay.JPG" class="img-responsive" alt="Responsive image"></img>

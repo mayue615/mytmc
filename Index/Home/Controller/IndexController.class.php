@@ -35,7 +35,9 @@ class IndexController extends Controller {
 		$news=$article1->show_news_page();
 		$this->assign('news_list',$news['data']);
 		$this->assign('page_method_news',$news['show']);		
-	
+		$manuals=$article1->show_manuals_page();
+		$this->assign('manuals_list',$manuals['data']);
+		$this->assign('page_method_manuals',$manuals['show']);		
 		$donation=$this->show_donation_page();
 		$this->assign('donation_list',$donation['data']);
 		$this->assign('page_method_donation',$donation['show']);		
