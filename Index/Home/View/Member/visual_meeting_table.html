@@ -1,8 +1,21 @@
-﻿<table border="0" cellpadding="0" cellspacing="0">
+﻿<script language="javascript">
+	function syncscroll(obj)
+	{
+	 //y.innerHTML = obj.scrollTop;
+	 //x.innerHTML = obj.scrollLeft;
+	 scroll1.children[0].style.position = "relative";
+	 scroll2.children[0].style.position = "relative";
+	 scroll1.children[0].style.left = "-"+obj.scrollLeft;
+	 scroll2.children[0].style.top =  "-"+obj.scrollTop;
+	 
+	}
+</script>	
+
+<table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td>
-  <!--*********左上-BEGIN***********-->
-		<table width="80" height="100%" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">
+<!--*********左上-BEGIN***********-->
+		<table width="80" height="40" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">
 		   <colgroup>
 		   <col width="30" >
 		   <col width="50" >
@@ -10,12 +23,12 @@
 			<tr><td height="40">No.</td>
 			<td height="40">Date</td></tr>
 		</table>		
-  <!--**************左上-END**********-->
-		</td>
-		<td>
+<!--**************左上-END**********-->
+</td>
+<td>
  <div id='scroll1' style="width:1400;overflow:hidden ">		
-  <!--***********右上-BEGIN********-->  
-		<table style="width:3000" height="100%" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">  
+<!--***********右上-BEGIN********-->  
+		<table style="width:3000" height="40" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">  
 		   <colgroup>
 		   <col width="80" ><col width="80" ><col width="100" ><col width="100" >
 		   <col width="100" ><col width="100" ><col width="100" ><col width="100" >
@@ -35,14 +48,14 @@
 			<td height="40">Speaker7</td><td height="40">Evaluator7</td><td height="40">Speaker8</td><td height="40">Evaluator8</td>
 			<td height="40">Speaker9</td><td height="40">Evaluator9</td></tr>
 		</table>	
-  <!--************右上-END**********-->
+<!--************右上-END**********-->
  </div>   
-		</td>
-		</tr>
-		<tr>
-		<td>
- <div id='scroll2' style="height:450;overflow-y:hidden;overflow-x:scroll">		
-   <!--*************左下-BEGIN**************--> 
+</td>
+</tr>
+<tr>
+<td>
+ <div id='scroll2' style="height:300;overflow-y:hidden;overflow-x:scroll">		
+<!--*************左下-BEGIN**************--> 
 		<table width="80" height="100" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">     
 		   <colgroup>
 		   <col width="30" >
@@ -52,12 +65,12 @@
 			<tr><td height="40" role="num">{$vo.num}</td><td role="date">{$vo.m_date}</td></tr>
 			</volist>
 		</table>				
-  <!--*************左下-END***********-->
+<!--*************左下-END***********-->
  </div>
-		</td>
-		<td>
- <div style="width:1400;height:450;overflow:scroll " onscroll="javascript:syncscroll(this)">		
-  <!--***********右下-BEGIN***********-->
+</td>
+<td>
+ <div style="width:1400;height:300;overflow:scroll " onscroll="javascript:syncscroll(this)">		
+<!--***********右下-BEGIN***********-->
 		<table style="width:3000 " height="100" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">   
 		   <colgroup>
 		   <col width="80" ><col width="80" ><col width="100" ><col width="100" >
@@ -82,7 +95,7 @@
 			</tr>
 			</volist>	
 		</table>
-  <!--*************右下-END*****************-->	
+<!--*************右下-END*****************-->	
   </div> 
 </td>
 </tr>

@@ -1,8 +1,21 @@
-﻿<table border="0" cellpadding="0" cellspacing="0">
+﻿<script language="javascript">
+	function syncscroll(obj)
+	{
+	 //y.innerHTML = obj.scrollTop;
+	 //x.innerHTML = obj.scrollLeft;
+	 scroll1.children[0].style.position = "relative";
+	 scroll2.children[0].style.position = "relative";
+	 scroll1.children[0].style.left = "-"+obj.scrollLeft;
+	 scroll2.children[0].style.top =  "-"+obj.scrollTop;
+	 
+	}
+</script>	
+
+<table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td>
   <!--*********左上-BEGIN***********-->
-		<table width="110" height="100%" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">
+		<table width="110" height="40" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">
 		   <colgroup>
 		   <col width="30" >
 		   <col width="80" >
@@ -15,7 +28,7 @@
 		<td>
  <div id='scroll1' style="width:1100;overflow:hidden ">		
   <!--***********右上-BEGIN********-->  
-		<table style="width:3000" height="100%" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">  
+		<table style="width:3000" height="40" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">  
 		   <colgroup>
 		   <col width="100" ><col width="100" ><col width="100" ><col width="100" >
 		   <col width="100" ><col width="100" ><col width="100" ><col width="100" >
@@ -41,7 +54,7 @@
 		</tr>
 		<tr>
 		<td>
- <div id='scroll2' style="height:450;overflow-y:hidden;overflow-x:scroll">		
+ <div id='scroll2' style="height:300;overflow-y:hidden;overflow-x:scroll">		
    <!--*************左下-BEGIN**************--> 
 		<table width="110" height="100" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">     
 		   <colgroup>
@@ -56,7 +69,7 @@
  </div>
 		</td>
 		<td>
- <div style="width:1100;height:450;overflow:scroll " onscroll="javascript:syncscroll(this)">		
+ <div style="width:1100;height:300;overflow:scroll " onscroll="javascript:syncscroll(this)">		
   <!--***********右下-BEGIN***********-->
 		<table style="width:3000 " height="100" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">   
 		   <colgroup>
