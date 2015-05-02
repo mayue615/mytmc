@@ -1,6 +1,17 @@
 <layout name="layout_homepage" />	  
 <script language="javascript">
 $(document).ready(function(){
+	$('.form_date').datetimepicker({
+        //language:  'uk',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	
 	var temp = $("#type").val();	
 	if(temp=="Union"){	
 		$("#club").show();
@@ -31,7 +42,11 @@ $(document).ready(function(){
 		<input type="hidden" name="Id" id="Id"  value={$data.Id}>
 		<table class="table table-striped">		
 		<tr><th>Meeting Date:</th><td>
-			<input type="text" name="m_date" id="m_date" value={$data.m_date}>
+			<input type="hidden" name="m_date" id="m_date" value={$data.m_date}>
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="m_date" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" value="{$data.m_date}" readonly>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>			
 		</td>
 		
 		</tr>	
