@@ -14,15 +14,15 @@
 			<th>4</th><th>1</th><th>4</th><th>3</th></tr>	
 			
 			<volist name="roles" id="vo">
-			<tr><td rowspan="3">{$vo.name}</td><td>{$vo.past.type}</td><td rowspan="3">{$vo.past.Speaker}</td><td>{$vo.past.Toastmaster}</td><td>{$vo.past.Jokemaster}</td>
+			<tr><td rowspan="3">{$vo.name}</td><td>{$vo.past.type}</td><td>{$vo.past.Speaker}</td><td>{$vo.past.Toastmaster}</td><td>{$vo.past.Jokemaster}</td>
 			<td>{$vo.past.General Evaluator}</td><td>{$vo.past.Timer}</td><td>{$vo.past.Grammarian}</td><td>{$vo.past.Aha counter}</td>
-			<td rowspan="3">{$vo.past.Evaluator}</td><td>{$vo.past.Table Topic Master}</td></tr>
-			<tr><td>{$vo.future.type}</td><td>{$vo.future.Toastmaster}</td><td>{$vo.future.Jokemaster}</td>
+			<td>{$vo.past.Evaluator}</td><td>{$vo.past.Table Topic Master}</td></tr>
+			<tr><td>{$vo.future.type}</td><td>{$vo.future.Speaker}</td><td>{$vo.future.Toastmaster}</td><td>{$vo.future.Jokemaster}</td>
 			<td>{$vo.future.General Evaluator}</td><td>{$vo.future.Timer}</td><td>{$vo.future.Grammarian}</td><td>{$vo.future.Aha counter}</td>
-			<td>{$vo.future.Table Topic Master}</td></tr>	
-			<tr><td>{$vo.all.type}</td><td>{$vo.all.Toastmaster}</td><td>{$vo.all.Jokemaster}</td>
+			<td>{$vo.future.Evaluator}</td><td>{$vo.future.Table Topic Master}</td></tr>	
+			<tr><td>{$vo.all.type}</td><td>{$vo.all.Speaker}</td><td>{$vo.all.Toastmaster}</td><td>{$vo.all.Jokemaster}</td>
 			<td>{$vo.all.General Evaluator}</td><td>{$vo.all.Timer}</td><td>{$vo.all.Grammarian}</td><td>{$vo.all.Aha counter}</td>
-			<td>{$vo.all.Table Topic Master}</td></tr>			
+			<td>{$vo.all.Evaluator}</td><td>{$vo.all.Table Topic Master}</td></tr>			
 			</volist>
 		</table>
 	</div>

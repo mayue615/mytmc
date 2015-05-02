@@ -201,7 +201,6 @@ class MemberController extends CommonController {
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');	
 		$speech=D('userspeech','Api');
-		//$speech->ut();
 		$data=$speech->get_user_speech($user_id);
 /* 		foreach($data as &$item){
 			$item['content']=htmlspecialchars_decode($item['content']);
