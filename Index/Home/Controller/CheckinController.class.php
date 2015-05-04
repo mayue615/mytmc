@@ -35,8 +35,13 @@ class CheckinController extends Controller {
 		$vote=D('vote');
 		$data=$vote->create();
 		$m_id=$data['m_id'];
-		$vote->add($data);
-		$this->success("Thank you for your vote",U('Checkin/show_vote',array('m_id'=>$m_id)));
+		if(!$data){
+			$this->error($vote->getError());			
+		}
+		else{
+			$vote->add($data);
+			$this->success("Succeed to vote!",U('Checkin/show_vote',array('m_id'=>$m_id)));
+		}
 	}
 	public function show_vote(){
 		$this->common_para();	
@@ -84,7 +89,7 @@ class CheckinController extends Controller {
 			//dump($data);
 			$reslut=$checkin->add($data);	
 		} 
-		$this->success();
+		$this->success("Succeed to check in!");
 	
 	}
 	public function checkin_guest(){
@@ -116,8 +121,13 @@ class CheckinController extends Controller {
 		$m_id=I('post.m_id');		
 		$checkin=D('guestcheckin');
 		$data=$checkin->create();
-		$checkin->add($data);
-		$this->redirect('show_guests',array('club_id'=>$club_id,'m_id'=>$m_id));
+		if(!$data){
+			$this->error($checkin->getError());
+		}
+		else{
+			$checkin->add($data);
+			$this->success("Succeed to check in!",U('show_guests',array('club_id'=>$club_id,'m_id'=>$m_id)));
+		}
 	}	
 	public function show_guests(){
 		$this->common_para();	

@@ -36,7 +36,7 @@ class AdminController extends CommonadminController {
 		$template=D('agenda');
 		$data=$template->create();
 		$template->save($data);
-		$this->success();	
+		$this->success("Succeed to modify template!");	
 	}
 	public function add_template(){
 		$this->display();		
@@ -97,7 +97,7 @@ class AdminController extends CommonadminController {
 		$club=D('Club','Api');
 		$data=$club->create();		
 		$club->save();
-		$this->success();
+		$this->success("Succeed to modify club!");
 	}	
 	public function modify_member(){
 		$club_id = cookie('club_id');
@@ -121,7 +121,7 @@ class AdminController extends CommonadminController {
 		$user=D('user','Api');
 		$data=$user->create();		
 		$user->save();
-		$this->success();
+		$this->success("Succeed to modify member!");
 	}
 	public function delete_guestcheckin(){
 		$guest_id=I('get.guest_id');
@@ -224,10 +224,10 @@ class AdminController extends CommonadminController {
 		$club->set_meetings_num($club_id);
 		
 		if($m_date>=$current_date){
-			$this->success("Update successfully.",U('modify_future_meeting'));	
+			$this->success("Succeed to modify meeting!",U('modify_future_meeting'));	
 		}
 		else{
-			$this->success("Update successfully.",U('modify_history_meeting'));			
+			$this->success("Succeed to modify meeting!",U('modify_history_meeting'));			
 		}
 	}	
 	public function get_clubs_ajax(){
@@ -236,10 +236,7 @@ class AdminController extends CommonadminController {
 		$this->ajaxReturn($data);	
 	}
 	public function get_users(){
-			$club_id=I('get.club_id');
-			//$club1=new ClubController();
-			//$members=$club_id;
-			//$members=$club1->get_user_info($club_id);			
+			$club_id=I('get.club_id');	
 			$this->ajaxReturn($club_id);		
 	}	
 	public function add_meeting(){
@@ -267,7 +264,7 @@ class AdminController extends CommonadminController {
 		}
 		$club=D('club','Api');
 		$club->set_meetings_num($club_id);		
-		$this->success();
+		$this->success("Succeed to add meeting!");
 	}
 	public function show_checkin(){
 		$club_id = cookie('club_id');	

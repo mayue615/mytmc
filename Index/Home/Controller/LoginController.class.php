@@ -11,27 +11,17 @@ class LoginController extends Controller {
 	
 	public function register_deal(){
 	    $user=D('user','Api');
-		$data['user_name']=I('post.user_name');
-		$data['password']=I('post.password');	
-		$data['english_name']=I('post.english_name');	
-		$data['chinese_name']=I('post.chinese_name');	
-		$data['email']=I('post.email');	
-		$data['phone']=I('post.phone');	
-		$data['birthday']=I('post.birthday');		
-		//$data1=$user->create();
-		//dump($data1);		
-		//dump($data);		
-		$data['authority']="member";
-		$data['register_date']=date('Y-m-d H:i:s',time());
-		$user=D('user','Api');
-		$result=$user->is_user_exist($data['user_name']);
-		if($result!=false)
-			$this->error('user name exit!',U('register'));
-		else{	
+		$data=$user->create();
+		if(!$data){
+			$this->error($user->getError());			
+		}
+		else{
+			$data['authority']="member";
+			$data['register_date']=date('Y-m-d H:i:s',time());			
 			$user_id=$user->add($data);
 			cookie('user_id',$user_id);		
 			cookie('user_authority',"member");			
-			$this->redirect('Member/apply_club');
+			$this->success('Add account successfully!',U('Member/apply_club'));			
 		}
 	}	
 	public function is_user_exist_ajax(){
