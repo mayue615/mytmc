@@ -20,7 +20,8 @@ class AgendaController extends Controller {
 		//dump($template_id);
 		$club=D('club','Api');
 		$meeting=D('Meeting','Api');
-		$meeting_info=$meeting->get_visual_meeting_table($m_id);		
+		$meeting_info=$meeting->get_visual_meeting_table($m_id);
+		//dump($meeting_info);
 		$meeting_time=$club->get_meeting_time($club_id);
 		$arr_time=explode("~",$meeting_time);
 		$start_time=$meeting_info['time'];
@@ -55,7 +56,7 @@ class AgendaController extends Controller {
 			$temp['role']="Toastmaster";
 			$temp['action']="Welcome speech and inroduce guests";
 			if($meeting_info['toast_id']!=null){	
-				$temp['member']=$meeting_info['toast_id'];
+				$temp['member']=$meeting_info['toast_id_name'];
 			}
 			else{
 				$temp['member']="";
@@ -70,7 +71,7 @@ class AgendaController extends Controller {
 			$temp['role']="Jokemaster";
 			$temp['action']="Warm up";
 			if($meeting_info['joke_id']!=null){	
-				$temp['member']=$meeting_info['joke_id'];
+				$temp['member']=$meeting_info['joke_id_name'];
 			}
 			else{
 				$temp['member']="";
@@ -84,7 +85,7 @@ class AgendaController extends Controller {
 			$temp['role']="General Evaluator";
 			$temp['action']="Introduce the Evaluation Team";
 			if($meeting_info['ge_id']!=null){	
-				$temp['member']=$meeting_info['ge_id'];
+				$temp['member']=$meeting_info['ge_id_name'];
 			}
 			else{
 				$temp['member']="";
@@ -98,7 +99,7 @@ class AgendaController extends Controller {
 			$temp['role']="Timer";
 			$temp['action']="Introduce the responsibility of timer";
 			if($meeting_info['timer_id']!=null){	
-				$temp['member']=$meeting_info['timer_id'];
+				$temp['member']=$meeting_info['timer_id_name'];
 			}
 			else{
 				$temp['member']="";
@@ -112,7 +113,7 @@ class AgendaController extends Controller {
 			$temp['role']="Grammarian";
 			$temp['action']="Introduce the responsibility of Grammarian";
 			if($meeting_info['gramm_id']!=null){	
-				$temp['member']=$meeting_info['gramm_id'];
+				$temp['member']=$meeting_info['gramm_id_name'];
 			}
 			else{
 				$temp['member']="";
@@ -126,7 +127,7 @@ class AgendaController extends Controller {
 			$temp['role']="Aha Counter";
 			$temp['action']="Introduce the responsibility of Ah Counter";
 			if($meeting_info['aha_id']!=null){	
-				$temp['member']=$meeting_info['aha_id'];
+				$temp['member']=$meeting_info['aha_id_name'];
 			}
 			else{
 				$temp['member']="";
@@ -140,11 +141,12 @@ class AgendaController extends Controller {
 		$speeches=$userspeech->get_meeting_speech($m_id);
 		$spk_index=0;
 		foreach($speeches as $speech){
-			$spk_index += 1;		
+			$spk_index += 1;
+			//dump($speech);
 			$temp['member']=$speech['spk_name'];
 			$temp['time']=$start_time_session;
 			$temp['role']="Speaker#".$spk_index;
-			$temp['action']=$speech['speech_level'].":".$speech['title'];
+			$temp['action']=$speech['level'].":".$speech['title'];
 			$temp['duration']=$speech['min_time'].":".$speech['max_time'];
 			array_push($data,$temp);
 			$start_time_session=$this->clac_time($start_time_session,$speech['max_time']);	
@@ -196,7 +198,7 @@ class AgendaController extends Controller {
 				$temp['role']="Table Topic master";
 				$temp['action']="Table Topic session";
 				if($meeting_info['table1_id']!=""){	
-					$temp['member']=$meeting_info['table1_id'];
+					$temp['member']=$meeting_info['table1_id_name'];
 				}
 				else{
 					$temp['member']="";
@@ -212,7 +214,7 @@ class AgendaController extends Controller {
 				$temp['role']="Table Topic master#2";
 				$temp['action']="Table Topic session#2";
 				if($meeting_info['table2_id']!=null){	
-					$temp['member']=$meeting_info['table2_id'];
+					$temp['member']=$meeting_info['table2_id_name'];
 				}
 				else{
 					$temp['member']="";
@@ -241,7 +243,7 @@ class AgendaController extends Controller {
 			$temp['role']="Timer";
 			$temp['action']="Timer report";
 			if($meeting_info['timer_id']!=null){	
-				$temp['member']=$meeting_info['timer_id'];
+				$temp['member']=$meeting_info['timer_id_name'];
 			}
 			else{
 				$temp['member']="";
@@ -255,7 +257,7 @@ class AgendaController extends Controller {
 			$temp['role']="Grammarian";
 			$temp['action']="Grammarian report";
 			if($meeting_info['gramm_id']!=null){	
-				$temp['member']=$meeting_info['gramm_id'];
+				$temp['member']=$meeting_info['gramm_id_name'];
 			}
 			else{
 				$temp['member']="";
@@ -269,7 +271,7 @@ class AgendaController extends Controller {
 			$temp['role']="Aha Counter";
 			$temp['action']="Ah Counter report";
 			if($meeting_info['aha_id']!=null){	
-				$temp['member']=$meeting_info['aha_id'];
+				$temp['member']=$meeting_info['aha_id_name'];
 			}
 			else{
 				$temp['member']="";
@@ -283,7 +285,7 @@ class AgendaController extends Controller {
 			$temp['role']="General Evaluator";
 			$temp['action']="Summary report";
 			if($meeting_info['ge_id']!=null){	
-				$temp['member']=$meeting_info['ge_id'];
+				$temp['member']=$meeting_info['ge_id_name'];
 			}
 			else{
 				$temp['member']="";
@@ -297,7 +299,7 @@ class AgendaController extends Controller {
 			$temp['role']="Toastmaster";
 			$temp['action']="Close speech and comments time";
 			if($meeting_info['toast_id']!=null){	
-				$temp['member']=$meeting_info['toast_id'];
+				$temp['member']=$meeting_info['toast_id_name'];
 			}
 			else{
 				$temp['member']="";

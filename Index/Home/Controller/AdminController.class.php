@@ -186,6 +186,7 @@ class AdminController extends CommonadminController {
 		$m_id=I('get.m_id');		
 		$meeting=D('Meeting','Api');
 		$data=$meeting->get_visual_meeting_table($m_id);
+		//dump($data);
 		$club=D('Club','Api');
 		$users=$club->get_club_users($club_id);
 		$clubs=$club->get_other_clubs($club_id);		

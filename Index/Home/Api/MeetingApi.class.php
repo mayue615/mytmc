@@ -37,11 +37,14 @@ use Home\Logic\MeetingLogic;
 		}	
 		public function get_meeting_info_role_name($m_id){
 			$meeting=$this->get_meeting_info($m_id);
+			//dump($meeting);
 			$user=D('user','Api');
 			$id2name_dict=$user->get_user_name_dictionary();
 			$roles=array('owner_id','toast_id','joke_id','ge_id','gramm_id','timer_id','aha_id','table1_id','table2_id','table1_ev_id','table2_ev_id');
 			$roles_speech=array('spk_id','ev_id');
 			foreach($roles as $role){
+				//dump($role);
+				//dump($meeting[$role]);
 				if($meeting[$role] != ""){
 					$i=$meeting[$role];
 					$meeting[$role."_name"]=$id2name_dict[$i];
@@ -96,20 +99,20 @@ use Home\Logic\MeetingLogic;
 		
 		}
 		public function get_visual_meeting_table($m_id){
-			$meeting=$this->get_meeting_info_role_name($m_id);
+			$meeting=$this->get_meeting_info_role_name($m_id);		
 			$roles=array('spk1_id','ev1_id','spk2_id','ev2_id','spk3_id','ev3_id','spk4_id','ev4_id','spk5_id','ev5_id',
 						 'spk6_id','ev6_id','spk7_id','ev7_id','spk8_id','ev8_id','spk9_id','ev9_id');
 				$i=0;
 				$speeches=$meeting['speech'];
-				array_pop($meeting);
+				//array_pop($meeting);
 				foreach($speeches as $speech){
 					$meeting[$roles[$i]]=$speech['spk_id'];
+					$meeting[$roles[$i]."_name"]=$speech['spk_id_name'];					
 					$i=$i+1;
 					$meeting[$roles[$i]]=$speech['ev_id'];
+					$meeting[$roles[$i]."_name"]=$speech['spk_id_name'];					
 					$i=$i+1;
 				}
-			//dump($m_id);
-			//dump($meeting);
 			return $meeting;
 
 		}
