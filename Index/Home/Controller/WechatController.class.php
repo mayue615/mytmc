@@ -87,11 +87,15 @@ class WechatController extends Controller {
 		}
 		else if($command=="答题"){
 			$this->save_user_id();
-			$result=$this->get_a_question();
+			$result=$this->get_question_page();
 		}			
 		else{
 			$result="Welcome to visit www.mytmc.cn";
 		}
+		return $result;
+	}
+	private function get_question_page(){
+		$result="www.mytmc.cn/index.php/Home/Question/question/user_id/".$this->user_id;
 		return $result;
 	}
 	private function get_a_question(){
@@ -111,13 +115,16 @@ class WechatController extends Controller {
 	private function save_user_id(){
 		$m=D('nokia_user');		
 		$user_id=$this->user_id;
-		if($user_id){
-			$condition['name']=$user_id;	
+		$condition['user_id']=$user_id;
+		$is_user_exit=$m->where($condition)->count();
+		if(!$is_user_exit){
+			if($user_id){
+				$data['user_id']=$user_id;	
+				$m->add($data);				
+			}
+
 		}
-		else{
-			$condition['name']="空";
-		}
-		$m->add($condition);
+
 	}	
 	private function question_reply(){
 
