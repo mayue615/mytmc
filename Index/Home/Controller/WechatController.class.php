@@ -86,7 +86,7 @@ class WechatController extends Controller {
 			$result=$this->mytmc_reply();
 		}
 		else if($command=="答题"){
-			$this->save_user_id();
+			//$this->save_user_id();
 			$result=$this->get_question_page();
 		}			
 		else{
