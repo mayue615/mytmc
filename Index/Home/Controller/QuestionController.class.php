@@ -5,12 +5,18 @@ use Think\Controller;
 class QuestionController extends Controller {
 	
 	public function question(){
-	$data=$this->get_a_question();
-	$user_id=I('get.user_id');
+	$user_id=I('get.user_id');		
 	$this->save_user_id($user_id);	
+	$data=$this->get_a_question($user_id);
 	$this->assign('user_id',$user_id);	
-	$this->assign('data',$data);
-	$this->display();
+	if($data==false){
+		$this->display('question_finish');
+	}
+	else{
+		$this->assign('data',$data);
+		$this->display();		
+	}
+
 	}	
 	public function score(){
 
@@ -20,6 +26,17 @@ class QuestionController extends Controller {
 	$my_score=$this->get_personal_score($user_id);
 	$scores=$this->get_score();	
 	//dump($scores);
+	//dump($my_score);
+	$i=0;
+	foreach($scores as $score){
+		$i++;	
+		if($score['Id']==$my_score['Id']){
+			$ranking=$i;
+			break;
+		}
+	
+	}
+	$this->assign('ranking',$ranking);	
 	$this->assign('user_id',$user_id);	
 	$this->assign('my_score',$my_score);
 	$this->assign('scores',$scores);	
@@ -55,7 +72,9 @@ class QuestionController extends Controller {
 		$is_user_exit=$m->where($condition)->count();
 		if(!$is_user_exit){
 			if($user_id){
+				$ss=$this->get_rand_question_sequence();
 				$data['user_id']=$user_id;	
+				$data['q_sequence']=$ss;
 				$m->add($data);				
 			}
 
@@ -116,7 +135,38 @@ class QuestionController extends Controller {
 		}
 		
 	}
-	private function get_a_question(){
+	private function get_rand_question_sequence(){
+		$m=D('nokia_question');	
+		$q_count=$m->count();
+		$str_sequence="";
+		$numbers=range(1,$q_count);
+		shuffle($numbers);	
+		$str_sequence=implode(",",$numbers);
+		return $str_sequence;
+	}
+	private function get_a_question($user_id){
+		$m_user=D('nokia_user');
+		$condition['user_id']=$user_id;
+		$data=$m_user->where($condition)->find();
+		//dump($data);
+		$sequence=$data['q_sequence'];
+		if($sequence==""){
+			return false;
+		}
+		else{
+			$array_sequence=explode(",",$sequence);
+			$q_num=$array_sequence[0];
+			array_shift($array_sequence);
+			$sequence=implode(",",$array_sequence);
+			$data['q_sequence']=$sequence;
+			$m_user->save($data);
+			$m=D('nokia_question');
+			$data=$m->where("Id='$q_num'")->find();
+			return $data;			
+		}
+		
+	}	
+	private function get_a_question2(){
 		$m=D('nokia_question');
 		$q_count=$m->count();
 		$q_num=rand(1,$q_count);
