@@ -10,7 +10,18 @@ class QuestionController extends Controller {
 	$data=$this->get_a_question($user_id);
 	$this->assign('user_id',$user_id);	
 	if($data==false){
-		$this->display('question_finish');
+		$delay_time=rand(1,5);
+		sleep($delay_time);
+		$data=$this->get_a_question($user_id);	
+		if($data==false){
+			$this->display('question_finish');			
+		}
+		else{
+			$this->assign('data',$data);
+			$this->display();				
+			
+		}
+
 	}
 	else{
 		$this->assign('data',$data);
@@ -28,18 +39,25 @@ class QuestionController extends Controller {
 	//dump($scores);
 	//dump($my_score);
 	$i=0;
-	foreach($scores as $score){
+	foreach($scores as &$score){
 		$i++;	
-		if($score['Id']==$my_score['Id']){
+		$score['ranking']=$i;
+/* 		if($score['Id']==$my_score['Id']){
 			$ranking=$i;
 			break;
-		}
+		} */
 	
+	}
+	if(sizeof($scores)>=30){
+		$scores1=array_slice($scores,0,30);
+	}
+	else{
+		$scores1=$scores;
 	}
 	$this->assign('ranking',$ranking);	
 	$this->assign('user_id',$user_id);	
 	$this->assign('my_score',$my_score);
-	$this->assign('scores',$scores);	
+	$this->assign('scores',$scores1);	
 	$this->display();
 	}
 	private function get_score(){
@@ -49,11 +67,19 @@ class QuestionController extends Controller {
 		$score=array();
 		foreach($users as $user){
 			$user_id=$user['user_id'];
-			$score=$this->get_personal_score($user_id);		
+			$score=$this->get_personal_score($user_id);	
 		}
-		$data=$m_user->order('score desc')->select();
+		$data=$m_user->order('score desc,time')->select();
 		return $data;
 	}
+	private function set_personal_time($user_id){
+		$m_user=D('nokia_user');			
+		$condition['user_id']=$user_id;
+		$user_data=$m_user->where($condition)->find();
+		$user_data['time']=date('Y-m-d H:i:s',time());
+		$m_user->save($user_data);
+		return $user_data;
+	}	
 	private function get_personal_score($user_id){
 		$m_answer=D('nokia_answer');
 		$m_user=D('nokia_user');			
@@ -75,7 +101,9 @@ class QuestionController extends Controller {
 				$ss=$this->get_rand_question_sequence();
 				$data['user_id']=$user_id;	
 				$data['q_sequence']=$ss;
-				$m->add($data);				
+				$data['time']=date('Y-m-d H:i:s',time());				
+				$m->add($data);	
+				
 			}
 
 		}
@@ -116,22 +144,33 @@ class QuestionController extends Controller {
 			else{
 				$data['is_answer']=0;				
 			}
-			$n=$m_answer->add($data);			
-			if($n){
-				if($data['is_answer']==1){
-					$this->success("Answer is right.",U('answer',array('q_id'=>$q_id,'user_id'=>$user_id)));					
+			$condition['user_id']=$data['user_id'];
+			$condition['q_id']=$data['q_id'];
+ 			$answer=$m_answer->where($condition)->find();
+			if(!$answer){
+				$n=$m_answer->add($data);			
+				if($n){
+					if($data['is_answer']==1){
+						$this->set_personal_time($user_id);						
+						$this->success("Answer is right.",U('answer',array('q_id'=>$q_id,'user_id'=>$user_id)));					
+					}
+					else{
+						$this->error("Answer is wrong.",U('answer',array('q_id'=>$q_id,'user_id'=>$user_id)),1);											
+					}
 				}
 				else{
-					$this->error("Answer is wrong.",U('answer',array('q_id'=>$q_id,'user_id'=>$user_id)));											
-				}
+					$this->error("fail to add data");				
+				}				
+				
 			}
 			else{
-			$this->error("fail to add data");				
+					$this->error("You have answered this question. Don't double click button. Don't use browser back function.It doesn't work.",U('answer',array('q_id'=>$q_id,'user_id'=>$user_id)));
 			}
+
 
 		}
 		else{
-			$this->error("fail to find answer");
+			$this->error("fail to find answer",U('answer',array('q_id'=>$q_id,'user_id'=>$user_id)));
 		}
 		
 	}
@@ -148,10 +187,9 @@ class QuestionController extends Controller {
 		$m_user=D('nokia_user');
 		$condition['user_id']=$user_id;
 		$data=$m_user->where($condition)->find();
-		//dump($data);
 		$sequence=$data['q_sequence'];
 		if($sequence==""){
-			return false;
+				return false;				
 		}
 		else{
 			$array_sequence=explode(",",$sequence);
