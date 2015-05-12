@@ -100,9 +100,6 @@ class ArticleController extends Controller {
 	public function show_news_page(){
 		return $this->show_common_page(5,'news',0);	
 	}
-	public function show_manuals_page(){
-		return $this->show_common_page(5,'manual',0);	
-	}	
 	public function get_article($article_id){
 		$m=D('article','Api');
 		$item=$m->relation(true)->where("Id='$article_id'")->find();
@@ -147,7 +144,12 @@ class ArticleController extends Controller {
 		$data['title']		=I('post.title');		
 		$data['user_id']		=$user_id;
 		$data['create_time']	=date("Y-m-d H:i:s");	
-		$data['type']=$type;
+		if($type=="article"){
+			$data['type']="article";
+		}
+		else{
+			$data['type']="news";
+		}
 		$article_id=$article->add($data);
 		if($article_id>0){
 			$this->success('文章添加成功',U('Index/article',array('article_id'=>$article_id)));			
