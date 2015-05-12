@@ -5,27 +5,39 @@ use Think\Controller;
 class QuestionController extends Controller {
 	
 	public function question(){
-	$user_id=I('get.user_id');		
-	$this->save_user_id($user_id);	
-	$data=$this->get_a_question($user_id);
-	$this->assign('user_id',$user_id);	
-	if($data==false){
-		$delay_time=rand(1,5);
-		sleep($delay_time);
-		$data=$this->get_a_question($user_id);	
+	//$current_date=date('Y-m-d H:i:s',mktime(16,5,0,5,12,2015));
+	$current_date=date('Y-m-d H:i:s',time());
+	$start_date=date('Y-m-d H:i:s',mktime(12,0,0,5,12,2015));
+	$end_date=date('Y-m-d H:i:s',mktime(16,0,0,5,12,2015));	
+	if($current_date<$start_date){
+		$this->display('question_not_start');		
+	}
+	else if($current_date>$end_date){
+		$this->display('question_end');			
+	}	
+	else{
+		$user_id=I('get.user_id');		
+		$this->save_user_id($user_id);	
+		$data=$this->get_a_question($user_id);
+		$this->assign('user_id',$user_id);	
 		if($data==false){
-			$this->display('question_finish');			
+			$delay_time=rand(1,5);
+			sleep($delay_time);
+			$data=$this->get_a_question($user_id);	
+			if($data==false){
+				$this->display('question_finish');			
+			}
+			else{
+				$this->assign('data',$data);
+				$this->display();				
+				
+			}
+
 		}
 		else{
 			$this->assign('data',$data);
-			$this->display();				
-			
-		}
-
-	}
-	else{
-		$this->assign('data',$data);
-		$this->display();		
+			$this->display();		
+		}	
 	}
 
 	}	
