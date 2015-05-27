@@ -1,44 +1,24 @@
 <layout name="layout_homepage" />
 <script language="javascript">
+
+
 $(document).ready(function(){
+	$('.form_date').datetimepicker({
+        //language:  'uk',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	
 	$("#club").hide();
 	$("#type").change(function() {
 		var temp = $("#type").val();		
 		if(temp=="Union"){	
 			$("#club").show();
-/*			$.ajax(
-				{ 	url: "__APP__/Home/Admin/get_clubs_ajax",
-					//async:false,
-					dataType: "json",
-					success: function(data){
-							$("#m_date").val("2014-1-2");
-						},
-					error: 	function(data){
-							$("#m_date").val("2014-1-3");
-							//console.log();
-							console.log(data); 
-							//alert(data);
-						}
-				}
-			);	*/		
-			
-			
-			
-			//$.get("__APP__/Home/Admin/get_clubs_ajax",function(data,status){
-			//  alert("数据：" + data + "\n状态：" + status);
-			//},'json');		
-			//alert(temp);
-			//$("type").load("__APP__/Home/Admin/get_clubs_ajax");			
-			//$.get("__APP__/Home/Admin/get_clubs_ajax",function(data,status){
-			//var count=data.length;
-			//alert(count);
-			//$("#m_date").val("2014-1-1");
-			//$("#meeting_type").append("Club:<select class=\"input-xlarge\" name=\"union_club\">");
-			//for(var i=0;i<count;i++){
-			//	$("#meeting_type").append("<option value="+data[i].Id+">"+data[i].club_name+"</option>");
-			//}
-			//$("#meeting_type").append("</select>");
-		   //});
 		}
 		else{
 			$("#club").hide();
@@ -56,7 +36,13 @@ $(document).ready(function(){
 	<table class="table table-striped">	
 	<form action="{:U('Admin/add_meeting_deal')}" method="post">
 		<tr><th>Meeting Date:</th>
-		<td><input type="datetime" id="m_date" name="m_date" value="" placeholder="2015-1-1" required=""/></td></tr>	
+		<td><input type="hidden" id="m_date" name="m_date" value=""/>
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="m_date" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" value="" readonly>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+		</td></tr>
+		
 		<tr><th>Meeting Style:</th><td id="meeting_type">
 			<select class="input-xlarge" name="type" id="type">
 			<option>Common</option>
@@ -79,7 +65,7 @@ $(document).ready(function(){
 		<tr><th>Meeting Room:</th><td><input type="text" name="room" id="room"></td></tr>
 		<tr><th>Meeting Time:</th><td><input type="text" name="time" id="time"></td></tr>	
 		<tr><th>Note</th><td><input type="text" name="note" id="note"></td></tr>
-		<tr><td><button class="btn btn-success">Add Meeting</button></form></td><td></td></tr>						
+		<tr><td><button class="btn btn-primary">Add Meeting</button></form></td><td></td></tr>						
 	</table>
 <h3>Delete meeting</h3>
 	<table class="table table-striped">	

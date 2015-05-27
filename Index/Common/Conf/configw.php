@@ -9,7 +9,7 @@ return array(
 	'DB_PORT'	 =>	'3306',
 	'DB_PREFIX'	 =>	'',//'think_',//数据库表名前缀
 	'TMPL_TEMPLATE_SUFFIX' => '.html', // 默认模板文件后缀 
-	 //'SHOW_PAGE_TRACE'=>'true',
+	//'SHOW_PAGE_TRACE'=>'true',
 	'URL_MODEL'             =>  1,  // URL访问模式,可选参数0、1、2、3,代表以下四种模式:0 (普通模式); 1 (PATHINFO 模式); 2 (REWRITE  模式); 3 (兼容模式)  默认为PATHINFO 模式
 	'DB_PARAMS'    =>    array(\PDO::ATTR_CASE=>  \PDO::CASE_NATURAL),//update to thinkphp3.2.3 
 	// 配置邮件发送服务器

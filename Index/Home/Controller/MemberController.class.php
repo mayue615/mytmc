@@ -39,7 +39,7 @@ class MemberController extends CommonController {
 	public function club_choose(){
 		$club_id=I('get.club_id');
 		cookie('club_id',$club_id);		
-		$this->success();
+		$this->success("Succeed to choose club!");
 
 	}
 
@@ -58,7 +58,7 @@ class MemberController extends CommonController {
 		$user=D('user','Api');
 		$data=$user->create();
 		$user->save($data);
-		$this->success();		
+		$this->success("Succeed to modify info!");		
 	}
 	
     public function club_info(){
@@ -201,7 +201,6 @@ class MemberController extends CommonController {
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');	
 		$speech=D('userspeech','Api');
-		//$speech->ut();
 		$data=$speech->get_user_speech($user_id);
 /* 		foreach($data as &$item){
 			$item['content']=htmlspecialchars_decode($item['content']);
@@ -249,7 +248,7 @@ class MemberController extends CommonController {
 		//$data['content']=htmlspecialchars(stripslashes($data['content']));
 		//dump($data);		
 		$userspeech->save($data);
-		$this->success("Modify speech successfully",U("myspeech"));
+		$this->success("Succeed to modify speech!",U("myspeech"));
 	}	
 	public function ueditor(){
 		$data = new \Org\Util\Ueditor();

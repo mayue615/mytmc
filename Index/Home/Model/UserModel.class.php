@@ -29,12 +29,12 @@ use Think\Model\RelationModel;
 	
 	
 		protected $_validate=array(
-			array('password','require','验证码必须填写!'),
-			array('password','checkCode','验证码错误!',0,'callback',1),
+
 			array('user_name','require','用户必须填写!'),
-			array('user_name','','用户已经存在',0,'unique',1),
-			array('user_name','/^\w{6,}$/','用户名必须6个字母以上',0,'regex',1),
-			array('repassword','password','确认密码不正确',0,'confirm'), 
+			array('user_name','','用户已经存在',self::EXISTS_VALIDATE,'unique',self::MODEL_INSERT),
+			array('user_name','/^\w{6,}$/','用户名必须6个字母以上',self::EXISTS_VALIDATE,'regex',self::MODEL_INSERT),
+			array('password','require','密码必须填写!'),			
+			array('repassword','password','确认密码不正确',self::EXISTS_VALIDATE,'confirm'), 
 		);
 
 		

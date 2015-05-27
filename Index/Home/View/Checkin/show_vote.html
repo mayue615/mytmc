@@ -1,0 +1,54 @@
+<layout name="layout_blank" />
+<script type="text/javascript">  
+$(document).ready(function(){
+
+});
+</script>
+
+  <div id="content" class="container-fluid">
+  <div class="row-fluid">
+  <form class="form-horizontal" method="post" action="{:U('vote_deal')}">	  
+		<input type="hidden" name="club_id" value="{$club_id}">
+		<input type="hidden" name="m_id" value="{$m_id}">	
+		<div id="content" class="col-md-12">			
+          <h3>Best table topic</h3>
+		  <volist name="table" id="vo">
+		  <div class="col-md-2">
+		  <p>{$vo.name}:{$vo.vote}</p>
+		  </div>
+		  </volist>		  
+		</div>
+		
+		<div id="content" class="col-md-12">
+          <h3>Best Speech</h3>
+		  <volist name="spk" id="vo">
+		  <div class="col-md-2">		  
+		  <p>{$vo.name}:{$vo.vote}</p>
+		  </div>
+		  </volist>
+		</div>
+
+		<div id="content" class="col-md-12">			
+          <h3>Best Evaluator</h3>
+		  <volist name="ev" id="vo">
+		  <div class="col-md-2">
+		  <p>{$vo.name}:{$vo.vote}</p>
+		  </div>
+		  </volist>		  
+		</div>	
+		
+		<div id="content" class="col-md-12">			
+          <h3>Best Role</h3>
+		  <volist name="role" id="vo">
+		  <div class="col-md-2">		  
+		  <p>{$vo.name}:{$vo.vote}</p>
+		  </div>
+		  </volist>		  
+		</div>
+	</form>
+	</div>
+	</div>
+	<h3><a href="{:U('Checkin/feature_page',array('club_id'=>$club_id,'m_id'=>$m_id))}">Return</a></h3>	
+
+						
+						

@@ -34,9 +34,28 @@ class CheckinController extends Controller {
 	public function vote_deal(){
 		$vote=D('vote');
 		$data=$vote->create();
-		//$checkin->add($data);
-		$this->success();
-	}		
+		$m_id=$data['m_id'];
+		if(!$data){
+			$this->error($vote->getError());			
+		}
+		else{
+			$vote->add($data);
+			$this->success("Succeed to vote!",U('Checkin/show_vote',array('m_id'=>$m_id)));
+		}
+	}
+	public function show_vote(){
+		$this->common_para();	
+		$club_id=I('get.club_id');
+		$m_id=I('get.m_id');	
+		$vote=D('vote','Api');	
+		$data=$vote->get_votes($m_id);
+		//dump($data);
+		$this->assign('spk',$data['spk']);
+		$this->assign('ev',$data['ev']);
+		$this->assign('role',$data['role']);
+		$this->assign('table',$data['table']);		
+		$this->display('show_vote');
+	}	
 	public function checkin_member(){
 		$this->common_para();	
 		$club_id=I('get.club_id');
@@ -70,7 +89,7 @@ class CheckinController extends Controller {
 			//dump($data);
 			$reslut=$checkin->add($data);	
 		} 
-		$this->success();
+		$this->success("Succeed to check in!");
 	
 	}
 	public function checkin_guest(){
@@ -102,8 +121,13 @@ class CheckinController extends Controller {
 		$m_id=I('post.m_id');		
 		$checkin=D('guestcheckin');
 		$data=$checkin->create();
-		$checkin->add($data);
-		$this->redirect('show_guests',array('club_id'=>$club_id,'m_id'=>$m_id));
+		if(!$data){
+			$this->error($checkin->getError());
+		}
+		else{
+			$checkin->add($data);
+			$this->success("Succeed to check in!",U('show_guests',array('club_id'=>$club_id,'m_id'=>$m_id)));
+		}
 	}	
 	public function show_guests(){
 		$this->common_para();	

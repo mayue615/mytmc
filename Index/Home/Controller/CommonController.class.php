@@ -5,7 +5,7 @@ use Think\Controller;
 		Public function _initialize(){
    		// 初始化的时候检查用户权限
    			if(!isset($_COOKIE['user_id']) || $_COOKIE['user_id']==''){
-				$this->redirect('Login/index');
+				$this->error("you don't authority to visit this function",U('Login/login'));
 			}
 			else{
 				$user_id = $_COOKIE['user_id'];	

@@ -4,10 +4,7 @@ use Think\Controller;
 	class CommonadminController extends Controller{
 		Public function _initialize(){
    		// 初始化的时候检查用户权限
-   			if(!isset($_COOKIE['user_id']) || $_COOKIE['user_id']==''){
-				$this->redirect('Login/index');
-			}
-			else{
+   			if(!isset($_COOKIE['user_authority']) || $_COOKIE['user_authority']=='admin'|| $_COOKIE['user_authority']=='superadmin'){
 				$user_id = $_COOKIE['user_id'];	
 				$user=D('user','Api');
 				$user_name=$user->get_user_name($user_id);
@@ -16,6 +13,10 @@ use Think\Controller;
 				$this->assign('user_name',$user_name);	
 				$this->assign('user_name_2',$user_name."@");
 				$this->common_para();
+
+			}
+			else{
+				$this->error("you don't authority to visit this function",U('Login/login'));
 			}
 		}
 		public function common_para(){

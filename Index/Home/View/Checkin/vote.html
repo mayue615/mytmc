@@ -7,14 +7,14 @@ $(document).ready(function(){
 
   <div id="content" class="container-fluid">
   <div class="row-fluid">
-  <form class="form-horizontal" method="get" action="{:U('vote_deal')}">	  
+  <form class="form-horizontal" method="post" action="{:U('vote_deal')}">	  
 		<input type="hidden" name="club_id" value="{$club_id}">
 		<input type="hidden" name="m_id" value="{$m_id}">	
 		<div id="content" class="col-md-12">			
           <h3>Best table topic</h3>
 		  <volist name="table" id="vo">
-		  <div class="col-md-2">
-		  <input type="radio" name="table" value="{$vo}">{$vo}
+		  <div class="col-md-1">
+		  <input type="radio" name="best_table" value="{$vo.Id}">{$vo.name}
 		  </div>
 		  </volist>		  
 		</div>
@@ -23,7 +23,7 @@ $(document).ready(function(){
           <h3>Best Speech</h3>
 		  <volist name="spk" id="vo">
 		  <div class="col-md-2">		  
-		  <input type="radio" name="speech" value="{$vo}">{$vo}
+		  <input type="radio" name="best_speech" value="{$vo.Id}">{$vo.name}
 		  </div>
 		  </volist>
 		</div>
@@ -32,7 +32,7 @@ $(document).ready(function(){
           <h3>Best Evaluator</h3>
 		  <volist name="ev" id="vo">
 		  <div class="col-md-2">
-		  <input type="radio" name="ev" value="{$vo}">{$vo}
+		  <input type="radio" name="best_ev" value="{$vo.Id}">{$vo.name}
 		  </div>
 		  </volist>		  
 		</div>	
@@ -41,13 +41,13 @@ $(document).ready(function(){
           <h3>Best Role</h3>
 		  <volist name="role" id="vo">
 		  <div class="col-md-2">		  
-		  <input type="radio" name="role" value="{$vo}">{$vo}
+		  <input type="radio" name="best_role" value="{$vo.Id}">{$vo.name}
 		  </div>
 		  </volist>		  
 		</div>
 	<div class="row-fluid">
 		<div class="col-md-12">
-			<button class="btn btn-default">Check in</button>
+			<button class="btn btn-primary">Submit</button>
 		</div>
 	</div>
 	</form>

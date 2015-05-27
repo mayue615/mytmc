@@ -1,6 +1,7 @@
 ﻿<?php
 return array(
 	//'配置项'=>'配置值'
+ 'LOG_RECORD'            =>  true,
  'DB_TYPE'	 =>	'mysql',
  'DB_HOST'	 =>	'localhost',
  'DB_NAME'	 =>	'mytmc3',//'rubydb',//需要新建一个数据库！名字叫

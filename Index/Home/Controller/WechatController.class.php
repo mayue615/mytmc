@@ -3,7 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 import('ORG.Util.wechat');
 class WechatController extends Controller {
-
+	private $user_id=null;
 	public function wechat(){
 /*
  *	微信公众平台PHP-SDK, 官方API部分
@@ -17,9 +17,12 @@ class WechatController extends Controller {
  			'appid'=>'wx8379661e96b3d086', //填写高级调用功能的app id
  			'appsecret'=>'11082da8128501114af26eda81629190' //填写高级调用功能的密钥
  		);
- 	 $weObj = new \Wechat($options);
+	//echo("ddd");
+	$this->get_a_question();	
+ 	$weObj = new \Wechat($options);
     $weObj->valid();
     $type = $weObj->getRev()->getRevType();
+	$this->user_id=$weObj->getRev()->getRevFrom();	
     switch($type) {
     		case \Wechat::MSGTYPE_TEXT:
 				$command = $weObj->getRevContent();
@@ -81,12 +84,53 @@ class WechatController extends Controller {
 		}
 		else if($command=="mytmc"){
 			$result=$this->mytmc_reply();
-		}		
+		}
+		else if($command=="答题"){
+			//$this->save_user_id();
+			$result=$this->get_question_page();
+		}			
 		else{
 			$result="Welcome to visit www.mytmc.cn";
 		}
 		return $result;
 	}
+	private function get_question_page(){
+		$result="www.mytmc.cn/index.php/Home/Question/question/user_id/".$this->user_id;
+		return $result;
+	}
+	private function get_a_question(){
+		$m=D('nokia_question');
+		$q_count=$m->count();
+		$q_num=rand(1,$q_count);
+		$data=$m->where("Id='$q_num'")->find();
+		if($data){
+			$result=$data['question']."\n"."A.".$data['answer_a']."\n"."B.".$data['answer_b']."\n"."C.".$data['answer_c']."\n"."D.".$data['answer_d'];			
+		}
+		else{
+			$result="no question";
+		}
+		echo($result);
+		return $result;		
+	}
+	private function save_user_id(){
+		$m=D('nokia_user');		
+		$user_id=$this->user_id;
+		$condition['user_id']=$user_id;
+		$is_user_exit=$m->where($condition)->count();
+		if(!$is_user_exit){
+			if($user_id){
+				$data['user_id']=$user_id;	
+				$m->add($data);				
+			}
+
+		}
+
+	}	
+	private function question_reply(){
+
+		$result="www.mytmc.cn";
+		return $result;
+	}		
 	private function team_reply($team_name){
 
 		$m=M('nokia_tel');

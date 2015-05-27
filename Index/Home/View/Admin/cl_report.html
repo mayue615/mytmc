@@ -1,30 +1,118 @@
 <layout name="layout_homepage" />
+<script language="javascript">
+	function syncscroll(obj)
+	{
+	 //y.innerHTML = obj.scrollTop;
+	 //x.innerHTML = obj.scrollLeft;
+	 scroll1.children[0].style.position = "relative";
+	 scroll2.children[0].style.position = "relative";
+	 scroll1.children[0].style.left = "-"+obj.scrollLeft;
+	 scroll2.children[0].style.top =  "-"+obj.scrollTop;
+	 
+	}
+</script>	
 <div class="col-md-2">
 <include file="Public:admin_sub_menu" />
 </div>
 <div class="col-md-10"> 
 <div id="content" class="row-fluid">
-	<div class="table-responsive">
+<b>Note:Except these roles, CL also needs 1 Mentor role, 1 activity organizer.</b>
+<!-- 	<div class="table-responsive">
 		<table class="table table-bordered ">
 
-			<b>Note:Except these roles, CL also needs 1 Mentor role, 1 activity organizer.</b>
+			
 			<tr><th>Member Name</th><th>Type</th><th>Speaker</th><th>Toastmaster</th><th>Jokemaster</th><th>General Evaluator</th><th>Timer</th>
 			<th>Grammarian</th><th>Aha counter</th><th>Evaluator</th><th>Table Topic</th></tr>
 			<tr><th>CL need</th><th>2</th><th>5</th><th>0</th><th>6</th><th>1</th>
-			<th>4</th><th>1</th><th>4</th><th>3</th></tr>			
+			<th>4</th><th>1</th><th>4</th><th>3</th></tr>	
+			
 			<volist name="roles" id="vo">
-			<tr><td rowspan="3">{$vo.name}</td><td>{$vo.past.type}</td><td rowspan="3">{$vo.past.Speaker}</td><td>{$vo.past.Toastmaster}</td><td>{$vo.past.Jokemaster}</td>
+			<tr><td rowspan="3">{$vo.name}</td><td>{$vo.past.type}</td><td>{$vo.past.Speaker}</td><td>{$vo.past.Toastmaster}</td><td>{$vo.past.Jokemaster}</td>
 			<td>{$vo.past.General Evaluator}</td><td>{$vo.past.Timer}</td><td>{$vo.past.Grammarian}</td><td>{$vo.past.Aha counter}</td>
-			<td rowspan="3">{$vo.past.Evaluator}</td><td>{$vo.past.Table Topic Master}</td></tr>
-			<tr><td>{$vo.future.type}</td><td>{$vo.future.Toastmaster}</td><td>{$vo.future.Jokemaster}</td>
+			<td>{$vo.past.Evaluator}</td><td>{$vo.past.Table Topic Master}</td></tr>
+			<tr><td>{$vo.future.type}</td><td>{$vo.future.Speaker}</td><td>{$vo.future.Toastmaster}</td><td>{$vo.future.Jokemaster}</td>
 			<td>{$vo.future.General Evaluator}</td><td>{$vo.future.Timer}</td><td>{$vo.future.Grammarian}</td><td>{$vo.future.Aha counter}</td>
-			<td>{$vo.future.Table Topic Master}</td></tr>	
-			<tr><td>{$vo.all.type}</td><td>{$vo.all.Toastmaster}</td><td>{$vo.all.Jokemaster}</td>
+			<td>{$vo.future.Evaluator}</td><td>{$vo.future.Table Topic Master}</td></tr>	
+			<tr><td>{$vo.all.type}</td><td>{$vo.all.Speaker}</td><td>{$vo.all.Toastmaster}</td><td>{$vo.all.Jokemaster}</td>
 			<td>{$vo.all.General Evaluator}</td><td>{$vo.all.Timer}</td><td>{$vo.all.Grammarian}</td><td>{$vo.all.Aha counter}</td>
-			<td>{$vo.all.Table Topic Master}</td></tr>			
+			<td>{$vo.all.Evaluator}</td><td>{$vo.all.Table Topic Master}</td></tr>			
 			</volist>
 		</table>
-	</div>
+	</div> -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td>
+<!--*********左上-BEGIN***********-->
+		<table width="120" height="40" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">
+		   <colgroup>
+		   <col width="120" >
+		   <col width="120" >		   
+		   </colgroup>		
+			<tr><th height="40">Member Name</th></tr>
+			<tr><th height="40">CL need</th></tr>			
+		</table>		
+<!--**************左上-END**********-->
+</td>
+<td>
+ <div id='scroll1' style="width:1000;overflow:hidden ">		
+<!--***********右上-BEGIN********-->  
+		<table style="width:800" height="40" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">  
+		   <colgroup>
+		   <col width="80" ><col width="80" ><col width="80" ><col width="80" ><col width="80" >
+		   <col width="80" ><col width="80" ><col width="80" ><col width="80" ><col width="80" >
+		   </colgroup>		   
+			<tr><th height="40">Type</th><th>Speaker</th><th>Toast Master</th><th>Joke Master</th><th>General Evaluator</th><th>Timer</th>
+			<th>Gramm-arian</th><th>Aha counter</th><th>Evaluator</th><th>Table Topic</th></tr>
+			<tr><th height="40"></th><th>2</th><th>5</th><th>0</th><th>6</th><th>1</th>
+			<th>4</th><th>1</th><th>4</th><th>3</th></tr>	
+		</table>	
+<!--************右上-END**********-->
+ </div>   
+</td>
+</tr>
+<tr>
+<td>
+ <div id='scroll2' style="height:300;overflow-y:hidden;overflow-x:scroll">		
+<!--*************左下-BEGIN**************--> 
+		<table width="120" height="100%" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">     
+		   <colgroup>
+		   <col width="120" >
+		   </colgroup>		
+			<volist name="roles" id="vo">
+			<tr><td height="120">{$vo.name}</td></tr>
+			</volist>
+		</table>				
+<!--*************左下-END***********-->
+ </div>
+</td>
+<td>
+ <div style="width:1000;height:300;overflow:scroll " onscroll="javascript:syncscroll(this)">		
+<!--***********右下-BEGIN***********-->
+		<table style="width:800 " height="100" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">   
+		   <colgroup>
+		   <col width="80" ><col width="80" ><col width="80" ><col width="80" ><col width="80" >
+		   <col width="80" ><col width="80" ><col width="80" ><col width="80" ><col width="80" >
+		   </colgroup>		
+			<volist name="roles" id="vo">  
+			<tr><td height="40">{$vo.past.type}</td><td>{$vo.past.Speaker}</td><td>{$vo.past.Toastmaster}</td><td>{$vo.past.Jokemaster}</td>
+			<td>{$vo.past.General Evaluator}</td><td>{$vo.past.Timer}</td><td>{$vo.past.Grammarian}</td><td>{$vo.past.Aha counter}</td>
+			<td>{$vo.past.Evaluator}</td><td>{$vo.past.Table Topic Master}</td></tr>
+			<tr><td height="40">{$vo.future.type}</td><td>{$vo.future.Speaker}</td><td>{$vo.future.Toastmaster}</td><td>{$vo.future.Jokemaster}</td>
+			<td>{$vo.future.General Evaluator}</td><td>{$vo.future.Timer}</td><td>{$vo.future.Grammarian}</td><td>{$vo.future.Aha counter}</td>
+			<td>{$vo.future.Evaluator}</td><td>{$vo.future.Table Topic Master}</td></tr>	
+			<tr><td height="40">{$vo.all.type}</td><td>{$vo.all.Speaker}</td><td>{$vo.all.Toastmaster}</td><td>{$vo.all.Jokemaster}</td>
+			<td>{$vo.all.General Evaluator}</td><td>{$vo.all.Timer}</td><td>{$vo.all.Grammarian}</td><td>{$vo.all.Aha counter}</td>
+			<td>{$vo.all.Evaluator}</td><td>{$vo.all.Table Topic Master}</td></tr>	
+			</volist>	
+		</table>
+<!--*************右下-END*****************-->	
+  </div> 
+</td>
+</tr>
+</table>	
+	
+	
+	
 </div>
 </div>
 						

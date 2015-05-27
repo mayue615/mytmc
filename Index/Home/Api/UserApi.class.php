@@ -92,12 +92,14 @@ use Home\Logic\UserLogic;
 			//dump($result);			
 			return $result['speech'];						
 		}		
-		public function get_user_roles_number($user_id,$type){
+		public function get_user_roles_number($user_id,$type="all"){
 			$m=D('meeting','Api');
 			$speech=D('userspeech','Api');			
 			$id_roles=$m->meeting_roles();
 			$current_date = date('Y-m-d',time());
 			$data=array();
+			$data1=array();
+			$speech=D('userspeech','Api');			
 			if($type=="past"){//history
 				$data['type']="done";
 				$data['Toastmaster']=$m->where("toast_id='$user_id' and m_date<='$current_date'")->count();
@@ -107,9 +109,11 @@ use Home\Logic\UserLogic;
 				$data['Grammarian']=$m->where("gramm_id='$user_id' and m_date<='$current_date'")->count();	
 				$data['Aha counter']=$m->where("aha_id='$user_id' and m_date<='$current_date'")->count();	
 				$data['Table Topic Master']=$m->where("(table1_id='$user_id' or table2_id='$user_id') and m_date<='$current_date'")->count();
-				$data['Table Evaluator']=$m->where("(table1_ev_id='$user_id' or table2_ev_id='$user_id') and m_date<='$current_date'")->count();	
-				$data['Speaker']=$speech->where("spk_id='$user_id'")->count();
-				$data['Evaluator']=$speech->where("ev_id='$user_id'")->count();
+				$data['Table Evaluator']=$m->where("(table1_ev_id='$user_id' or table2_ev_id='$user_id') and m_date<='$current_date'")->count();
+				$data1=$speech->get_user_speech($user_id,"past");
+				$data['Speaker']=sizeof($data1);
+				$data1=$speech->get_user_evaluator($user_id,"past");
+				$data['Evaluator']=sizeof($data1);		
 			}
 			elseif($type=="future"){//future
 				$data['type']="book";		
@@ -121,8 +125,10 @@ use Home\Logic\UserLogic;
 				$data['Aha counter']=$m->where("aha_id='$user_id' and m_date>'$current_date'")->count();	
 				$data['Table Topic Master']=$m->where("(table1_id='$user_id' or table2_id='$user_id') and m_date>'$current_date'")->count();
 				$data['Table Evaluator']=$m->where("(table1_ev_id='$user_id' or table2_ev_id='$user_id') and m_date>'$current_date'")->count();	
-				$data['Speaker']=$speech->where("spk_id='$user_id'")->count();
-				$data['Evaluator']=$speech->where("ev_id='$user_id'")->count();	
+				$data1=$speech->get_user_speech($user_id,"future");
+				$data['Speaker']=sizeof($data1);
+				$data1=$speech->get_user_evaluator($user_id,"future");
+				$data['Evaluator']=sizeof($data1);				
 			}
 			else{//all
 				$data['type']="all";			
@@ -134,8 +140,10 @@ use Home\Logic\UserLogic;
 				$data['Aha counter']=$m->where("aha_id='$user_id'")->count();	
 				$data['Table Topic Master']=$m->where("table1_id='$user_id' or table2_id='$user_id'")->count();
 				$data['Table Evaluator']=$m->where("table1_ev_id='$user_id' or table2_ev_id='$user_id'")->count();	
-				$data['Speaker']=$speech->where("spk_id='$user_id'")->count();
-				$data['Evaluator']=$speech->where("ev_id='$user_id'")->count();	
+				$data1=$speech->get_user_speech($user_id,"all");
+				$data['Speaker']=sizeof($data1);
+				$data1=$speech->get_user_evaluator($user_id,"all");
+				$data['Evaluator']=sizeof($data1);		
 			}
 			//echo("ttt");
 			//dump($data);

@@ -29,32 +29,30 @@ $(this).attr("style", "BACKGROUND-COLOR: #98FB98");
 
 
 $('#submit').click(function(){
-
 	$("#change_role").val(command);
-	//$("documentForm").submit("__APP__/Home/Member/booking_js");
+	//$("documentForm").submit("__APP__/Home/Member/booking_deal/change_role/"+command);
+	//alert("tt");
 });	
 
 	
 });
-function syncscroll(obj)
-{
- //y.innerHTML = obj.scrollTop;
- //x.innerHTML = obj.scrollLeft;
- scroll1.children[0].style.position = "relative";
- scroll2.children[0].style.position = "relative";
- scroll1.children[0].style.left = "-"+obj.scrollLeft;
- scroll2.children[0].style.top =  "-"+obj.scrollTop;
- 
-}
+
 </script>
 <input type="hidden" id="username" value="{$user_name}">
 <div id="content">
+<div class="col-md-1">  
 <h3>Booking</h3>
-<include file="visual_meeting_table" />
 </div>
+<div class="col-md-2"> 
+<br>
   <form method="post" id="documentForm" action="{:U('booking_deal')}">
 	<input id="change_role" type="hidden" name="change_role" value="">
      <button class="btn btn-primary" id="submit">Submit</button>
   </form>
+</div>
+<div class="col-md-9"> </div>
+<include file="visual_meeting_table" />
+</div>
+
 						
 						
