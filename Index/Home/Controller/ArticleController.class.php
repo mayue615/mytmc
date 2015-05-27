@@ -150,8 +150,9 @@ class ArticleController extends Controller {
 		else{
 			$data['type']="news";
 		}
-		if($article->add($data)){
-			$this->success('文章添加成功',U('Article/admin'));			
+		$article_id=$article->add($data);
+		if($article_id>0){
+			$this->success('文章添加成功',U('Index/article',array('article_id'=>$article_id)));			
 		}else{
 			$this->error('文章添加失败');
 		}
