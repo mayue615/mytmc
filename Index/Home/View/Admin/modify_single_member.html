@@ -27,8 +27,12 @@
 				</td>
 			</tr>
 			<tr><th>Birthday</th><td><input type="text" name="birthday" value="{$data.birthday}"/></td></tr>
-			<tr><td><button class="btn btn-primary">Submit</button></td><td></td></tr>				
+			<tr><td><button class="btn btn-primary">Update Info</button></td><td></td></tr>				
 		</table>	
+	</form>
+	<form action="{:U('Admin/reset_password_deal')}" method="post">
+		<input type="hidden" name="Id" value="{$data.Id}"/>	
+		<tr><td><button class="btn btn-primary">Reset password</button></td><td></td></tr>		
 	</form>	
 </div>
 </div>

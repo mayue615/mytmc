@@ -123,6 +123,15 @@ class AdminController extends CommonadminController {
 		$user->save();
 		$this->success("Succeed to modify member!");
 	}
+	public function reset_password_deal(){
+		$user=D('user','Api');
+		$data=$user->create();	
+		$data['password']="123456";
+		//dump($data);
+		$user->save($data);
+		$this->success("Succeed to reset password!");	
+	}	
+	
 	public function delete_guestcheckin(){
 		$guest_id=I('get.guest_id');
 		$user=D('guestcheckin','Api');
@@ -230,7 +239,11 @@ class AdminController extends CommonadminController {
 		else{
 			$this->success("Succeed to modify meeting!",U('modify_history_meeting'));			
 		}
-	}	
+	}
+
+
+
+	
 	public function get_clubs_ajax(){
 		$club=D('club','Api');
 		$data=$club->get_clubs();

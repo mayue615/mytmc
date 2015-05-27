@@ -51,6 +51,7 @@ use Home\Logic\MeetingLogic;
 				}
 			}
 			foreach($meeting['speech'] as &$speech){
+				//intval($speech['level'])>10?$speech['level']="AC".($speech['level']-10):$speech['level']="CC".$speech['level'];
 				foreach($roles_speech as $role_speech){
 					if($speech[$role_speech] != ""){
 						$i=$speech[$role_speech];
@@ -110,7 +111,7 @@ use Home\Logic\MeetingLogic;
 					$meeting[$roles[$i]."_name"]=$speech['spk_id_name'];					
 					$i=$i+1;
 					$meeting[$roles[$i]]=$speech['ev_id'];
-					$meeting[$roles[$i]."_name"]=$speech['spk_id_name'];					
+					$meeting[$roles[$i]."_name"]=$speech['ev_id_name'];					
 					$i=$i+1;
 				}
 			return $meeting;

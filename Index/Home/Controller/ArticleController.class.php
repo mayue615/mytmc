@@ -90,6 +90,11 @@ class ArticleController extends Controller {
 		return $this->show_common_page(12,'article',0);	
 		return $result;
 	}
+	public function show_manuals_page(){
+		return $this->show_common_page(12,'manual',0);	
+		return $result;
+	}	
+	
 	public function show_user_all_page($user_id){
 		return $this->show_common_page(12,'all',$user_id);	
 	}	
