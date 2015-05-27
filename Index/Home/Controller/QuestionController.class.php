@@ -54,14 +54,13 @@ class QuestionController extends Controller {
 	foreach($scores as &$score){
 		$i++;	
 		$score['ranking']=$i;
-/* 		if($score['Id']==$my_score['Id']){
+ 		if($score['Id']==$my_score['Id']){
 			$ranking=$i;
-			break;
-		} */
+		}
 	
 	}
-	if(sizeof($scores)>=30){
-		$scores1=array_slice($scores,0,30);
+	if(sizeof($scores)>=80){
+		$scores1=array_slice($scores,0,80);
 	}
 	else{
 		$scores1=$scores;
