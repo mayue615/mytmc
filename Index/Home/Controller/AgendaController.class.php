@@ -139,6 +139,7 @@ class AgendaController extends Controller {
 		//begin speech session
 		$userspeech=D('userspeech','Api');
 		$speeches=$userspeech->get_meeting_speech($m_id);
+		//dump($speeches);
 		$spk_index=0;
 		foreach($speeches as $speech){
 			$spk_index += 1;

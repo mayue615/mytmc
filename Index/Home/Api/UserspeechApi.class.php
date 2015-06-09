@@ -61,7 +61,7 @@ use Home\Logic\UserspeechLogic;
 		}		
 		public function get_meeting_speech($m_id){
 			$condition['m_id']=$m_id;
-			$data=$this->where($condition)->relation(true)->order('level desc')->select();
+			$data=$this->where($condition)->relation(true)->order('level asc')->select();
 			return $data;
 		}
 	}

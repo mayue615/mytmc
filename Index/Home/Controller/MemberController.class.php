@@ -141,7 +141,7 @@ class MemberController extends CommonController {
 		$user_id = cookie('user_id');
 		$meeting=D('visualMeeting','Api');
 		$data=$meeting->get_visual_future_meeting_table($club_id);		
-		$this->assign('data',$data);		
+		$this->assign('data',$data);
 		//$this->assign('data',$result['data']);
 		$this->assign('page_method',$result['show']);	
 		$this->display('booking');
