@@ -6,12 +6,28 @@ class CanteenController extends Controller {
 	public function index(){
 		$question=D('nokia_canteen_question');
 		$user_id=I('get.user_id');
-		$condition->Id=1;
-		$data=$question->where($condition)->find();
-		$this->assign('user_id',$user_id);
-		$this->assign('data',$data);
-		$this->display('index');
+		if($this->is_user_exist($user_id)){
+			$this->redirect('result',array('user_id'=>$user_id));
+		}
+		else{
+			$condition->Id=1;
+			$data=$question->where($condition)->find();
+			$this->assign('user_id',$user_id);
+			$this->assign('data',$data);
+			$this->display('index');		
+		}
 	}
+	
+	public function is_user_exist($user_id){
+		$user=D('nokia_canteen_user');
+		$condition['user_id']=$user_id;
+		$data=$user->where($condition)->find();
+		if($data=="")
+			return false;
+		else
+			return true;
+	}
+	
 	public function save_user($user_id,$site){
 		$user=D('nokia_canteen_user');
 		$data['user_id']=$user_id;
@@ -46,32 +62,40 @@ class CanteenController extends Controller {
 	}
 	public function question_deal(){//need to test all answers are selected
  		$site=I('post.site');
-		$user_id=I('post.user_id');			
-		$question=D('nokia_canteen_question');
-		$answer=D('nokia_canteen_question_answer');
-		$condition->question_site=$site;
-		$num=$question->where($condition)->count();	
-		for($i=1;$i<=$num-1;$i++){
-			$answer_i=I('post.answer'.$i);
-			if($answer_i==""){
-				$this->error("Some answer is not selected!");
-				exit();
+		$user_id=I('post.user_id');	
+		if($this->is_user_exist($user_id)){
+			$this->error("You have sbumit your answer,don't do it twice",U('result',array('user_id'=>$user_id)));
+		}
+		else{		
+			$question=D('nokia_canteen_question');
+			$answer=D('nokia_canteen_question_answer');
+			$condition->question_site=$site;
+			$num=$question->where($condition)->count();	
+			for($i=1;$i<=$num-1;$i++){
+				$answer_i=I('post.answer'.$i);
+				if($answer_i==""){
+					$this->error("Some answer is not selected!");
+					exit();
+				}
 			}
+			for($i=1;$i<=$num;$i++){
+				$data=array();
+				$answer_i=I('post.answer'.$i);
+				$q_id=I('post.q_id'.$i);
+				$data['user_id']=$user_id;
+				$data['q_id']=$q_id;
+				$data['answer']=$answer_i;
+				$answer->add($data);
+			}
+			$this->save_user($user_id,$site);		
+			$this->redirect('result',array('user_id'=>$data['user_id']));
 		}
-		for($i=1;$i<=$num;$i++){
-			$data=array();
-			$answer_i=I('post.answer'.$i);
-			$q_id=I('post.q_id'.$i);
-			$data['user_id']=$user_id;
-			$data['q_id']=$q_id;
-			$data['answer']=$answer_i;
-			$answer->add($data);
-		}
-		$this->save_user($user_id,$site);		
-		$this->redirect('result');
 	
 	}
 	public function result(){
+		$user_id=I('get.user_id');
+		$site=I('get.site');
+		$this->assign('user',$user_id);
 /* 		$answer=D('nokia_canteen_question_answer');
 		$question=D('nokia_canteen_question');	
 		$user=D('nokia_canteen_user');		

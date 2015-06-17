@@ -18,7 +18,7 @@ class WechatController extends Controller {
  			'appsecret'=>'11082da8128501114af26eda81629190' //填写高级调用功能的密钥
  		);
 	//echo("ddd");
-	$this->get_a_question();	
+	//$this->get_a_question();	
  	$weObj = new \Wechat($options);
     $weObj->valid();
     $type = $weObj->getRev()->getRevType();
@@ -88,14 +88,22 @@ class WechatController extends Controller {
 		else if($command=="答题"){
 			//$this->save_user_id();
 			$result=$this->get_question_page();
-		}			
+		}	
+		else if($command=="食堂"){
+			//$this->save_user_id();
+			$result=$this->get_canteen_page();
+		}		
 		else{
 			$result="Welcome to visit www.mytmc.cn";
 		}
 		return $result;
 	}
+	private function get_canteen_page(){
+		$result="www.mytmc.cn/index.php/Home/Canteen/index/user_id/".$this->user_id;
+		return $result;
+	}	
 	private function get_question_page(){
-		$result="www.mytmc.cn/index.php/Home/Question/question/user_id/".$this->user_id;
+		$result="www.mytmc.cn/index.php/Home/Canteen/question/user_id/".$this->user_id;
 		return $result;
 	}
 	private function get_a_question(){
