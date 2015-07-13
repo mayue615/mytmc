@@ -115,6 +115,20 @@
 					</volist>
 				</select>				
 				</td>
+			</tr>	
+			<tr><th>Secretary:</th>
+				<td>
+				<select class="input-xlarge" name="secretary">
+					<option></option>
+					<volist name="member" id="vo">
+						<if condition="$data['secretary'] eq $vo['Id']">
+							<option value="{$vo.Id}" selected>{$vo.english_name}</option>						
+						<else/>
+							<option value="{$vo.Id}">{$vo.english_name}</option>
+						</if>
+					</volist>
+				</select>				
+				</td>
 			</tr>			
 			<tr><th>President A:</th><td><input type="text" name="president_a" value="{$data.president_a}"/></td></tr>
 			<tr><th>VPE A:</th><td><input type="text" name="vpe_a" value="{$data.vpe_a}"/></td></tr>	
