@@ -88,8 +88,8 @@ class IndexController extends Controller {
 		}
 		$meeting_info['time_range']=$time_range;
 		$qr1=new QRController();
-		$qr_pic=$club_id."_".$m_id;		
-		$qr1->test_pic_tmc_meeting($club_id,$m_id);		
+		$qr_pic=$club_id;		
+		$qr1->test_pic_tmc_meeting($club_id);		
 		
 		$this->assign('qr_pic',$qr_pic);
 		$this->assign('table',$table);

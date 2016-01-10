@@ -156,7 +156,7 @@ class AgendaController extends Controller {
 			$temp['member']=$speech['spk_name'];
 			$temp['time']=$start_time_session;
 			$temp['role']="Speaker#".$spk_index;
-			$temp['action']=$speech['level'].":".$speech['title'];
+			$temp['action']=$speech['speech_level'].":".$speech['title'];
 			$temp['duration']=$speech['min_time'].":".$speech['max_time'];
 			array_push($data,$temp);
 			$start_time_session=$this->clac_time($start_time_session,$speech['max_time']);	
