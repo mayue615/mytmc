@@ -42,6 +42,15 @@ class AgendaController extends Controller {
 			array_push($data,$temp);
 			$start_time_session=$this->clac_time($start_time,$arr['prepare']);
 		}
+		if($arr['club_intro']!=0){
+			$temp['time']=$start_time_session;
+			$temp['role']="Officer";
+			$temp['action']="Introduce toastmaster and club";
+			$temp['member']="Officer";
+			$temp['duration']=$arr['club_intro'];
+			array_push($data,$temp);
+			$start_time_session=$this->clac_time($start_time,$arr['prepare']);
+		}		
 		if($arr['SAA']!=0){
 			$temp['time']=$start_time_session;
 			$temp['role']="SAA";
@@ -225,6 +234,39 @@ class AgendaController extends Controller {
 				$start_time_session=$this->clac_time($start_time_session,$arr['table2']);	
 			}
 		}
+		if($arr['table']!=0){
+			if($meeting_info['table1_id']!=null){
+				$temp['time']=$start_time_session;
+				$temp['role']="Table Topic Evaluator";
+				$temp['action']="Table Topic Evaluation";
+				if($meeting_info['table1_id']!=""){	
+					$temp['member']=$meeting_info['table1_ev_id_name'];
+				}
+				else{
+					$temp['member']="";
+				}
+				$temp['duration']=$arr['table_evaluater'];
+				array_push($data,$temp);
+				$start_time_session=$this->clac_time($start_time_session,$arr['table_evaluater']);
+			}
+		}
+		if($arr['table2']!=0){
+			if($meeting_info['table2_id']!=null){		
+				$temp['time']=$start_time_session;
+				$temp['role']="Table Topic Evaluator#2";
+				$temp['action']="Table Topic Evaluation#2";
+				if($meeting_info['table2_id']!=null){	
+					$temp['member']=$meeting_info['table2_ev_id_name'];
+				}
+				else{
+					$temp['member']="";
+				}
+				$temp['duration']=$arr['table_evaluater2'];
+				array_push($data,$temp);
+				$start_time_session=$this->clac_time($start_time_session,$arr['table_evaluater2']);	
+			}
+		}		
+				
 		$spk_index=0;
 		foreach($speeches as $speech){
 			$spk_index += 1;		
