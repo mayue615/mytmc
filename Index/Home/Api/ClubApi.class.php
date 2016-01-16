@@ -138,15 +138,15 @@ use Home\Logic\ClubLogic;
 				
 			}
 		}
-		public function cl_report($club_id){
+		public function cl_report($club_id,$start_date="2012-1-1"){
 			$users=$this->get_users_info($club_id);
 			$m=D('user','Api');
 			$arr=array();
 			foreach($users as $user){
 				$data['name']=$user['english_name'];
-				$data['past']=$m->get_user_roles_number($user['Id'],"past");
+				$data['past']=$m->get_user_roles_number($user['Id'],"past",$start_date);
 				$data['future']=$m->get_user_roles_number($user['Id'],"future");
-				$data['all']=$m->get_user_roles_number($user['Id'],"all");				
+				$data['all']=$m->get_user_roles_number($user['Id'],"all",$start_date);				
 				array_push($arr,$data);
 			
 			}

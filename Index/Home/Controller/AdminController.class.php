@@ -7,8 +7,14 @@ class AdminController extends CommonadminController {
 	public function cl_report(){
 		$club_id = cookie('club_id');	
 		$club=D('club','Api');
-		$data=$club->cl_report($club_id);
-		//dump($data);
+		
+		$start_date=I('get.start_date','2012-01-01','date');
+		//if($start_date==""){
+		//	$start_date="2012-1-1";
+		//}		
+		$data=$club->cl_report($club_id,$start_date);
+		//dump($start_date);
+		$this->assign('start_date',$start_date);
 		$this->assign('roles',$data);
 		$this->display();
 	

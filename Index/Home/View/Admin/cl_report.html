@@ -1,5 +1,8 @@
 <layout name="layout_homepage" />
+
+	
 <script language="javascript">
+	
 	function syncscroll(obj)
 	{
 	 //y.innerHTML = obj.scrollTop;
@@ -15,6 +18,12 @@
 <include file="Public:admin_sub_menu" />
 </div>
 <div class="col-md-10"> 
+<div class="row-fluid">	
+	<form action="{:U('Admin/cl_report')}" method="get">
+		<h4>Data Start Date:(default:2012-01-01)</h4>
+<input type="date" name="start_date" value="{$start_date}">   <button class="btn btn-primary">Query</button>
+</div>
+
 <div id="content" class="row-fluid">
 <b>Note:Except these roles, CL also needs 1 Mentor role, 1 activity organizer.</b>
 <!-- 	<div class="table-responsive">

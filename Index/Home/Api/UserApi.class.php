@@ -92,7 +92,7 @@ use Home\Logic\UserLogic;
 			//dump($result);			
 			return $result['speech'];						
 		}		
-		public function get_user_roles_number($user_id,$type="all"){
+		public function get_user_roles_number($user_id,$type="all",$start_date="2012-1-1"){
 			$m=D('meeting','Api');
 			$speech=D('userspeech','Api');			
 			$id_roles=$m->meeting_roles();
@@ -102,17 +102,17 @@ use Home\Logic\UserLogic;
 			$speech=D('userspeech','Api');			
 			if($type=="past"){//history
 				$data['type']="done";
-				$data['Toastmaster']=$m->where("toast_id='$user_id' and m_date<='$current_date'")->count();
-				$data['Jokemaster']=$m->where("joke_id='$user_id' and m_date<='$current_date'")->count();
-				$data['General Evaluator']=$m->where("ge_id='$user_id' and m_date<='$current_date'")->count();					
-				$data['Timer']=$m->where("timer_id='$user_id' and m_date<='$current_date'")->count();
-				$data['Grammarian']=$m->where("gramm_id='$user_id' and m_date<='$current_date'")->count();	
-				$data['Aha counter']=$m->where("aha_id='$user_id' and m_date<='$current_date'")->count();	
-				$data['Table Topic Master']=$m->where("(table1_id='$user_id' or table2_id='$user_id') and m_date<='$current_date'")->count();
-				$data['Table Evaluator']=$m->where("(table1_ev_id='$user_id' or table2_ev_id='$user_id') and m_date<='$current_date'")->count();
-				$data1=$speech->get_user_speech($user_id,"past");
+				$data['Toastmaster']=$m->where("toast_id='$user_id' and m_date<='$current_date' and m_date>='$start_date'")->count();
+				$data['Jokemaster']=$m->where("joke_id='$user_id' and m_date<='$current_date' and m_date>='$start_date'")->count();
+				$data['General Evaluator']=$m->where("ge_id='$user_id' and m_date<='$current_date' and m_date>='$start_date'")->count();					
+				$data['Timer']=$m->where("timer_id='$user_id' and m_date<='$current_date' and m_date>='$start_date'")->count();
+				$data['Grammarian']=$m->where("gramm_id='$user_id' and m_date<='$current_date' and m_date>='$start_date'")->count();	
+				$data['Aha counter']=$m->where("aha_id='$user_id' and m_date<='$current_date' and m_date>='$start_date'")->count();	
+				$data['Table Topic Master']=$m->where("(table1_id='$user_id' or table2_id='$user_id') and m_date<='$current_date' and m_date>='$start_date'")->count();
+				$data['Table Evaluator']=$m->where("(table1_ev_id='$user_id' or table2_ev_id='$user_id') and m_date<='$current_date' and m_date>='$start_date'")->count();
+				$data1=$speech->get_user_speech($user_id,"past",$start_date);
 				$data['Speaker']=sizeof($data1);
-				$data1=$speech->get_user_evaluator($user_id,"past");
+				$data1=$speech->get_user_evaluator($user_id,"past",$start_date);
 				$data['Evaluator']=sizeof($data1);		
 			}
 			elseif($type=="future"){//future
@@ -132,20 +132,21 @@ use Home\Logic\UserLogic;
 			}
 			else{//all
 				$data['type']="all";			
-				$data['Toastmaster']=$m->where("toast_id='$user_id'")->count();
-				$data['Jokemaster']=$m->where("joke_id='$user_id'")->count();
-				$data['General Evaluator']=$m->where("ge_id='$user_id'")->count();					
-				$data['Timer']=$m->where("timer_id='$user_id'")->count();
-				$data['Grammarian']=$m->where("gramm_id='$user_id'")->count();	
-				$data['Aha counter']=$m->where("aha_id='$user_id'")->count();	
-				$data['Table Topic Master']=$m->where("table1_id='$user_id' or table2_id='$user_id'")->count();
-				$data['Table Evaluator']=$m->where("table1_ev_id='$user_id' or table2_ev_id='$user_id'")->count();	
-				$data1=$speech->get_user_speech($user_id,"all");
+				$data['Toastmaster']=$m->where("toast_id='$user_id' and m_date>='$start_date'")->count();
+				$data['Jokemaster']=$m->where("joke_id='$user_id' and m_date>='$start_date'")->count();
+				$data['General Evaluator']=$m->where("ge_id='$user_id' and m_date>='$start_date'")->count();					
+				$data['Timer']=$m->where("timer_id='$user_id' and m_date>='$start_date'")->count();
+				$data['Grammarian']=$m->where("gramm_id='$user_id' and m_date>='$start_date'")->count();	
+				$data['Aha counter']=$m->where("aha_id='$user_id' and m_date>='$start_date'")->count();	
+				$data['Table Topic Master']=$m->where("(table1_id='$user_id' or table2_id='$user_id') and m_date>='$start_date'")->count();
+				$data['Table Evaluator']=$m->where("(table1_ev_id='$user_id' or table2_ev_id='$user_id') and m_date>='$start_date'")->count();	
+				$data1=$speech->get_user_speech($user_id,"all",$start_date);
 				$data['Speaker']=sizeof($data1);
-				$data1=$speech->get_user_evaluator($user_id,"all");
+				$data1=$speech->get_user_evaluator($user_id,"all",$start_date);
 				$data['Evaluator']=sizeof($data1);		
 			}
 			//echo("ttt");
+			//dump($start_date);
 			//dump($data);
 			return $data;
 		}
