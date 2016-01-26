@@ -49,7 +49,7 @@ class AgendaController extends Controller {
 			$temp['member']="Officer";
 			$temp['duration']=$arr['club_intro'];
 			array_push($data,$temp);
-			$start_time_session=$this->clac_time($start_time,$arr['prepare']);
+			$start_time_session=$this->clac_time($start_time_session,$arr['club_intro']);
 		}		
 		if($arr['SAA']!=0){
 			$temp['time']=$start_time_session;
