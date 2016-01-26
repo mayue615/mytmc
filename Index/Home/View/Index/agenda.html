@@ -42,15 +42,12 @@ $(document).ready(function(){
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="col-md-6">
-			<div class="col-md-8">
-			<br/>
+			<div class="col-md-12">
 			<h3 class="text-center">{$club_info.club_name} {$meeting_info.num} meeting</h3>
 			<p class="text-center">Time:{$meeting_info.time_range}</p> 
 			<p class="text-center">Venue:{$meeting_info.room}</p>
 			</div>
-			<div class="col-md-4">
-			<img src="__ROOT__/temp/qrpic/{$qr_pic}.png" class="img-responsive" alt="Responsive image">
-			</div>			
+			
 			<table class="table table-condensed">
 			<tr bgcolor='#B6DC73'>	
 				<th>Time</th>
@@ -176,10 +173,8 @@ $(document).ready(function(){
 			</table>
 			<table class="table table-condensed">
 				<tr>
-					<td rowspan='2' colspan='8'> Vote for best table topic speaker :</td>
-				</tr>
-				<tr>
-					<td colspan='8'/ > 
+					<td> Vote for best table topic speaker :</td>
+					<td> <img src="__ROOT__/temp/qrpic/{$qr_pic}.png" class="img-responsive" alt="Responsive image"></td>
 				</tr>
 			</table>			
 		</div>
