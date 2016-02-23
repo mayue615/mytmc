@@ -1,0 +1,14 @@
+<layout name="layout_blank" />
+
+<div>
+
+		<h3>未来会议</h3>
+		<table class="table table-striped">	
+			<tr><th>会议日期</th></tr>
+			<volist name="data" id="vo">
+			<tr><td><a href="{:U('Wechatbook/book_role',array('m_id'=>$vo['Id']))}">{$vo.m_date}</td></tr>
+			</volist>
+		</table>
+	<h3><a href="{:U('Index/index',array('club_id'=>$club_id))}">Return</a></h3>			
+</div>
+

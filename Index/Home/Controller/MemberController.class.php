@@ -80,11 +80,11 @@ class MemberController extends CommonController {
 		$this->display();
 	}	
  	public function history(){
-		//$agent = $_SERVER['HTTP_USER_AGENT'];
-		//if(strstr($agent,'Windows'))
+		$agent = $_SERVER['HTTP_USER_AGENT'];
+		if(strstr($agent,'Windows'))
 			$this->history_PC();
-		//else
-		//	$this->history_phone();
+		else
+			$this->history_phone();
 	}
 	
     public function history_PC(){
@@ -102,7 +102,7 @@ class MemberController extends CommonController {
 		$this->display('history');		
 	}
 
-    public function history_phone(){
+    public function history_phone5(){
  		$current_date = date('Y-m-d',time());
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');
@@ -143,7 +143,7 @@ class MemberController extends CommonController {
 		$data=$meeting->get_visual_future_meeting_table($club_id);		
 		$this->assign('data',$data);
 		//$this->assign('data',$result['data']);
-		$this->assign('page_method',$result['show']);	
+		//$this->assign('page_method',$result['show']);	
 		$this->display('booking');
 	}
 /*	
@@ -169,8 +169,9 @@ class MemberController extends CommonController {
 	public function booking_delete_meeting_role_ajax(){
 			$this->ajaxReturn($roles);	
 	}*/	
-	public function booking_deal(){
-	    $str=I('post.change_role');
+	
+	public function booking_deal($str){
+
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');
 		$str=rtrim($str,";");
@@ -195,8 +196,57 @@ class MemberController extends CommonController {
 			
 			}
 		} 
-		$this->success("Succeed to update roles");
+
+	}	
+	public function booking_PC_deal(){
+	    $str=I('post.change_role');		
+		$this->booking_deal($str);
+		$this->success("Succeed to update roles");		
+	}		
+	public function booking_phone_deal(){
+	    $str=I('post.change_role');
+	    $m_id=I('post.Id');		
+		$this->booking_deal($str);
+		$this->success("Succeed to update roles",U('booking_phone',array('m_id'=>$m_id)));
 	}
+	
+	public function booking_phone(){
+		$m_id=I('get.m_id',0);
+ 		$current_date = date('Y-m-d',time());
+		$club_id = cookie('club_id');
+		$user_id = cookie('user_id');	
+		$club=D('club','Api');
+		$meeting=D('Meeting','Api');		
+		$dates=$club->get_meetings_date($club_id,"future");	
+		if($m_id==0)
+			$m_id=$dates[0]["Id"];
+		$data=$meeting->get_visual_meeting_table($m_id);
+		$this->assign('dates',$dates);		
+		$this->assign('data',$data);
+		//dump($data);
+		$this->display('booking_phone');
+	}
+
+	public function booking_phone_ajax(){
+		$m_id=I('post.m_id');
+		$meeting=D('Meeting','Api');
+		$data=$meeting->get_visual_meeting_table($m_id);		
+		$this->ajaxReturn($data);	
+	}
+	public function history_phone(){
+ 		$current_date = date('Y-m-d',time());
+		$club_id = cookie('club_id');
+		$user_id = cookie('user_id');	
+		$club=D('club','Api');
+		$meeting=D('Meeting','Api');		
+		$dates=$club->get_meetings_date($club_id,"past");	
+		$latest_m_id=$dates[0]["Id"];
+		$this->assign('dates',$dates);
+		$data=$meeting->get_visual_meeting_table($latest_m_id);
+		$this->assign('data',$data);
+		//dump($data);
+		$this->display('history_phone');
+	}				
 	public function myspeech(){
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');	

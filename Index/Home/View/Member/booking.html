@@ -28,24 +28,21 @@ $(this).attr("style", "BACKGROUND-COLOR: #98FB98");
 });	
 
 
-$('#submit').click(function(){
-	$("#change_role").val(command);
-	//$("documentForm").submit("__APP__/Home/Member/booking_deal/change_role/"+command);
-	//alert("tt");
-});	
+
 
 	
 });
 
 </script>
+<h4><a href="{:U('Member/booking_phone')}">Show Phone Page</a>&nbsp&nbsp<a href="{:U('Wechatbook/club_meeting',array('club_id'=>1))}">Show Wechat Page</a></h4>
 <input type="hidden" id="username" value="{$user_name}">
 <div id="content">
-<div class="col-md-1">  
+<div class="col-md-2">  
 <h3>Booking</h3>
 </div>
 <div class="col-md-2"> 
 <br>
-  <form method="post" id="documentForm" action="{:U('booking_deal')}">
+  <form method="post" id="documentForm" action="{:U('booking_PC_deal')}">
 	<input id="change_role" type="hidden" name="change_role" value="">
      <button class="btn btn-primary" id="submit">Submit</button>
   </form>

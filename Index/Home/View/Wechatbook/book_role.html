@@ -1,0 +1,224 @@
+<layout name="layout_blank" />
+<style>
+td.yellow {background-color:yellow;}
+td.green {background-color:#98FB98;}
+td.gray {background-color:#eee;}
+</style>
+<script language="javascript">
+
+$(document).ready(function(){
+
+	var command="";
+	var meeting_id;
+	var phone_num;
+	var role_name;
+	//alert("请使用mytmc系统中注册的手机号码订角色，如果您的手机号码不存在，请联系VPE进行注册");
+	$("input").change(function(){
+		phone_num=$(this).val();
+		role_name=$(this).attr("name");
+		alert(phone_num+role_name);
+
+	});	
+
+});
+</script>
+	<form action="{:U('book_role_deal')}" method="post" id="form_role">
+		<button class="btn btn-primary" id="button_submit">Submit</button>
+		<input type="hidden" name="Id" id="Id"  value={$data.Id}>
+		<input id="change_role" type="hidden" name="change_role" value="">
+		<table class="table table-striped">		
+		<tr><th>Meeting Date:</th><td id="date" role="type">{$data.m_date}</td></tr>	
+		<tr><th>Meeting Type:</th><td id="type" role="type">{$data.type}</td></tr>
+		<tr><th>Language:</th><td id="language" role="language">{$data.language}</td></tr>	
+		<tr><th>Meeting Room:</th><td id="room" role="room">{$data.room}</td></tr>
+		<tr><th>Meeting Time:</th><td id="time" role="time">{$data.time}</td></tr>	
+		<tr><th>Note</th><td id="note" role="note">{$data.note}</td></tr>
+		<tr num="{$data.Id}"><th>Sharing</th><td id="sharing" role="sharing">{$data.sharing}</td></tr>		
+		<tr num="{$data.Id}"><th>Toastmaster:</th><td id="toast_id_name" role="toast_id">
+			<if condition="$data['toast_id_name'] eq NULL">
+				<input type="test" name="toast_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.toast_id_name}
+			</if>
+		</td></tr>		
+		<tr num="{$data.Id}"><th>Jokemaster:</th><td id="joke_id_name" role="joke_id">
+			<if condition="$data['joke_id_name'] eq NULL">
+				<input type="test" name="joke_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.joke_id_name}
+			</if>		
+		</td></tr>
+		<tr num="{$data.Id}"><th>General Evaluator:</th><td id="ge_id_name" role="ge_id">
+			<if condition="$data['ge_id_name'] eq NULL">
+				<input type="test" name="ge_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.ge_id_name}
+			</if>		
+		</td></tr>
+		<tr num="{$data.Id}"><th>Timer:</th><td id="timer_id_name" role="timer_id">
+			<if condition="$data['timer_id_name'] eq NULL">
+				<input type="test" name="timer_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.timer_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Grammarian:</th><td id="gramm_id_name" role="gramm_id">
+			<if condition="$data['gramm_id_name'] eq NULL">
+				<input type="test" name="gramm_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.gramm_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Aha Counter:</th><td id="aha_id_name" role="aha_id">
+			<if condition="$data['aha_id_name'] eq NULL">
+				<input type="test" name="aha_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.aha_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Table master1:</th><td id="table1_id_name" role="table1_id">
+			<if condition="$data['table1_id_name'] eq NULL">
+				<input type="test" name="table1_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.table1_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Table evaluator1:</th><td id="table1_ev_id_name" role="joke_id">
+			<if condition="$data['table1_ev_id_name'] eq NULL">
+				<input type="test" name="table1_ev_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.table1_ev_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Speaker1:</th><td id="spk1_id_name" role="spk1_id">
+			<if condition="$data['spk1_id_name'] eq NULL">
+				<input type="test" name="spk1_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.spk1_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator1:</th><td id="ev1_id_name" role="ev1_id">
+			<if condition="$data['ev1_id_name'] eq NULL">
+				<input type="test" name="ev1_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.ev1_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Speaker2:</th><td id="spk2_id_name" role="spk2_id">
+			<if condition="$data['spk2_id_name'] eq NULL">
+				<input type="test" name="spk2_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.spk2_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator2:</th><td id="ev2_id_name" role="ev2_id">
+			<if condition="$data['ev2_id_name'] eq NULL">
+				<input type="test" name="ev2_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.ev2_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Speaker3:</th><td id="spk3_id_name" role="spk3_id">
+			<if condition="$data['spk3_id_name'] eq NULL">
+				<input type="test" name="spk3_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.spk3_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator3:</th><td id="ev3_id_name" role="ev3_id">
+			<if condition="$data['ev3_id_name'] eq NULL">
+				<input type="test" name="ev3_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.ev3_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Speaker4:</th><td id="spk4_id_name" role="spk4_id">
+			<if condition="$data['spk4_id_name'] eq NULL">
+				<input type="test" name="spk4_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.spk4_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator4:</th><td id="ev4_id_name" role="ev4_id">
+			<if condition="$data['ev4_id_name'] eq NULL">
+				<input type="test" name="ev4_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.ev4_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Speaker5:</th><td id="spk5_id_name" role="spk5_id">
+			<if condition="$data['spk5_id_name'] eq NULL">
+				<input type="test" name="spk5_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.spk5_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator5:</th><td id="ev5_id_name" role="ev5_id">
+			<if condition="$data['ev5_id_name'] eq NULL">
+				<input type="test" name="ev5_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.ev5_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Speaker6:</th><td id="spk6_id_name" role="spk6_id">
+			<if condition="$data['spk6_id_name'] eq NULL">
+				<input type="test" name="spk6_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.spk6_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator6:</th><td id="ev6_id_name" role="ev6_id">
+			<if condition="$data['ev6_id_name'] eq NULL">
+				<input type="test" name="ev6_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.ev6_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Speaker7:</th><td id="spk7_id_name" role="spk7_id">
+			<if condition="$data['spk7_id_name'] eq NULL">
+				<input type="test" name="spk7_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.spk7_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator7:</th><td id="ev7_id_name" role="ev7_id">
+			<if condition="$data['ev7_id_name'] eq NULL">
+				<input type="test" name="ev7_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.ev7_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Speaker8:</th><td id="spk8_id_name" role="spk8_id">
+			<if condition="$data['spk8_id_name'] eq NULL">
+				<input type="test" name="spk8_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.spk8_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator8:</th><td id="ev8_id_name" role="ev8_id">
+			<if condition="$data['ev8_id_name'] eq NULL">
+				<input type="test" name="ev8_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.ev8_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Speaker9:</th><td id="spk9_id_name" role="spk9_id">
+			<if condition="$data['spk9_id_name'] eq NULL">
+				<input type="test" name="spk9_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.spk9_id_name}
+			</if>			
+		</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator9:</th><td id="ev9_id_name" role="ev9_id">
+			<if condition="$data['ev9_id_name'] eq NULL">
+				<input type="test" name="ev9_id_name" placeholder="输入手机号码订角色">					
+			<else/>
+				{$data.ev9_id_name}
+			</if>			
+		</td></tr>	
+
+		</table>	
+	</form>	
+
+						
+						

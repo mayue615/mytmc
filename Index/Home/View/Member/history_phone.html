@@ -1,28 +1,264 @@
 <layout name="layout_homepage" />
+<style>
+td.yellow {background-color:yellow;}
+td.green {background-color:#98FB98;}
+td.gray {background-color:#eee;}
+</style>
 <script language="javascript">
+
+function deal_data(data){
+		    if ("type" in data) 
+				$("#type").text(data.type);				
+			else			
+				$("#type").text("");		
+		    if ("language" in data) 
+				$("#language").text(data.language);				
+			else			
+				$("#language").text("");	
+		    if ("room" in data) 
+				$("#room").text(data.room);				
+			else			
+				$("#room").text("");		
+		    if ("time" in data) 
+				$("#time").text(data.time);				
+			else			
+				$("#time").text("");	
+		    if ("note" in data) 
+				$("#note").text(data.note);				
+			else			
+				$("#room").text("");		
+		    if ("sharing" in data) 
+				$("#sharing").text(data.sharing);				
+			else			
+				$("#sharing").text("");	
+		    if ("toast_id_name" in data) 
+				$("#toast_id_name").text(data.toast_id_name);				
+			else			
+				$("#toast_id_name").text("");
+		    if ("joke_id_name" in data) 
+				$("#joke_id_name").text(data.joke_id_name);				
+			else			
+				$("#joke_id_name").text("");		
+		    if ("ge_id_name" in data) 
+				$("#ge_id_name").text(data.ge_id_name);				
+			else			
+				$("#ge_id_name").text("");	
+		    if ("timer_id_name" in data) 
+				$("#timer_id_name").text(data.timer_id_name);				
+			else			
+				$("#timer_id_name").text("");		
+		    if ("gramm_id_name" in data) 
+				$("#gramm_id_name").text(data.gramm_id_name);				
+			else			
+				$("#gramm_id_name").text("");	
+		    if ("aha_id_name" in data) 
+				$("#aha_id_name").text(data.aha_id_name);				
+			else			
+				$("#aha_id_name").text("");					
+		    if ("table1_id_name" in data) 
+				$("#table1_id_name").text(data.table1_id_name);				
+			else			
+				$("#table1_id_name").text("");		
+		    if ("table1_ev_id_name" in data) 
+				$("#table1_ev_id_name").text(data.table1_ev_id_name);				
+			else			
+				$("#table1_ev_id_name").text("");	
+		    if ("spk1_id_name" in data) 
+				$("#spk1_id_name").text(data.spk1_id_name);				
+			else			
+				$("#spk1_id_name").text("");	
+		    if ("ev1_id_name" in data) 
+				$("#ev1_id_name").text(data.ev1_id_name);				
+			else			
+				$("#ev1_id_name").text("");
+		    if ("spk2_id_name" in data) 
+				$("#spk2_id_name").text(data.spk2_id_name);				
+			else			
+				$("#spk2_id_name").text("");	
+		    if ("ev2_id_name" in data) 
+				$("#ev2_id_name").text(data.ev2_id_name);				
+			else			
+				$("#ev2_id_name").text("");				
+		    if ("spk3_id_name" in data) 
+				$("#spk3_id_name").text(data.spk3_id_name);				
+			else			
+				$("#spk3_id_name").text("");	
+		    if ("ev3_id_name" in data) 
+				$("#ev3_id_name").text(data.ev3_id_name);				
+			else			
+				$("#ev3_id_name").text("");		
+		    if ("spk4_id_name" in data) 
+				$("#spk4_id_name").text(data.spk4_id_name);				
+			else			
+				$("#spk4_id_name").text("");	
+		    if ("ev4_id_name" in data) 
+				$("#ev4_id_name").text(data.ev4_id_name);				
+			else			
+				$("#ev4_id_name").text("");	
+		    if ("spk5_id_name" in data) 
+				$("#spk5_id_name").text(data.spk5_id_name);				
+			else			
+				$("#spk5_id_name").text("");	
+		    if ("ev5_id_name" in data) 
+				$("#ev5_id_name").text(data.ev5_id_name);				
+			else			
+				$("#ev5_id_name").text("");						
+		    if ("spk6_id_name" in data) 
+				$("#spk6_id_name").text(data.spk6_id_name);				
+			else			
+				$("#spk6_id_name").text("");	
+		    if ("ev6_id_name" in data) 
+				$("#ev6_id_name").text(data.ev6_id_name);				
+			else			
+				$("#ev6_id_name").text("");						
+		    if ("spk7_id_name" in data) 
+				$("#spk7_id_name").text(data.spk7_id_name);				
+			else			
+				$("#spk7_id_name").text("");	
+		    if ("ev7_id_name" in data) 
+				$("#ev7_id_name").text(data.ev7_id_name);				
+			else			
+				$("#ev7_id_name").text("");						
+		    if ("spk8_id_name" in data) 
+				$("#spk8_id_name").text(data.spk8_id_name);				
+			else			
+				$("#spk8_id_name").text("");	
+		    if ("ev8_id_name" in data) 
+				$("#ev8_id_name").text(data.ev8_id_name);				
+			else			
+				$("#ev8_id_name").text("");	
+		    if ("spk9_id_name" in data) 
+				$("#spk9_id_name").text(data.spk9_id_name);				
+			else			
+				$("#spk9_id_name").text("");	
+		    if ("ev9_id_name" in data) 
+				$("#ev9_id_name").text(data.ev9_id_name);				
+			else			
+				$("#ev9_id_name").text("");	
+}
 $(document).ready(function(){
-$("table tr:gt(0)").each(function(i){
-    $(this).children("td").each(function(i){
-		if($(this).text()==$('#username').val()){
-			$(this).attr("style", "BACKGROUND-COLOR: yellow");
-		}
-    });
-});
 
-});
-</script>
+	var command="";
+	var meeting_id;
+	$("table tr:gt(0)").each(function(i){
+		$(this).children("td").each(function(i){
+			if($(this).text()==$('#username').val()){
+				//$(this).attr("style", "BACKGROUND-COLOR: yellow");
+				$(this).addClass("yellow");
+			}
+		});
+	});
 
-	<div class="table-responsive">
-		<table class="table table-striped">
+	$('td').click(function(){
+	if($(this).text()=="" && !($(this).attr("role")=="note")&& !($(this).attr("role")=="language")&& !($(this).attr("role")=="type")&&!($(this).attr("role")=="room")&&!($(this).attr("role")=="time")&&!($(this).attr("role")=="sharing")){
+	//$(this).attr("style", "BACKGROUND-COLOR: #98FB98");
+	$(this).addClass("green");
+	 $(this).text($('#username').val());
+	 //alert($(this).parent("tr").attr("num")+$(this).attr("role"));
+	 meeting_id=$("#m_date").val();
+	 //command=command+"add"+","+$(this).parent("tr").attr("num")+","+$(this).attr("role")+";";
+	 command=command+"add"+","+meeting_id+","+$(this).attr("role")+";";
+	 $("#change_role").val(command);
+	 //alert(command);
+	 }
+	 else if($(this).text()==$('#username').val()){
+	 //$(this).attr("style", "BACKGROUND-COLOR: #eee");
+	 $(this).removeClass("green");
+	 $(this).removeClass("yellow");
+	 $(this).text("");
+	 meeting_id=$("#m_date").val();	 
+	 //command=command+"delete"+","+$(this).parent("tr").attr("num")+","+$(this).attr("role")+";";
+	 command=command+"delete"+","+meeting_id+","+$(this).attr("role")+";";
+	 $("#change_role").val(command);	  
+	 //alert(command);
+	 }
+	});	
+
 
 	
-			<tr><th>No.</th><th>Date</th><th>Role</th></tr>
-			<volist name="data" id="vo">
-			<tr><td>{$vo.num}</td><td>{$vo.m_date}</td><td>{$vo.role}</td></tr>
-			</volist>
-		</table>
+	
+	
+	$("#m_date").change(function(){
+		//recover_background();
+		var meeting_id=$("#m_date").val();
+		command="";
+		$("#change_role").val(command);	
+		$("#Id").val(meeting_id);	
+		$.post("{:U('Member/booking_phone_ajax')}",{m_id:meeting_id},function(data,status){
 
-	</div>
-	<h3><a href="{:U('Member/history_PC')}">Show PC Page</a></h3>
+			deal_data(data);	
+			$("table tr:gt(0)").each(function(i){
+				$(this).attr("num",meeting_id);
+				$(this).children("td").each(function(i){
+					$(this).removeClass("yellow");
+					$(this).removeClass("green");
+					
+					if($(this).text()==$('#username').val()){
+						$(this).addClass("yellow");
+					}
+				});
+			});				
+		});
+
+		
+	});
+});
+</script>
+	<h4><a href="{:U('Member/booking')}">Show PC Page</a></h4>
+	<input type="hidden" id="username" value="{$user_name}">
+	<form action="{:U('booking_phone_deal')}" method="post" id="form_role">
+		<input type="hidden" name="Id" id="Id"  value={$data.Id}>
+		<input id="change_role" type="hidden" name="change_role" value="">
+		<table class="table table-striped">		
+		<tr><th>Meeting Date:</th>
+			<td>
+			<select class="input-xlarge" name="m_date" id="m_date">			
+				<volist name="dates" id="vo">
+					<if condition="$data['Id'] eq $vo['Id']">
+						<option value="{$vo.Id}" selected>{$vo.m_date}</option>						
+					<else/>
+						<option value="{$vo.Id}">{$vo.m_date}</option>
+					</if>	
+				</volist>
+			</select>	
+
+			</td>
+		</tr>	
+		<tr><th>Meeting Type:</th><td id="type" role="type">{$data.type}</td></tr>
+		<tr><th>Language:</th><td id="language" role="language">{$data.language}</td></tr>	
+		<tr><th>Meeting Room:</th><td id="room" role="room">{$data.room}</td></tr>
+		<tr><th>Meeting Time:</th><td id="time" role="time">{$data.time}</td></tr>	
+		<tr><th>Note</th><td id="note" role="note">{$data.note}</td></tr>
+		<tr num="{$data.Id}"><th>Sharing</th><td id="sharing" role="sharing">{$data.sharing}</td></tr>		
+		<tr num="{$data.Id}"><th>Toastmaster:</th><td id="toast_id_name" role="toast_id">{$data.toast_id_name}</td></tr>		
+		<tr num="{$data.Id}"><th>Jokemaster:</th><td id="joke_id_name" role="joke_id">{$data.joke_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>General Evaluator:</th><td id="ge_id_name" role="ge_id">{$data.ge_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Timer:</th><td id="timer_id_name" role="timer_id">{$data.timer_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Grammarian:</th><td id="gramm_id_name" role="gramm_id">{$data.gramm_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Aha Counter:</th><td id="aha_id_name" role="aha_id">{$data.aha_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Table master1:</th><td id="table1_id_name" role="table1_id">{$data.table1_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Table evaluator1:</th><td id="table1_ev_id_name" role="joke_id">{$data.table1_ev_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Speaker1:</th><td id="spk1_id_name" role="spk1_id">{$data.spk1_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator1:</th><td id="ev1_id_name" role="ev1_id">{$data.ev1_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Speaker2:</th><td id="spk2_id_name" role="spk2_id">{$data.spk2_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator2:</th><td id="ev2_id_name" role="ev2_id">{$data.ev2_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Speaker3:</th><td id="spk3_id_name" role="spk3_id">{$data.spk3_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator3:</th><td id="ev3_id_name" role="ev3_id">{$data.ev3_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Speaker4:</th><td id="spk4_id_name" role="spk4_id">{$data.spk4_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator4:</th><td id="ev4_id_name" role="ev4_id">{$data.ev4_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Speaker5:</th><td id="spk5_id_name" role="spk5_id">{$data.spk5_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator5:</th><td id="ev5_id_name" role="ev5_id">{$data.ev5_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Speaker6:</th><td id="spk6_id_name" role="spk6_id">{$data.spk6_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator6:</th><td id="ev6_id_name" role="ev6_id">{$data.ev6_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Speaker7:</th><td id="spk7_id_name" role="spk7_id">{$data.spk7_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator7:</th><td id="ev7_id_name" role="ev7_id">{$data.ev7_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Speaker8:</th><td id="spk8_id_name" role="spk8_id">{$data.spk8_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator8:</th><td id="ev8_id_name" role="ev8_id">{$data.ev8_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Speaker9:</th><td id="spk9_id_name" role="spk9_id">{$data.spk9_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Evaluator9:</th><td id="ev9_id_name" role="ev9_id">{$data.ev9_id_name}</td></tr>	
+
+		</table>	
+	</form>	
+
 						
 						

@@ -15,10 +15,10 @@
 <tr>
 <td>
   <!--*********左上-BEGIN***********-->
-		<table width="140" height="40" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">
+		<table width="80" height="40" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">
 		   <colgroup>
-		   <col width="40" >
-		   <col width="100" >
+		   <col width="30" >
+		   <col width="50" >
 		   </colgroup>		
 			<tr><td height="40">No.</td>
 			<td>Date</td></tr>
@@ -30,7 +30,7 @@
   <!--***********右上-BEGIN********-->  
 		<table style="width:3000" height="40" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">  
 		   <colgroup>
-		   <col width="100" ><col width="100" ><col width="100" ><col width="100" >
+		   <col width="80" ><col width="80" ><col width="150" ><col width="100" >
 		   <col width="100" ><col width="100" ><col width="100" ><col width="100" >
 		   <col width="100" ><col width="100" ><col width="100" ><col width="100" >
 		   <col width="100" ><col width="100" ><col width="100" ><col width="100" >
@@ -56,10 +56,10 @@
 		<td>
  <div id='scroll2' style="height:300;overflow-y:hidden;overflow-x:scroll">		
    <!--*************左下-BEGIN**************--> 
-		<table width="140" height="40" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">     
+		<table width="80" height="40" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">     
 		   <colgroup>
-		   <col width="40" >
-		   <col width="100" >
+		   <col width="30" >
+		   <col width="50" >
 		   </colgroup>		
 			<volist name="data" id="vo">
 			<tr><td height="40" role="num">{$vo.num}</td><td role="date"><a href="{:U('Admin/modify_single_meeting',array('m_id'=>$vo['Id']))}">{$vo.m_date}</td></tr>
@@ -71,9 +71,9 @@
 		<td>
  <div style="width:1100;height:300;overflow:scroll " onscroll="javascript:syncscroll(this)">		
   <!--***********右下-BEGIN***********-->
-		<table style="width:3000 " height="40" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">   
+		<table style="width:3000 " height="100" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">   
 		   <colgroup>
-		   <col width="100" ><col width="100" ><col width="100" ><col width="100" >
+		   <col width="80" ><col width="80" ><col width="150" ><col width="100" >
 		   <col width="100" ><col width="100" ><col width="100" ><col width="100" >
 		   <col width="100" ><col width="100" ><col width="100" ><col width="100" >
 		   <col width="100" ><col width="100" ><col width="100" ><col width="100" >
