@@ -28,7 +28,7 @@ class WechatbookController extends Controller {
 		
 	}
 	public function book_role_deal(){
-		echo("功能开发中,程序员美眉加油！");
+		echo("fuction is developing...");
 		
 	}
 

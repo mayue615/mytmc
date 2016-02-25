@@ -34,8 +34,9 @@ $(this).attr("style", "BACKGROUND-COLOR: #98FB98");
 });
 
 </script>
-<h4><a href="{:U('Member/booking_phone')}">Show Phone Page</a>&nbsp&nbsp<a href="{:U('Wechatbook/club_meeting',array('club_id'=>1))}">Show Wechat Page</a></h4>
+<h4><a href="{:U('Member/booking_phone')}">Show Phone Page</a>&nbsp&nbsp<a href="{:U('Wechatbook/club_meeting',array('club_id'=>$club_id))}">Show Wechat Page</a></h4>
 <input type="hidden" id="username" value="{$user_name}">
+<input type="hidden" id="club_id" value="{$club_id}">
 <div id="content">
 <div class="col-md-2">  
 <h3>Booking</h3>

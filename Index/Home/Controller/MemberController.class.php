@@ -134,14 +134,23 @@ class MemberController extends CommonController {
 		$this->assign('data',$result);//$arr(num,m_date,role)
 		$this->display('history_phone');		
 	}
+	public function booking(){
+		$agent = $_SERVER['HTTP_USER_AGENT'];
+		if(strstr($agent,'Windows'))
+			$this->booking_PC();
+		else
+			$this->booking_phone();		
+		
+	}
 	
-    public function booking(){
+    public function booking_PC(){
  		$current_date = date('Y-m-d',time());
 		$club_id = cookie('club_id');
 		$user_id = cookie('user_id');
 		$meeting=D('visualMeeting','Api');
 		$data=$meeting->get_visual_future_meeting_table($club_id);		
 		$this->assign('data',$data);
+		$this->assign('club_id',$club_id);
 		//$this->assign('data',$result['data']);
 		//$this->assign('page_method',$result['show']);	
 		$this->display('booking');
@@ -221,6 +230,7 @@ class MemberController extends CommonController {
 		if($m_id==0)
 			$m_id=$dates[0]["Id"];
 		$data=$meeting->get_visual_meeting_table($m_id);
+		$this->assign('club_id',$club_id);		
 		$this->assign('dates',$dates);		
 		$this->assign('data',$data);
 		//dump($data);

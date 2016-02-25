@@ -209,7 +209,7 @@ $(document).ready(function(){
 	});
 });
 </script>
-	<h4><a href="{:U('Member/booking')}">Show PC Page</a></h4>
+	<h4><a href="{:U('Member/booking_PC')}">Show PC Page</a></h4>
 	<input type="hidden" id="username" value="{$user_name}">
 	<form action="{:U('booking_phone_deal')}" method="post" id="form_role">
 		<button class="btn btn-primary" id="button_submit">Submit</button>
@@ -243,7 +243,7 @@ $(document).ready(function(){
 		<tr num="{$data.Id}"><th>Grammarian:</th><td id="gramm_id_name" role="gramm_id">{$data.gramm_id_name}</td></tr>
 		<tr num="{$data.Id}"><th>Aha Counter:</th><td id="aha_id_name" role="aha_id">{$data.aha_id_name}</td></tr>
 		<tr num="{$data.Id}"><th>Table master1:</th><td id="table1_id_name" role="table1_id">{$data.table1_id_name}</td></tr>
-		<tr num="{$data.Id}"><th>Table evaluator1:</th><td id="table1_ev_id_name" role="joke_id">{$data.table1_ev_id_name}</td></tr>
+		<tr num="{$data.Id}"><th>Table evaluator1:</th><td id="table1_ev_id_name" role="table1_ev_id">{$data.table1_ev_id_name}</td></tr>
 		<tr num="{$data.Id}"><th>Speaker1:</th><td id="spk1_id_name" role="spk1_id">{$data.spk1_id_name}</td></tr>
 		<tr num="{$data.Id}"><th>Evaluator1:</th><td id="ev1_id_name" role="ev1_id">{$data.ev1_id_name}</td></tr>
 		<tr num="{$data.Id}"><th>Speaker2:</th><td id="spk2_id_name" role="spk2_id">{$data.spk2_id_name}</td></tr>
