@@ -234,6 +234,22 @@ class AgendaController extends Controller {
 				$start_time_session=$this->clac_time($start_time_session,$arr['table2']);	
 			}
 		}
+		
+				
+		$spk_index=0;
+		foreach($speeches as $speech){
+			$spk_index += 1;		
+			$temp['member']=$speech['ev_name'];
+			$temp['time']=$start_time_session;
+			$temp['role']="Evaluator#".$spk_index;
+			$temp['action']="Evaluation for Speaker#".$spk_index;
+			$temp['duration']=$arr['evaluator'];
+			//dump($temp);
+			array_push($data,$temp);
+			$start_time_session=$this->clac_time($start_time_session,$arr['evaluator']);			
+		}		
+        //begin evaluation report
+
 		if($arr['table']!=0){
 			if($meeting_info['table1_id']!=null){
 				$temp['time']=$start_time_session;
@@ -265,21 +281,8 @@ class AgendaController extends Controller {
 				array_push($data,$temp);
 				$start_time_session=$this->clac_time($start_time_session,$arr['table_evaluater2']);	
 			}
-		}		
-				
-		$spk_index=0;
-		foreach($speeches as $speech){
-			$spk_index += 1;		
-			$temp['member']=$speech['ev_name'];
-			$temp['time']=$start_time_session;
-			$temp['role']="Evaluator#".$spk_index;
-			$temp['action']="Evaluation for Speaker#".$spk_index;
-			$temp['duration']=$arr['evaluator'];
-			//dump($temp);
-			array_push($data,$temp);
-			$start_time_session=$this->clac_time($start_time_session,$arr['evaluator']);			
-		}		
-        //begin evaluation report
+		}
+
 		
 		if($arr['timer_report']!=0){
 			$temp['time']=$start_time_session;
