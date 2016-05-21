@@ -20,7 +20,8 @@ class CheckinController extends Controller {
 		$m_id=$club->get_next_meetings_id($club_id);	
 		$this->assign('m_id',$m_id);				
 		$meeting=D('meeting','Api');
-		$data=$meeting->get_meeting_each_role($m_id);
+		$data=$meeting->get_meeting_each_role($m_id);		
+		array_shift($data['table']);
 		//dump($data);
 		$this->assign('spk',$data['spk']);
 		$this->assign('ev',$data['ev']);
@@ -49,6 +50,7 @@ class CheckinController extends Controller {
 		$this->assign('m_id',$m_id);		
 		$vote=D('vote','Api');	
 		$data=$vote->get_votes($m_id);
+		array_shift($data['table']);
 		//dump($data);
 		$this->assign('spk',$data['spk']);
 		$this->assign('ev',$data['ev']);
